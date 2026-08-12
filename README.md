@@ -59,5 +59,7 @@ This is a design document repository — the game is being fully designed here b
 - [11 — Progression](docs/11-progression.md)
 - [12 — UI & Interaction](docs/12-ui-and-interaction.md)
 - [13 — Narrative Arc & Endings](docs/13-narrative-arch.md)
+- [14 — Art Bible](docs/14-art-bible.md) (graphics agent brief: style, cast, asset list, consistency workflow)
+- [15 — Audio Brief](docs/15-audio-brief.md) (Suno + ElevenLabs spec: track list, voice cast, SFX)
 
-Also: [DECISIONS.md](DECISIONS.md) — a log of what was considered, chosen, and why.
+Also: [DECISIONS.md](DECISIONS.md) — a log of what was considered, chosen, and why. Production tooling is locked: **Adobe Firefly** (art), **Suno** (music), **ElevenLabs** (voices/SFX) — all paid commercial tiers.

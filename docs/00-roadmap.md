@@ -19,6 +19,8 @@ Everything needed to fully design The Last Inn before implementation begins.
 | 11 | Progression | ✅ Done |
 | 12 | UI & interaction | ✅ Done |
 | 13 | Narrative arc & endings | ✅ Done |
+| 14 | Art bible (graphics agent brief) | ✅ Done |
+| 15 | Audio brief (Suno + ElevenLabs) | ✅ Done |
 
 ## Open questions (for later passes)
 
@@ -27,7 +29,15 @@ Everything needed to fully design The Last Inn before implementation begins.
 - The goblin-mill quest: confirm negotiation-first design vs. combat-first
 - Length of the "Embers" mode — endless by design?
 - Whether the locked door's trial is a conversation (current design) or something else
-- Music: who writes it, and how much (currently: low ambient bed, silence at dark moments)
+- Voice for narration (currently: no narrator — the game is in the room, not a booth)
+- Art: whether the 2.5D (Live2D-style) enhancement is worth adding for character life
+
+## Tooling decisions (locked)
+
+- **Images:** Adobe Firefly (paid commercial tier). Rejected: Midjourney/Stable Diffusion/DALL·E (scraped training data, active litigation, no indemnification), Getty AI (photo-centric, weak at anime)
+- **Music:** Suno (paid commercial tier) — settled with Warner Music, moving to licensed models
+- **Voices & SFX:** ElevenLabs (paid commercial tier), generated voices only
+- **Style:** 2D hand-drawn "90s painterly anime" (anime characters on painterly backgrounds). Rejected: modern glossy anime, pure storybook, 3D cel-shaded
 
 ## Design principles (quick reference)
 

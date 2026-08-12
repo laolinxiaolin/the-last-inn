@@ -34,7 +34,16 @@ Considered:
 ## Art direction
 
 - **Rejected: pixel art** — crowded lane; demographic has seen a million of them.
-- **Chosen: storybook-painted, firelight + windowlight palette** — the inn as a living museum (walls accumulate the playthrough's weapons), the window as the world map, the player never on screen (POV behind the bar).
+- **Chosen initially: storybook painted** (firelight + windowlight palette, the inn as living museum, POV behind the bar).
+- **Revised (user decision): 90s painterly anime** — anime character design (bold lines, expressive faces) on hand-painted storybook backgrounds. Rationale: anime faces carry the comedy; painted rooms carry the melancholy; it's the aesthetic of the target player's youth. Anchors: Record of Lodoss War (1990), early Ghibli backgrounds, Cowboy Bebop, Slayers.
+- **Rejected: modern glossy anime** (fights the tone), **3D cel-shaded** (production cost, no AI pipeline for rigged 3D).
+
+## Production tools (locked)
+
+- **Images: Adobe Firefly** (paid tier, licensed training data). Rejected: Midjourney / Stable Diffusion (scraped data, active Getty v. Stability litigation, no indemnification), DALL·E (no indemnification), Getty AI (photo-centric library — weak at anime), Udio (pivoted to walled-garden platform; outputs can't leave).
+- **Music: Suno** (paid commercial tier; settled with Warner Music Nov 2025; licensed models from 2026).
+- **Voices & SFX: ElevenLabs** (paid tier; generated voices only — no real-person cloning).
+- **Legal posture:** paid commercial tiers, prompt logs per asset, no artist-name prompts, no real people/logos/trademarks, no text in images. US Copyright Office (Jan 2025): pure AI output isn't independently copyrightable — the game as a whole is protected by human authorship (code, story, design, selection/arrangement).
 
 ## Ale system
 
