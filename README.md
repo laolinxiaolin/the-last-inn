@@ -43,10 +43,21 @@ The other inns are gone. The region is thinning — villages quieter, roads empt
 
 ## Current status
 
-This is a design document repository — the game's full design is being written here before a single line of code. See [docs/](docs/).
+This is a design document repository — the game is being fully designed here before a single line of code. See [docs/](docs/).
 
+- [00 — Design Roadmap](docs/00-roadmap.md) (status + open questions)
 - [01 — Concept](docs/01-concept.md)
 - [02 — Tone](docs/02-tone.md)
 - [03 — The Player's Backstory](docs/03-backstory.md)
 - [04 — Art Direction](docs/04-art-direction.md)
 - [05 — The Ale System](docs/05-ale-system.md)
+- [06 — Session Structure](docs/06-session-structure.md)
+- [07 — Guests](docs/07-guests.md) (incl. the first-night roster: Renn, Keld, the woman in grey, Fenwick, Garrick, Grib)
+- [08 — The Quest Board](docs/08-quest-board.md)
+- [09 — Returns](docs/09-returns.md)
+- [10 — World State](docs/10-world-state.md)
+- [11 — Progression](docs/11-progression.md)
+- [12 — UI & Interaction](docs/12-ui-and-interaction.md)
+- [13 — Narrative Arc & Endings](docs/13-narrative-arch.md)
+
+Also: [DECISIONS.md](DECISIONS.md) — a log of what was considered, chosen, and why.
