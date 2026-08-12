@@ -368,6 +368,8 @@ func _show_talks() -> void:
 
 func _on_talk(q: String, a: String) -> void:
 	_append_text("[b]You:[/b] \"%s\"\n[b]%s:[/b] %s" % [q, current_guest["name"], a])
+	world.note(current_guest["id"], "talked")
+	world.raise_bond(current_guest["id"])
 
 
 func _on_pour(brew_id: String) -> void:
@@ -382,6 +384,9 @@ func _on_pour(brew_id: String) -> void:
 	else:
 		_append_text("[b]You pour the %s.[/b] %s drinks it." % [brew["name"], current_guest["name"]])
 	pours[current_guest["id"]] = brew_id
+	world.note(current_guest["id"], "poured %s" % brew_id)
+	world.set_guest_flag(current_guest["id"], "poured_%s" % brew_id)
+	world.raise_bond(current_guest["id"])
 
 
 func _next_guest() -> void:
@@ -419,14 +424,14 @@ func _show_grib() -> void:
 
 func _grib_regular_scene() -> void:
 	portrait.visible = false
-	_set_text(DATA.grib_regular(_mill_state()))
+	_set_text(DATA.grib_regular(_mill_state(), world.guests.get("grib", {})))
 	_clear_actions()
 	_add_action("Continue", _window_scene)
 
 
 func _window_scene() -> void:
 	portrait.visible = false
-	_set_text(DATA.window_view(world.places, world.flags))
+	_set_text(DATA.window_view(world.places, world.flags, world.guests))
 	_clear_actions()
 	_add_action("Continue", _finish_epilogue)
 
@@ -609,6 +614,8 @@ func _queue_return(guest_id: String, quest_id: String) -> void:
 	if scene.is_empty():
 		return
 	var text: String = scene.get("text", "")
+	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "quiet":
+		text = DATA.renn_quiet_extra() + "\n\n" + text
 	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "dark":
 		text = DATA.renn_dark_extra() + "\n\n" + text
 	if guest_id == "keld" and quest_id == "tower" and pours.get("keld", "") == "dark":
@@ -634,6 +641,8 @@ func _apply_outcome(guest_id: String, quest_id: String) -> void:
 		return
 	var place_id: String = o["place"]
 	world.report(place_id, o["outcome"])
+	world.raise_bond(guest_id, 2)
+	world.note(guest_id, "quest %s" % quest_id)
 	if o.has("degrade"):
 		world.degrade(place_id)
 	elif o.has("set_state"):
@@ -742,6 +751,8 @@ func _demo_flow() -> void:
 	_next_guest()
 	await _frame()
 	_on_pour("dark")
+	_show_talks()
+	_on_talk(current_guest["talks"][0]["q"], current_guest["talks"][0]["a"])
 	await _frame()
 	await _shot("05_keld")
 	_next_guest()

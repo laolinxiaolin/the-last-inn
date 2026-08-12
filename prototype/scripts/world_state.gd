@@ -10,6 +10,7 @@ const FALLEN := "fallen"
 
 var places := {}
 var flags := {}
+var guests := {}  # guest_id -> {bond: int, flags: {}, history: []}
 
 func _init() -> void:
 	# The world arrives already thinned: the caravan is late, the forest
@@ -68,3 +69,35 @@ func degrade(place_id: String) -> void:
 			places[place_id]["state"] = FAILING
 		FAILING:
 			places[place_id]["state"] = FALLEN
+
+
+# ---------------------------------------------------------------- guests
+
+## The inn remembers how you treated people. Bond is the tab wearing a
+## disguise (docs/05-ale-system.md): pours and talks raise it, quests raise
+## it more. Flags record specific moments — a pour, a question, a secret.
+
+func _guest(guest_id: String) -> Dictionary:
+	if not guests.has(guest_id):
+		guests[guest_id] = {"bond": 0, "flags": {}, "history": []}
+	return guests[guest_id]
+
+
+func note(guest_id: String, what: String) -> void:
+	_guest(guest_id)["history"].append(what)
+
+
+func set_guest_flag(guest_id: String, name: String) -> void:
+	_guest(guest_id)["flags"][name] = true
+
+
+func has_guest_flag(guest_id: String, name: String) -> bool:
+	return guests.has(guest_id) and guests[guest_id]["flags"].has(name)
+
+
+func raise_bond(guest_id: String, amount: int = 1) -> void:
+	_guest(guest_id)["bond"] += amount
+
+
+func bond_of(guest_id: String) -> int:
+	return _guest(guest_id)["bond"]

@@ -218,6 +218,10 @@ static func renn_dark_extra() -> String:
 	return "He sits down hard and cries for a minute. 'Sorry. It's the smoke. It's the— it's a lot.'\n\nThen he grins again. 'Did I do good?'\n\nYou pour him a Common and slide it over. 'Yeah, kid. You did good.'"
 
 
+static func renn_quiet_extra() -> String:
+	return "He stops mid-story. 'That warm ale you gave me. Nobody ever gave me anything warm before.' He doesn't know why he said it. You do."
+
+
 # ---------------------------------------------------------------- night two: Grib
 
 static func grib() -> Dictionary:
@@ -318,16 +322,21 @@ static func night_two_close(mill_state: String) -> String:
 			return "You close the inn. The fire settles.\n\nSomewhere down the road, a letter is being read aloud — carefully, by someone who practiced it in the dark.\n\nThree days pass."
 
 
-static func grib_regular(mill_state: String) -> String:
+static func grib_regular(mill_state: String, grib: Dictionary) -> String:
 	if mill_state == "woman_dark":
 		return "On the third day, Grib comes back. He doesn't order. He sets down a thank-you note — very small, very neat — and leaves.\n\nHe comes back the week after anyway. Old habits. Hope.\n\nYou pour him the Sweet. You don't say anything. He doesn't either."
-	return "On the third day, Grib comes back. Not for business — he sits at the bar and orders a Common, with gratitude.\n\n'Thank you for listening,' he says. 'In the books, that's where the story starts.'\n\nHe is the best-dressed regular you will ever have."
+	var middle := ""
+	if grib.get("flags", {}).has("poured_sweet"):
+		middle = " He sets a small thing on the bar: a candle, barley wax, his own making. 'For the inn. In the books, the inn always has a candle.'"
+	elif grib.get("flags", {}).has("poured_bitter"):
+		middle = " He doesn't mention the Bitter. You don't either."
+	return "On the third day, Grib comes back. Not for business — he sits at the bar and orders a Common, with gratitude." + middle + "\n\n'Thank you for listening,' he says. 'In the books, that's where the story starts.'\n\nHe is the best-dressed regular you will ever have."
 
 
 # ---------------------------------------------------------------- the window
 
 ## The window is the world map. No states, no numbers — the innkeeper's view.
-static func window_view(places: Dictionary, flags: Dictionary) -> String:
+static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionary) -> String:
 	var t := "You wake before the fire. The window, at dawn:\n\n"
 	t += _place_line("mill_village", "The mill village", places) + "\n"
 	t += _place_line("crossroads", "The crossroads", places) + "\n"
@@ -351,6 +360,13 @@ static func window_view(places: Dictionary, flags: Dictionary) -> String:
 		flavor.append("Somewhere, a key of black iron stays warm.")
 	if flags.has("door_watcher"):
 		flavor.append("The woman in grey watches the door. She says she'll be there when it opens. You believe her.")
+	# The inn remembers how you treated people.
+	if guests.has("grib") and guests["grib"]["flags"].has("poured_sweet"):
+		flavor.append("Grib's tab is paid in advance, as always. There's a candle on the bar that wasn't there before.")
+	if guests.has("grib") and guests["grib"]["flags"].has("poured_bitter"):
+		flavor.append("Grib drinks what he's poured and hopes to earn a kinder one. You're working on it.")
+	if guests.has("keld") and guests["keld"]["bond"] >= 2:
+		flavor.append("At closing, Keld said one sentence about his daughter. Then never again.")
 	for f in flavor:
 		t += "\n[i]%s[/i]" % f
 	return t

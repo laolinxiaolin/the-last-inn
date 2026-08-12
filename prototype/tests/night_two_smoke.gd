@@ -85,5 +85,53 @@ func _initialize() -> void:
 	assert(scene.world.state_of("tower") == "failing", "tower should degrade to failing")
 	print("OK tower degraded to failing")
 
+	# --- character state: pours and talks write, scenes read ---
+	# Renn + Quiet pour → his mill return carries the callback
+	scene._start_night()
+	scene._on_pour("quiet")  # real interaction: writes flag + bond
+	scene.sends = {"renn": "mill"}
+	scene._run_returns()
+	await process_frame
+	assert(scene.text_label.text.contains("warm ale"), "renn quiet callback missing")
+	assert(scene.world.has_guest_flag("renn", "poured_quiet"), "renn poured_quiet flag missing")
+	assert(scene.world.bond_of("renn") >= 3, "renn bond should include pour + quest")
+	print("OK renn quiet callback + bond")
+
+	# Grib + Sweet → the candle; Grib + Bitter → the careful line
+	for brew in ["sweet", "bitter"]:
+		scene._start_night()
+		scene._run_returns()
+		await process_frame
+		scene._start_night_two()
+		await process_frame
+		scene._on_pour(brew)
+		await process_frame
+		await process_frame
+		scene._board_set()
+		scene._grib_regular_scene()
+		await process_frame
+		if brew == "sweet":
+			assert(scene.text_label.text.contains("candle"), "grib sweet gift missing")
+		else:
+			assert(scene.text_label.text.contains("doesn't mention the Bitter"), "grib bitter line missing")
+	print("OK grib pour callbacks")
+
+	# Keld's bond (pour + quest) earns the daughter line in the window
+	scene._start_night()
+	scene._next_guest()  # → Keld
+	scene._on_pour("dark")  # real interaction
+	scene.sends = {"keld": "tower"}
+	scene._run_returns()
+	await process_frame
+	scene._start_night_two()
+	await process_frame
+	scene._board_set()
+	scene._grib_regular_scene()
+	scene._window_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("daughter"), "keld daughter line missing")
+	assert(scene.world.bond_of("keld") >= 2, "keld bond too low")
+	print("OK keld daughter line in window")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)
