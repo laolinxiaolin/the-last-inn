@@ -170,6 +170,54 @@ static func guests_night_one() -> Array:
 	]
 
 
+# ---------------------------------------------------------------- returns
+
+static func returns() -> Dictionary:
+	return {
+		"renn|mill": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_renn.svg",
+			"text": "The door opens on the third day. It's the kid — goblin ear on a string, grin the size of the road.\n\n'We didn't kill nobody!' he says, before you can ask. 'They're families, innkeeper. Women and littles. They just wanted a roof — the mill's been empty since the flood.'\n\nHe sets the ear on the bar. 'This is from the one who tried to bite me. I gave it back.'\n\n[i]The quest was never what the board said. You knew that. Now the kid knows it too. The village will be angry. The goblins will stay. Somewhere between them, there's a peace to be poured.[/i]"},
+		"renn|caravan": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_renn.svg",
+			"text": "The kid comes back empty-handed, soaked, and furious.\n\n'The road's got more secrets than sense. I walked it twice and all I found was a hat.' He slams it on the bar. It's his hat. He wears it now.\n\n[i]Soft failures are still failures. But the hat stays.[/i]"},
+		"renn|tower": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_renn.svg",
+			"text": "The kid comes back three days later, pale, and does not tell you what he saw.\n\nHe asks for the Dark. You pour it. He drinks it slow and says: 'The tower's not the problem, is it.'\n\nIt's not a question.",
+		},
+		"keld|mill": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_keld.svg",
+			"text": "Keld comes back from the mill with a sack of barley and a look that could curdle ale.\n\n'Goblins. Families. I sat with them.' He doesn't say more.\n\n[i]The village gets its barley. The goblins keep the mill. Somehow, Keld made both happen, and neither side knows how.[/i]"},
+		"keld|caravan": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_keld.svg",
+			"text": "Keld comes back with a coin too new and a sentence:\n\n'The caravan's dead. The silver's alive. That's backwards.'\n\nHe drinks until closing. You don't ask again.",
+		},
+		"keld|tower": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_keld.svg",
+			"text": "The door opens on the fourth night. Keld comes in, says nothing, drinks until closing.\n\nYou ask how the tower went. He gives you one sentence:\n\n'You should have waited.'\n\nThen he drinks until closing, and you don't ask again.\n\n[i]The tower's not the problem. The tower's a door. You know that now. The question is what you'll do when it opens.[/i]"},
+		"woman|mill": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_woman.svg",
+			"text": "The woman in grey comes back in three days flat.\n\n'Done,' she says. 'The mill is yours again.'\n\nYou ask about the goblins. She looks at you. 'I said the mill is yours.'\n\n[i]You decide not to ask what she means. The village names a new miller. No one mentions the goblins. No one mentions her.[/i]"},
+		"woman|caravan": {
+			"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier",
+			"text": "Six days pass. The door opens.\n\nA stranger stands in the rain. He's holding a sword — hers, you'd know the hilt anywhere — and a letter, dry, because he kept it under his coat.\n\n'She said to give this to you. Said you'd know what to do with it.'\n\nYou take the letter. Inside: nothing but a coin.\n\nSilver. Too new."},
+		"woman|tower": {
+			"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_woman.svg",
+			"text": "The woman in grey comes back changed. She does not speak of the tower.\n\nShe pays her tab in silver too new and says: 'I'll be going back out. When the door opens, send word. I'll want to be there.'\n\n[i]You believe her. That's the worst part.[/i]"},
+	}
+
+
+static func courier_after() -> String:
+	return "You hang the sword on the wall. There were hooks waiting.\n\nThe fire pops. Somewhere in the dark, a door opens.\n\n[i]She paid in silver too new. She left in silver too new. Some debts come back. Some come back as questions.[/i]"
+
+
+static func keld_dark_extra() -> String:
+	return "Before he leaves, he sets something on the bar: a key, black iron, warm.\n\n'The lock in the tower. It's not a lock. It's a bell.'\n\nHe looks at you a long moment. 'You should have waited. ...You'll wait now.'"
+
+
+static func renn_dark_extra() -> String:
+	return "He sits down hard and cries for a minute. 'Sorry. It's the smoke. It's the— it's a lot.'\n\nThen he grins again. 'Did I do good?'\n\nYou pour him a Common and slide it over. 'Yeah, kid. You did good.'"
+
+
 # ---------------------------------------------------------------- night two: Grib
 
 static func grib() -> Dictionary:
@@ -274,3 +322,71 @@ static func grib_regular(mill_state: String) -> String:
 	if mill_state == "woman_dark":
 		return "On the third day, Grib comes back. He doesn't order. He sets down a thank-you note — very small, very neat — and leaves.\n\nHe comes back the week after anyway. Old habits. Hope.\n\nYou pour him the Sweet. You don't say anything. He doesn't either."
 	return "On the third day, Grib comes back. Not for business — he sits at the bar and orders a Common, with gratitude.\n\n'Thank you for listening,' he says. 'In the books, that's where the story starts.'\n\nHe is the best-dressed regular you will ever have."
+
+
+# ---------------------------------------------------------------- the window
+
+## The window is the world map. No states, no numbers — the innkeeper's view.
+static func window_view(places: Dictionary, flags: Dictionary) -> String:
+	var t := "You wake before the fire. The window, at dawn:\n\n"
+	t += _place_line("mill_village", "The mill village", places) + "\n"
+	t += _place_line("crossroads", "The crossroads", places) + "\n"
+	t += _place_line("forest", "The forest", places) + "\n"
+	t += _place_line("deep_road", "The deep road", places) + "\n"
+	t += _place_line("tower", "The tower", places) + "\n"
+	var flavor := PackedStringArray()
+	if flags.has("goblin_peace"):
+		flavor.append("The mill turns at night now — first time in years.")
+	if flags.has("mill_quiet"):
+		flavor.append("The new miller is a good man. He doesn't know what happened to the families. No one will tell him.")
+	if flags.has("renn_hat"):
+		flavor.append("Somewhere on the road, a boy wears a hat he found. It suits him.")
+	if flags.has("silver_too_new"):
+		flavor.append("On the bar: a coin, too new. It came back. She didn't.")
+	if flags.has("woman_dead"):
+		flavor.append("On the wall: a sword. There were hooks waiting.")
+	if flags.has("keld_knows"):
+		flavor.append("Keld knows things now. He drinks, and doesn't say them.")
+	if flags.has("bell_key"):
+		flavor.append("Somewhere, a key of black iron stays warm.")
+	if flags.has("door_watcher"):
+		flavor.append("The woman in grey watches the door. She says she'll be there when it opens. You believe her.")
+	for f in flavor:
+		t += "\n[i]%s[/i]" % f
+	return t
+
+
+static func _place_line(id: String, name: String, places: Dictionary) -> String:
+	var lines := {
+		"mill_village": {
+			"stable": "%s: lights steady under the snow, smoke in straight lines. The mill turns.",
+			"strained": "%s: lights lower than last season. The mill is quiet.",
+			"failing": "%s: dark at the edges. The lights remember where they were.",
+			"fallen": "%s: dark. The window is empty where it was.",
+		},
+		"crossroads": {
+			"stable": "%s: carts, lanterns, voices you can almost hear.",
+			"strained": "%s: fewer carts. The dust stays where it settles.",
+			"failing": "%s: the dust settles on empty road.",
+			"fallen": "%s: the road forgets itself.",
+		},
+		"forest": {
+			"stable": "%s: patient, at the edge of the field.",
+			"strained": "%s: closer than it was. You count the fence posts.",
+			"failing": "%s: the fence posts are gone. The trees stand where they were.",
+			"fallen": "%s: at the window. It taps.",
+		},
+		"deep_road": {
+			"stable": "%s: a cart, a song, someone coming home.",
+			"strained": "%s: quiet. The dust remembers the caravan.",
+			"failing": "%s: nothing comes. The dark keeps what it takes.",
+			"fallen": "%s: dark. The silver that came back was too new.",
+		},
+		"tower": {
+			"stable": "%s: a door, shut. You can feel it stay shut.",
+			"strained": "%s: a door. Not the problem. Never was.",
+			"failing": "%s: the door breathes. You've heard it.",
+			"fallen": "%s: open. The dark comes out to visit.",
+		},
+	}
+	return lines[id][places[id]["state"]] % name

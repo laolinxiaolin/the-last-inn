@@ -6,43 +6,21 @@ extends Control
 ## to auto-play the whole evening and capture shots to user://shots/.
 
 const DATA := preload("res://scripts/data.gd")
+const WORLD_STATE := preload("res://scripts/world_state.gd")
 
-# Return scenes keyed by "guest|quest".
-const RETURNS := {
-	"renn|mill": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_renn.svg",
-		"text": "The door opens on the third day. It's the kid — goblin ear on a string, grin the size of the road.\n\n'We didn't kill nobody!' he says, before you can ask. 'They're families, innkeeper. Women and littles. They just wanted a roof — the mill's been empty since the flood.'\n\nHe sets the ear on the bar. 'This is from the one who tried to bite me. I gave it back.'\n\n[i]The quest was never what the board said. You knew that. Now the kid knows it too. The village will be angry. The goblins will stay. Somewhere between them, there's a peace to be poured.[/i]"},
-	"renn|caravan": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_renn.svg",
-		"text": "The kid comes back empty-handed, soaked, and furious.\n\n'The road's got more secrets than sense. I walked it twice and all I found was a hat.' He slams it on the bar. It's his hat. He wears it now.\n\n[i]Soft failures are still failures. But the hat stays.[/i]"},
-	"renn|tower": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_renn.svg",
-		"text": "The kid comes back three days later, pale, and does not tell you what he saw.\n\nHe asks for the Dark. You pour it. He drinks it slow and says: 'The tower's not the problem, is it.'\n\nIt's not a question.",
-	},
-	"keld|mill": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_keld.svg",
-		"text": "Keld comes back from the mill with a sack of barley and a look that could curdle ale.\n\n'Goblins. Families. I sat with them.' He doesn't say more.\n\n[i]The village gets its barley. The goblins keep the mill. Somehow, Keld made both happen, and neither side knows how.[/i]"},
-	"keld|caravan": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_keld.svg",
-		"text": "Keld comes back with a coin too new and a sentence:\n\n'The caravan's dead. The silver's alive. That's backwards.'\n\nHe drinks until closing. You don't ask again.",
-	},
-	"keld|tower": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_keld.svg",
-		"text": "The door opens on the fourth night. Keld comes in, says nothing, drinks until closing.\n\nYou ask how the tower went. He gives you one sentence:\n\n'You should have waited.'\n\nThen he drinks until closing, and you don't ask again.\n\n[i]The tower's not the problem. The tower's a door. You know that now. The question is what you'll do when it opens.[/i]"},
-	"woman|mill": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_woman.svg",
-		"text": "The woman in grey comes back in three days flat.\n\n'Done,' she says. 'The mill is yours again.'\n\nYou ask about the goblins. She looks at you. 'I said the mill is yours.'\n\n[i]You decide not to ask what she means. The village names a new miller. No one mentions the goblins. No one mentions her.[/i]"},
-	"woman|caravan": {
-		"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier",
-		"text": "Six days pass. The door opens.\n\nA stranger stands in the rain. He's holding a sword — hers, you'd know the hilt anywhere — and a letter, dry, because he kept it under his coat.\n\n'She said to give this to you. Said you'd know what to do with it.'\n\nYou take the letter. Inside: nothing but a coin.\n\nSilver. Too new."},
-	"woman|tower": {
-		"bg": "res://assets/bg_inn.svg", "portrait": "res://assets/char_woman.svg",
-		"text": "The woman in grey comes back changed. She does not speak of the tower.\n\nShe pays her tab in silver too new and says: 'I'll be going back out. When the door opens, send word. I'll want to be there.'\n\n[i]You believe her. That's the worst part.[/i]"},
+# How each guest+quest outcome lands on the world. Scene text lives in
+# data.gd (returns()); this table is the world's memory of what happened.
+const OUTCOMES := {
+	"renn|mill": {"place": "mill_village", "outcome": "renn_parley", "flags": ["goblin_peace"]},
+	"keld|mill": {"place": "mill_village", "outcome": "keld_peace", "flags": ["goblin_peace"]},
+	"woman|mill": {"place": "mill_village", "outcome": "woman_dark", "flags": ["mill_quiet"]},
+	"renn|caravan": {"place": "deep_road", "outcome": "renn_soft_fail", "flags": ["renn_hat"], "degrade": true},
+	"keld|caravan": {"place": "deep_road", "outcome": "keld_silver", "flags": ["silver_too_new"], "set_state": "fallen"},
+	"woman|caravan": {"place": "deep_road", "outcome": "woman_courier", "flags": ["silver_too_new", "woman_dead"], "set_state": "fallen"},
+	"renn|tower": {"place": "tower", "outcome": "renn_scarred", "degrade": true},
+	"keld|tower": {"place": "tower", "outcome": "keld_knows", "flags": ["keld_knows"]},
+	"woman|tower": {"place": "tower", "outcome": "door_watcher", "flags": ["door_watcher"]},
 }
-
-const COURIER_AFTER := "You hang the sword on the wall. There were hooks waiting.\n\nThe fire pops. Somewhere in the dark, a door opens.\n\n[i]She paid in silver too new. She left in silver too new. Some debts come back. Some come back as questions.[/i]"
-const KELD_DARK_EXTRA := "Before he leaves, he sets something on the bar: a key, black iron, warm.\n\n'The lock in the tower. It's not a lock. It's a bell.'\n\nHe looks at you a long moment. 'You should have waited. ...You'll wait now.'"
-const RENN_DARK_EXTRA := "He sits down hard and cries for a minute. 'Sorry. It's the smoke. It's the— it's a lot.'\n\nThen he grins again. 'Did I do good?'\n\nYou pour him a Common and slide it over. 'Yeah, kid. You did good.'"
 
 # --- UI nodes (built in _build_ui) ---
 var bg: TextureRect
@@ -71,6 +49,7 @@ var night := 1
 var met_grib := false
 var in_returns := false
 var done_callable: Callable
+var world := WORLD_STATE.new()
 
 
 func _ready() -> void:
@@ -343,6 +322,7 @@ func _start_night() -> void:
 	night = 1
 	met_grib = false
 	in_returns = false
+	world = WORLD_STATE.new()
 	guests = DATA.guests_night_one()
 	guest_idx = 0
 	pours = {}
@@ -412,13 +392,7 @@ func _next_guest() -> void:
 # ---------------------------------------------------------------- night two: Grib
 
 func _mill_state() -> String:
-	if sends.has("woman") and sends["woman"] == "mill":
-		return "woman_dark"
-	if sends.has("keld") and sends["keld"] == "mill":
-		return "keld_peace"
-	if sends.has("renn") and sends["renn"] == "mill":
-		return "renn_parley"
-	return "unresolved"
+	return world.mill_resolution()
 
 
 func _start_night_two() -> void:
@@ -446,6 +420,13 @@ func _show_grib() -> void:
 func _grib_regular_scene() -> void:
 	portrait.visible = false
 	_set_text(DATA.grib_regular(_mill_state()))
+	_clear_actions()
+	_add_action("Continue", _window_scene)
+
+
+func _window_scene() -> void:
+	portrait.visible = false
+	_set_text(DATA.window_view(world.places, world.flags))
 	_clear_actions()
 	_add_action("Continue", _finish_epilogue)
 
@@ -624,14 +605,14 @@ func _board_set() -> void:
 
 func _queue_return(guest_id: String, quest_id: String) -> void:
 	var key := "%s|%s" % [guest_id, quest_id]
-	var scene: Dictionary = RETURNS.get(key, {})
+	var scene: Dictionary = DATA.returns().get(key, {})
 	if scene.is_empty():
 		return
 	var text: String = scene.get("text", "")
 	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "dark":
-		text = RENN_DARK_EXTRA + "\n\n" + text
+		text = DATA.renn_dark_extra() + "\n\n" + text
 	if guest_id == "keld" and quest_id == "tower" and pours.get("keld", "") == "dark":
-		text += "\n\n" + KELD_DARK_EXTRA
+		text += "\n\n" + DATA.keld_dark_extra()
 	var entry := {
 		"bg": scene.get("bg", "res://assets/bg_inn.svg"),
 		"portrait": scene.get("portrait", ""),
@@ -642,8 +623,26 @@ func _queue_return(guest_id: String, quest_id: String) -> void:
 	if scene.get("kind", "text") == "courier":
 		scene_queue.append({
 			"bg": "res://assets/bg_inn.svg", "portrait": "",
-			"kind": "text", "text": COURIER_AFTER,
+			"kind": "text", "text": DATA.courier_after(),
 		})
+
+
+func _apply_outcome(guest_id: String, quest_id: String) -> void:
+	var key := "%s|%s" % [guest_id, quest_id]
+	var o: Dictionary = OUTCOMES.get(key, {})
+	if o.is_empty():
+		return
+	var place_id: String = o["place"]
+	world.report(place_id, o["outcome"])
+	if o.has("degrade"):
+		world.degrade(place_id)
+	elif o.has("set_state"):
+		world.places[place_id]["state"] = o["set_state"]
+	for f in o.get("flags", []):
+		world.set_flag(f)
+	# The Dark pour earns the key from the tower.
+	if key == "keld|tower" and pours.get("keld", "") == "dark":
+		world.set_flag("bell_key")
 
 
 func _run_returns() -> void:
@@ -658,6 +657,7 @@ func _run_returns() -> void:
 		for gid in ["renn", "keld", "woman"]:
 			if sends.has(gid):
 				_queue_return(gid, sends[gid])
+				_apply_outcome(gid, sends[gid])
 	in_returns = true
 	_show_next_scene()
 
@@ -700,6 +700,7 @@ func _restart() -> void:
 	night = 1
 	met_grib = false
 	in_returns = false
+	world = WORLD_STATE.new()
 	dim.color = Color(0.08, 0.06, 0.05, 0.0)
 	_show_title()
 
@@ -798,7 +799,10 @@ func _demo_flow() -> void:
 	_grib_regular_scene()
 	await _frame()
 	await _shot("18_regular")
+	_window_scene()
+	await _frame()
+	await _shot("19_window")
 	_finish_epilogue()
 	await _frame()
-	await _shot("19_end")
+	await _shot("20_end")
 	get_tree().quit(0)
