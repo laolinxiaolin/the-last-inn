@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#232E45"/>
+      <stop offset="100%" stop-color="#141B2C"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#E8E0C5"/>
+      <stop offset="100%" stop-color="#C9BFA0"/>
+    </radialGradient>
+    <radialGradient id="fire" cx="0.82" cy="0.62" r="0.6">
+      <stop offset="0%" stop-color="#E8A33D" stop-opacity="0.85"/>
+      <stop offset="40%" stop-color="#C97B2D" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3E2817" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.8">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#2B1D14"/>
+  <rect x="90" y="110" width="300" height="230" rx="12" fill="url(#night)"/>
+  <rect x="90" y="110" width="300" height="230" rx="12" fill="none" stroke="#1A1210" stroke-width="16"/>
+  <circle cx="180" cy="165" r="28" fill="url(#moon)"/>
+  <circle cx="186" cy="158" r="28" fill="#232E45" opacity="0.55"/>
+  <path d="M90 340 L140 290 L200 325 L250 265 L310 310 L360 280 L390 340 Z" fill="#101826"/>
+  <rect width="1280" height="720" fill="url(#fire)"/>
+  <path d="M1000 480 Q1040 430 1100 430 Q1160 430 1200 480 L1200 570 L1000 570 Z" fill="#1A1210"/>
+  <path d="M1060 480 Q1080 450 1100 450 Q1120 450 1140 480 L1140 530 L1060 530 Z" fill="#0F0A08"/>
+  <path d="M1070 480 Q1085 425 1100 480 Q1115 425 1130 480 Z" fill="#E8A33D" opacity="0.9"/>
+  <path d="M1085 480 Q1095 450 1100 480 Q1105 450 1115 480 Z" fill="#F2E3C5" opacity="0.85"/>
+  <ellipse cx="1100" cy="492" rx="60" ry="18" fill="#C97B2D" opacity="0.55"/>
+  <rect x="1048" y="520" width="104" height="16" rx="8" fill="#4A3228" transform="rotate(-5 1100 528)"/>
+  <circle cx="560" cy="200" r="6" fill="#8A8A85"/>
+  <circle cx="700" cy="180" r="6" fill="#8A8A85"/>
+  <circle cx="840" cy="210" r="6" fill="#8A8A85"/>
+  <rect x="0" y="600" width="1280" height="120" fill="#5C3A21"/>
+  <rect x="0" y="600" width="1280" height="18" fill="#6B4A2A"/>
+  <rect x="470" y="570" width="46" height="34" rx="6" fill="#8C4A1F"/>
+  <rect x="540" y="576" width="40" height="28" rx="6" fill="#6B4A2A"/>
+  <rect width="1280" height="720" fill="url(#vig)"/>
+</svg>

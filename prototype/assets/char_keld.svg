@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <path d="M76 512 Q100 360 256 360 Q412 360 436 512 Z" fill="#4A3B30"/>
+  <path d="M76 512 Q92 420 148 392 L192 512 Z" fill="#352A22"/>
+  <path d="M100 420 L412 420 L400 440 L112 440 Z" fill="#6B5A48"/>
+  <g stroke="#B8A890" stroke-width="3" opacity="0.5">
+    <line x1="140" y1="432" x2="180" y2="432"/>
+    <line x1="200" y1="432" x2="300" y2="432"/>
+    <line x1="320" y1="432" x2="370" y2="432"/>
+  </g>
+  <rect x="222" y="330" width="68" height="70" rx="22" fill="#D8B090"/>
+  <ellipse cx="256" cy="250" rx="100" ry="110" fill="#E0C0A0"/>
+  <ellipse cx="152" cy="262" rx="16" ry="22" fill="#E0C0A0"/>
+  <ellipse cx="360" cy="262" rx="16" ry="22" fill="#E0C0A0"/>
+  <path d="M150 230 Q150 110 256 108 Q362 110 362 230 Q352 160 322 152 Q310 190 256 186 Q202 190 190 152 Q162 160 150 230 Z" fill="#8A8A82"/>
+  <path d="M170 170 Q182 130 210 120 Q196 160 190 196 Z" fill="#7A7A72"/>
+  <path d="M342 170 Q330 130 302 120 Q316 160 322 196 Z" fill="#7A7A72"/>
+  <path d="M150 240 Q146 212 160 196 Q180 208 182 240 Z" fill="#8A8A82"/>
+  <path d="M362 240 Q366 212 352 196 Q332 208 330 240 Z" fill="#8A8A82"/>
+  <path d="M196 268 Q210 296 214 306 Q232 332 268 336 Q304 332 306 306 Q310 296 318 268 Z" fill="#9A9A92"/>
+  <path d="M196 268 Q226 284 256 286 Q286 284 318 268 Q300 296 256 300 Q212 296 196 268 Z" fill="#8A8A82"/>
+  <path d="M206 236 L258 218 L310 236" stroke="#5A4A38" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M206 236 L206 252" stroke="#5A4A38" stroke-width="6" stroke-linecap="round"/>
+  <path d="M310 236 L310 252" stroke="#5A4A38" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="214" cy="276" rx="20" ry="24" fill="#FFFFFF"/>
+  <ellipse cx="298" cy="276" rx="20" ry="24" fill="#FFFFFF"/>
+  <circle cx="216" cy="280" r="11" fill="#7A6B4A"/>
+  <circle cx="296" cy="280" r="11" fill="#7A6B4A"/>
+  <circle cx="216" cy="280" r="5.5" fill="#1A1A1A"/>
+  <circle cx="296" cy="280" r="5.5" fill="#1A1A1A"/>
+  <circle cx="220" cy="275" r="3" fill="#FFFFFF"/>
+  <circle cx="300" cy="275" r="3" fill="#FFFFFF"/>
+  <path d="M230 316 Q256 330 282 316" stroke="#5A4A38" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <line x1="300" y1="198" x2="312" y2="184" stroke="#D8B090" stroke-width="5" stroke-linecap="round"/>
+</svg>

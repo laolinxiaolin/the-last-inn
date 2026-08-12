@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <path d="M84 512 Q112 370 256 370 Q400 370 428 512 Z" fill="#6B4A8C"/>
+  <path d="M84 512 Q104 428 156 400 L198 512 Z" fill="#54386E"/>
+  <path d="M118 398 L394 398 L384 420 L128 420 Z" fill="#F2E3C5"/>
+  <rect x="222" y="336" width="68" height="62" rx="20" fill="#E8C9A0"/>
+  <ellipse cx="256" cy="252" rx="92" ry="104" fill="#F2D8B8"/>
+  <ellipse cx="162" cy="264" rx="13" ry="18" fill="#F2D8B8"/>
+  <ellipse cx="350" cy="264" rx="13" ry="18" fill="#F2D8B8"/>
+  <path d="M140 200 Q130 70 256 66 Q382 70 372 200 Q340 130 310 140 Q296 180 256 176 Q216 180 202 140 Q174 130 140 200 Z" fill="#4A3228"/>
+  <path d="M140 200 Q136 160 160 130 Q200 150 200 204 Z" fill="#4A3228"/>
+  <path d="M372 200 Q376 160 352 130 Q312 150 312 204 Z" fill="#4A3228"/>
+  <ellipse cx="120" cy="140" rx="120" ry="34" fill="#5C3A21" transform="rotate(-14 120 140)"/>
+  <ellipse cx="120" cy="140" rx="120" ry="34" fill="none" stroke="#4A3228" stroke-width="6" transform="rotate(-14 120 140)"/>
+  <ellipse cx="404" cy="128" rx="120" ry="30" fill="#5C3A21" transform="rotate(12 404 128)"/>
+  <path d="M392 96 Q420 40 470 60 Q430 84 430 120 Z" fill="#2E8C7A" transform="rotate(-20 430 90)"/>
+  <circle cx="452" cy="70" r="7" fill="#141B2C" opacity="0.7"/>
+  <ellipse cx="214" cy="272" rx="26" ry="30" fill="#FFFFFF"/>
+  <ellipse cx="298" cy="272" rx="26" ry="30" fill="#FFFFFF"/>
+  <circle cx="218" cy="278" r="14" fill="#8C6B3A"/>
+  <circle cx="294" cy="278" r="14" fill="#8C6B3A"/>
+  <circle cx="218" cy="278" r="7" fill="#1A1A1A"/>
+  <circle cx="294" cy="278" r="7" fill="#1A1A1A"/>
+  <circle cx="224" cy="272" r="4" fill="#FFFFFF"/>
+  <circle cx="300" cy="272" r="4" fill="#FFFFFF"/>
+  <path d="M186 242 Q218 226 246 244" stroke="#2E1F16" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M266 244 Q294 226 326 242" stroke="#2E1F16" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M238 330 Q256 316 274 330 Q256 342 238 330 Z" fill="#B86B5A"/>
+</svg>
