@@ -67,6 +67,10 @@ var sends := {}
 var current_guest := {}
 var scene_queue: Array = []
 var last_scene_kind := ""
+var night := 1
+var met_grib := false
+var in_returns := false
+var done_callable: Callable
 
 
 func _ready() -> void:
@@ -149,6 +153,9 @@ func _build_ui() -> void:
 
 	text_label = RichTextLabel.new()
 	text_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	text_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	text_label.fit_content = true
+	text_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	text_label.bbcode_enabled = true
 	text_label.add_theme_font_size_override("normal_font_size", 25)
 	text_label.add_theme_color_override("default_color", Color("#3E2817"))
@@ -305,7 +312,15 @@ func _brew(id: String) -> Dictionary:
 
 func _append_text(t: String) -> void:
 	text_label.text += "\n\n" + t
-	scroll.set_deferred("scroll_vertical", 999999)
+	_scroll_to_bottom()
+
+
+func _scroll_to_bottom() -> void:
+	# Wait for the label's minimum size (fit_content) to settle before scrolling,
+	# so the scrollbar max reflects the full content height.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	scroll.scroll_vertical = 999999
 
 
 func _set_text(t: String) -> void:
@@ -325,6 +340,9 @@ func _show_title() -> void:
 
 
 func _start_night() -> void:
+	night = 1
+	met_grib = false
+	in_returns = false
 	guests = DATA.guests_night_one()
 	guest_idx = 0
 	pours = {}
@@ -340,6 +358,7 @@ func _show_guest(i: int) -> void:
 		return
 	guest_idx = i
 	current_guest = guests[i]
+	done_callable = _next_guest
 	_phase("Night One — The Hearth  ·  %s" % current_guest["name"])
 	_set_bg("res://assets/bg_inn.svg")
 	_set_portrait(current_guest["portrait"])
@@ -352,7 +371,7 @@ func _base_guest_actions() -> void:
 	_clear_actions()
 	_add_action("Pour an ale", _toggle_brew_row)
 	_add_action("Talk", _show_talks)
-	_add_action("Done with %s" % current_guest["name"], _next_guest)
+	_add_action("Done with %s" % current_guest["name"], done_callable)
 
 
 func _toggle_brew_row() -> void:
@@ -390,6 +409,47 @@ func _next_guest() -> void:
 	_show_guest(guest_idx + 1)
 
 
+# ---------------------------------------------------------------- night two: Grib
+
+func _mill_state() -> String:
+	if sends.has("woman") and sends["woman"] == "mill":
+		return "woman_dark"
+	if sends.has("keld") and sends["keld"] == "mill":
+		return "keld_peace"
+	if sends.has("renn") and sends["renn"] == "mill":
+		return "renn_parley"
+	return "unresolved"
+
+
+func _start_night_two() -> void:
+	night = 2
+	in_returns = false
+	board_btn.visible = true
+	dim.color = Color(0.08, 0.06, 0.05, 0.0)
+	_show_grib()
+
+
+func _show_grib() -> void:
+	met_grib = true
+	current_guest = DATA.grib()
+	current_guest["intro"] = DATA.grib_intro(_mill_state())
+	current_guest["talks"] = DATA.grib_talks(_mill_state())
+	done_callable = _open_board
+	_phase("Night Two — A Letter of Introduction  ·  Grib")
+	_set_bg("res://assets/bg_inn.svg")
+	_set_portrait(current_guest["portrait"])
+	portrait.visible = true
+	_set_text(current_guest["intro"])
+	_base_guest_actions()
+
+
+func _grib_regular_scene() -> void:
+	portrait.visible = false
+	_set_text(DATA.grib_regular(_mill_state()))
+	_clear_actions()
+	_add_action("Continue", _finish_epilogue)
+
+
 # ---------------------------------------------------------------- quest board
 
 func _open_board() -> void:
@@ -404,7 +464,17 @@ func _rebuild_board() -> void:
 		c.queue_free()
 	quest_rows = {}
 	for q in DATA.quests():
-		var row := _mk_quest_row(q)
+		var qq: Dictionary = q.duplicate()
+		if qq["id"] == "mill" and met_grib:
+			var card: Dictionary = DATA.mill_card(_mill_state())
+			qq["name"] = card["name"]
+			qq["tier"] = card["tier"]
+			qq["tier_color"] = card["tier_color"]
+			qq["desc"] = card["desc"]
+			qq["reward"] = card["reward"]
+			qq["locked"] = true
+			qq["resolved_text"] = card["resolved_text"]
+		var row := _mk_quest_row(qq)
 		quest_list.add_child(row)
 	_refresh_quest_rows()
 
@@ -463,33 +533,39 @@ func _mk_quest_row(q: Dictionary) -> Panel:
 	var bh := HBoxContainer.new()
 	v.add_child(bh)
 	var assigned := Label.new()
-	assigned.text = "—"
+	assigned.text = q.get("resolved_text", "—")
 	assigned.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	assigned.add_theme_font_size_override("font_size", 20)
 	assigned.add_theme_color_override("font_color", Color("#3E2817"))
 	bh.add_child(assigned)
-	var pick_btn := _mk_button("Assign", 18)
-	pick_btn.custom_minimum_size = Vector2(120, 40)
-	bh.add_child(pick_btn)
 
-	var picker := HBoxContainer.new()
-	picker.visible = false
-	picker.add_theme_constant_override("separation", 8)
-	v.add_child(picker)
-	for g in DATA.assignable_guests():
-		var gb := _mk_button(g["name"], 18)
-		gb.custom_minimum_size = Vector2(0, 40)
-		gb.pressed.connect(_pick.bind(q["id"], g["id"]))
-		picker.add_child(gb)
-	var nobody := _mk_button("Nobody", 18)
-	nobody.custom_minimum_size = Vector2(0, 40)
-	nobody.pressed.connect(_pick.bind(q["id"], ""))
-	picker.add_child(nobody)
+	var row_data := {"assigned": assigned, "locked": q.get("locked", false), "resolved_text": q.get("resolved_text", "")}
+	if not row_data["locked"]:
+		var pick_btn := _mk_button("Assign", 18)
+		pick_btn.custom_minimum_size = Vector2(120, 40)
+		bh.add_child(pick_btn)
 
-	pick_btn.pressed.connect(func() -> void:
-		picker.visible = not picker.visible)
+		var picker := HBoxContainer.new()
+		picker.visible = false
+		picker.add_theme_constant_override("separation", 8)
+		v.add_child(picker)
+		for g in DATA.assignable_guests():
+			var gb := _mk_button(g["name"], 18)
+			gb.custom_minimum_size = Vector2(0, 40)
+			gb.pressed.connect(_pick.bind(q["id"], g["id"]))
+			picker.add_child(gb)
+		var nobody := _mk_button("Nobody", 18)
+		nobody.custom_minimum_size = Vector2(0, 40)
+		nobody.pressed.connect(_pick.bind(q["id"], ""))
+		picker.add_child(nobody)
 
-	quest_rows[q["id"]] = {"assigned": assigned, "picker": picker, "btn": pick_btn}
+		pick_btn.pressed.connect(func() -> void:
+			picker.visible = not picker.visible)
+
+		row_data["picker"] = picker
+		row_data["btn"] = pick_btn
+
+	quest_rows[q["id"]] = row_data
 	return row
 
 
@@ -509,6 +585,9 @@ func _pick(quest_id: String, guest_id: String) -> void:
 func _refresh_quest_rows() -> void:
 	for q in DATA.quests():
 		var row: Dictionary = quest_rows[q["id"]]
+		if row["locked"]:
+			row["assigned"].text = row.get("resolved_text", "—")
+			continue
 		var who := "—"
 		for gid in sends.keys():
 			if sends[gid] == q["id"]:
@@ -531,9 +610,14 @@ func _board_set() -> void:
 	board_overlay.visible = false
 	dim.color = Color(0.08, 0.06, 0.05, 0.85)
 	portrait.visible = false
-	_set_text("You close the inn. The fire settles.\n\nThree days pass.")
-	_clear_actions()
-	_add_action("Continue", _run_returns)
+	if night == 2:
+		_set_text(DATA.night_two_close(_mill_state()))
+		_clear_actions()
+		_add_action("Continue", _grib_regular_scene)
+	else:
+		_set_text("You close the inn. The fire settles.\n\nThree days pass.")
+		_clear_actions()
+		_add_action("Continue", _run_returns)
 
 
 # ---------------------------------------------------------------- returns
@@ -574,21 +658,8 @@ func _run_returns() -> void:
 		for gid in ["renn", "keld", "woman"]:
 			if sends.has(gid):
 				_queue_return(gid, sends[gid])
-	_queue_epilogue()
+	in_returns = true
 	_show_next_scene()
-
-
-func _queue_epilogue() -> void:
-	scene_queue.append({
-		"bg": "res://assets/bg_inn.svg", "portrait": "",
-		"kind": "text",
-		"text": "Morning comes. The village road is quiet.\n\nAnd then, at dusk — a knock. Small. Polite.\n\n'Excuse me,' says a voice through the door. 'I was told this is the inn where people listen.'",
-	})
-	scene_queue.append({
-		"bg": "res://assets/bg_inn.svg", "portrait": "",
-		"kind": "text",
-		"text": "You open the door.\n\nA goblin stands there — hands where you can see them, tidy clothes, a letter of introduction from the mill. He bows.\n\n'My name is Grib. I understand you have a problem at the mill, and that you are the kind of person who listens before he pours.'\n\nHe is the best-dressed guest you will ever have.",
-	})
 
 
 func _show_next_scene() -> void:
@@ -607,14 +678,17 @@ func _show_next_scene() -> void:
 	_set_text(s.get("text", ""))
 	_clear_actions()
 	if scene_queue.is_empty():
-		_add_action("Continue", _finish_epilogue)
+		if in_returns:
+			_add_action("Continue", _start_night_two)
+		else:
+			_add_action("Continue", _finish_epilogue)
 	else:
 		_add_action("Continue", _show_next_scene)
 
 
 func _finish_epilogue() -> void:
 	portrait.visible = false
-	_set_text("[center][b][font_size=40]— Concept demo complete —[/font_size][/b]\n\n[font_size=24]The quest is never what the board says it is.\nThe tower is a door.\nSome debts come back as questions.\n\nThank you for pouring.[/font_size][/center]")
+	_set_text("[center][b][font_size=40]— Concept demo complete —[/font_size][/b]\n\n[font_size=24]The quest is never what the board says it is.\nThe tower is a door.\nSome debts come back as questions.\nAnd some knock — small, polite — and stay.\n\nThank you for pouring.[/font_size][/center]")
 	_clear_actions()
 	_add_action("Light the Fire Again", _restart)
 
@@ -623,6 +697,9 @@ func _restart() -> void:
 	scene_queue.clear()
 	pours = {}
 	sends = {}
+	night = 1
+	met_grib = false
+	in_returns = false
 	dim.color = Color(0.08, 0.06, 0.05, 0.0)
 	_show_title()
 
@@ -702,7 +779,26 @@ func _demo_flow() -> void:
 		await _frame()
 		if last_scene_kind == "courier":
 			await _shot("12_courier")
+	_start_night_two()
+	await _frame()
+	await _shot("13_grib")
+	_on_pour("sweet")
+	await _frame()
+	await _shot("14_grib_pour")
+	_show_talks()
+	_on_talk(current_guest["talks"][1]["q"], current_guest["talks"][1]["a"])
+	await _frame()
+	await _shot("15_grib_talk")
+	_open_board()
+	await _frame()
+	await _shot("16_board_night_two")
+	_board_set()
+	await _frame()
+	await _shot("17_close_night_two")
+	_grib_regular_scene()
+	await _frame()
+	await _shot("18_regular")
 	_finish_epilogue()
 	await _frame()
-	await _shot("13_end")
+	await _shot("19_end")
 	get_tree().quit(0)

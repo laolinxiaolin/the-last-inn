@@ -26,7 +26,7 @@ Everything needed to fully design The Last Inn before implementation begins.
 
 - Exact session count target for Act 1/2/3 (currently: ~10 / ~15 / open-ended, ~40-60 total)
 - How much player choice affects the endgame trial — candidate beats written, needs selection
-- The goblin-mill quest: confirm negotiation-first design vs. combat-first
+- ~~The goblin-mill quest: negotiation-first vs combat-first~~ — **Resolved** (concept prototype, night two): the mill is a parley. Combat is the dark outcome of neglect — the woman-in-grey's "done" shows it, and Grib's night-two arrival delivers the quest-truth lesson.
 - Length of the "Embers" mode — endless by design?
 - Whether the locked door's trial is a conversation (current design) or something else
 - Voice for narration (currently: no narrator — the game is in the room, not a booth)

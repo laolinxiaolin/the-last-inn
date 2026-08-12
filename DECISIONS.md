@@ -57,6 +57,7 @@ Considered:
 
 - **No random spawns** — every guest authored, with an arc.
 - First-night roster chosen to teach every system: Renn (judgment + returns), Keld (silence as information + the tower), the woman in grey (reading past performance + the caravan thread), Fenwick (comedy hiding wound + the same thread), Garrick (the relationship), Grib on night two (the quest-truth lesson).
+- **The mill quest (resolved in the concept prototype): negotiation-first.** The quest is never what the board says it is — combat is what happens when the player doesn't engage. Grib arrives on night two as the quest's truth; his arrival, his dialogue, and the board card all react to the mill's night-one outcome (Renn's parley / Keld's peace / the woman's quiet / nobody went).
 
 ## Open decisions (deferred)
 

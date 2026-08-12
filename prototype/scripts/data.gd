@@ -1,6 +1,6 @@
 class_name GameData
 
-## All concept-demo content: brews, quests, and the night-one cast.
+## All concept-demo content: brews, quests, and the cast (night one + Grib on night two).
 ## Placeholder dialogue — real writing comes later in the full game.
 
 static func brews() -> Array:
@@ -168,3 +168,109 @@ static func guests_night_one() -> Array:
 			],
 		},
 	]
+
+
+# ---------------------------------------------------------------- night two: Grib
+
+static func grib() -> Dictionary:
+	return {
+		"id": "grib",
+		"name": "Grib",
+		"portrait": "res://assets/char_grib.svg",
+		"pours": {
+			"common": {"react": "He holds the glass with both hands. 'Thank you. I've read about inns my whole life. The books said the ale is warm and the company is honest.' He sips. 'The books were right.'",
+				"read": "He's never been inside an inn. He's been memorizing them from books."},
+			"strong": {"react": "He takes a sip, coughs into his sleeve, politely. 'A warrior's drink. I'm an engineer — I'll stick to bridges, and ale I can walk away from.'",
+				"read": "He knows his limits, and says so. Rare."},
+			"quiet": {"react": "He wraps both hands around the glass. 'Warm. In the books, the hero always gets the warm one. I didn't think they'd give it to the goblin.'",
+				"read": "He thought the warm glass was for heroes only."},
+			"bitter": {"react": "He drinks it without complaint, sets it down, and says, very carefully: 'I will drink anything you pour, innkeeper. I hope, one day, to earn a kinder one.'",
+				"read": "He will drink anything you pour. He hopes to earn a kinder one."},
+			"dark": {"react": "He looks at it a long moment. 'This is the ale they give men before they do brave things. I'm not brave. I'm just polite.' He drinks it anyway. '...I'll be brave, if it's yours.'",
+				"read": "He thinks courage is given, not carried. You disagree."},
+			"sweet": {"react": "His eyes go very wide. He stares at the glass like it's a small miracle. 'This is... sweet. For me?' He takes the smallest sip, to make it last. 'I didn't know inns did this. I didn't know anything did this.'",
+				"read": "He's never been served anything sweet. Not once."},
+		},
+	}
+
+
+static func grib_intro(mill_state: String) -> String:
+	match mill_state:
+		"renn_parley":
+			return "The next evening, you light the fire. A knock. Small. Polite.\n\nYou open the door. A goblin stands there — hands where you can see them, tidy clothes, a letter of introduction sealed with barley wax. He bows.\n\n'My name is Grib. I'm told the boy with the borrowed sword came home and told the village we're families, not monsters. He said the innkeeper sent him.'\n\nHe sets two coins on the bar before he's even inside. 'I came to thank the innkeeper.'"
+		"keld_peace":
+			return "The next evening, you light the fire. A knock. Small. Polite.\n\nYou open the door. A goblin stands there — hands where you can see them, tidy clothes. He bows, and then he's crying a little, and he hates it.\n\n'My name is Grib. The dwarf — the one with the eyes — he sat with us. Just sat. He made the village see.' He wipes his face. 'I'm sorry. It's not the smoke. It's just — nobody's ever sat with us before.'"
+		"woman_dark":
+			return "The next evening, you light the fire. A knock. Small. Polite.\n\nYou open the door. A goblin stands there — alone, smaller than he should be, hands where you can see them.\n\n'My name is Grib.' A pause. 'I'm told the mill is yours again. The new miller is a good man. He doesn't know what happened to the families. No one will tell him.'\n\nHe sets a letter on the bar — addressed to no one — and two coins beside it. 'I don't know who to give this to anymore. You seemed like the person who'd keep a letter.'"
+		_:
+			return "The next evening, you light the fire. The village road is quiet.\n\nAnd then, at dusk — a knock. Small. Polite.\n\n'Excuse me,' says a voice through the door. 'I was told this is the inn where people listen.'\n\nYou open the door. A goblin stands there — hands where you can see them, tidy clothes, a letter of introduction sealed with barley wax. He bows, and sets two coins on the bar before he's even inside.\n\n'My name is Grib. The mill sent me. The people of the mill, I mean — not the board. The board and the people... disagree about us.'"
+
+
+static func grib_talks(mill_state: String) -> Array:
+	var why := ""
+	var need := ""
+	var truth := ""
+	match mill_state:
+		"renn_parley":
+			why = " And because the boy said you'd listen. He was right."
+			need = "Nothing. The mill is settled — the way the boy told it, the way the village heard it. I came to pay the tab and say thank you. And to ask if I might come back sometimes. The books say regulars are how an inn stays alive."
+			truth = "The boy with the borrowed sword walked into the middle of it and saw the truth. You sent us a listener. The board didn't survive the conversation."
+		"keld_peace":
+			why = " And because the dwarf said you'd sit. He was right."
+			need = "Nothing. The mill is settled — though no one is quite sure how, and the dwarf isn't saying. I came to pay the tab and say thank you. And to ask if I might come back sometimes. The books say regulars are how an inn stays alive."
+			truth = "The dwarf walked into the middle of it and just sat. No questions, no swords. The board didn't survive the sitting."
+		"woman_dark":
+			why = " And because the letter needed somewhere to go. You were the address."
+			need = "Nothing. The mill is quiet now, the way the village wanted it. I came to pay the tab — and to ask if I might come back sometimes. I don't have anywhere else to keep a letter."
+			truth = "The board was right about the danger. It just had the wrong danger in mind."
+		_:
+			need = "A parley letter, if you'll let one be written. Whoever carries it will be welcomed at the mill — no swords, no traps, no ambushes. The mill doesn't need clearing, innkeeper. It needs a conversation."
+			truth = "That's why I'm here — so the next board gets read between the lines."
+	return [
+		{"q": "What are you, exactly?", "a": "The mill goblins' ambassador. There — I said it before you had to. We're not raiders, innkeeper. We're refugees. The old mill's been empty since the flood. It has a roof. We have families. No one has been harmed. No one will be."},
+		{"q": "Why did you come to me?", "a": "Because you're the neutral ground. The other inns are gone, and the village is afraid, and fear is becoming a war — and wars start with the people who are easiest to fear. I was sent to the one place in the world that listens before it pours." + why},
+		{"q": "What do you need?", "a": need},
+		{"q": "The board says you're a problem.", "a": "The board said 'goblins in the mill.' The truth was 'families in the mill.' The board is never a lie, innkeeper — it's the shape of a story, seen from far away. " + truth + " The tower's next, isn't it? The board will say 'a door.' It will be right — and that's the terrifying part."},
+	]
+
+
+static func mill_card(mill_state: String) -> Dictionary:
+	match mill_state:
+		"renn_parley":
+			return {"name": "The Mill, at Peace", "tier": "Peace", "tier_color": "8C9A6B",
+				"desc": "The village council read the boy's story and the goblins' letter. The mill has a miller again — and this time, everyone knows what they voted for.",
+				"reward": "Peace, barley, a story the board never wrote",
+				"resolved_text": "Resolved — by a boy with a borrowed sword"}
+		"keld_peace":
+			return {"name": "The Mill, at Peace", "tier": "Peace", "tier_color": "8C9A6B",
+				"desc": "No one is sure how the dwarf did it. The barley moves both ways now. The village pretends it was all their idea.",
+				"reward": "Peace, barley, a very quiet dwarf",
+				"resolved_text": "Resolved — no one knows how"}
+		"woman_dark":
+			return {"name": "The Mill, Quiet", "tier": "Quiet", "tier_color": "6B7A8C",
+				"desc": "The village names a new miller. No one mentions the goblins. No one mentions her.",
+				"reward": "A quiet winter",
+				"resolved_text": "Resolved — no one mentions it"}
+		_:
+			return {"name": "A Parley at the Mill", "tier": "Peace", "tier_color": "8C9A6B",
+				"desc": "Grib's letter makes it a conversation. The mill doesn't need clearing — it needs someone brave enough to say so.",
+				"reward": "A new regular, a letter, peace",
+				"resolved_text": "Going: Grib's letter"}
+
+
+static func night_two_close(mill_state: String) -> String:
+	match mill_state:
+		"renn_parley":
+			return "You close the inn. The fire settles.\n\nThe village council reads the letter twice. The miller's boy stands there while they do — borrowed sword, muddy boots, no lies.\n\nThree days pass."
+		"keld_peace":
+			return "You close the inn. The fire settles.\n\nNo one is sure how the dwarf did it. The village doesn't ask. The barley moves, and that's the answer.\n\nThree days pass."
+		"woman_dark":
+			return "You close the inn. The fire settles.\n\nThe letter is addressed to no one. You keep it anyway, between two hooks on the wall that were waiting.\n\nThree days pass."
+		_:
+			return "You close the inn. The fire settles.\n\nSomewhere down the road, a letter is being read aloud — carefully, by someone who practiced it in the dark.\n\nThree days pass."
+
+
+static func grib_regular(mill_state: String) -> String:
+	if mill_state == "woman_dark":
+		return "On the third day, Grib comes back. He doesn't order. He sets down a thank-you note — very small, very neat — and leaves.\n\nHe comes back the week after anyway. Old habits. Hope.\n\nYou pour him the Sweet. You don't say anything. He doesn't either."
+	return "On the third day, Grib comes back. Not for business — he sits at the bar and orders a Common, with gratitude.\n\n'Thank you for listening,' he says. 'In the books, that's where the story starts.'\n\nHe is the best-dressed regular you will ever have."
