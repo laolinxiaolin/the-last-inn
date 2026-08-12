@@ -61,5 +61,6 @@ This is a design document repository — the game is being fully designed here b
 - [13 — Narrative Arc & Endings](docs/13-narrative-arch.md)
 - [14 — Art Bible](docs/14-art-bible.md) (graphics agent brief: style, cast, asset list, consistency workflow)
 - [15 — Audio Brief](docs/15-audio-brief.md) (Suno + ElevenLabs spec: track list, voice cast, SFX)
+- [16 — Art Prompt Pack](docs/16-art-prompt-pack.md) (copy-paste Firefly prompts: golden frame, lock sheets, backgrounds, ale, weapons, UI)
 
 Also: [DECISIONS.md](DECISIONS.md) — a log of what was considered, chosen, and why. Production tooling is locked: **Adobe Firefly** (art), **Suno** (music), **ElevenLabs** (voices/SFX) — all paid commercial tiers.
