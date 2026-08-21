@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- THE NIGHT OUTSIDE — what you see through the window. Deep winter, the
+       valley, the treeline, the moon, and the last warm lights. The world
+       coming to your door. -->
+  <defs>
+    <linearGradient id="nightsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141B2C"/>
+      <stop offset="60%" stop-color="#1E2A42"/>
+      <stop offset="100%" stop-color="#2A3854"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#E8E0C5"/>
+      <stop offset="100%" stop-color="#B8C2D0"/>
+    </radialGradient>
+    <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E9EDF2"/>
+      <stop offset="100%" stop-color="#C4CBD8"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.8">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="1920" height="1080" fill="url(#nightsky)"/>
+  <!-- stars -->
+  <g fill="#D9DCE3" opacity="0.7">
+    <circle cx="220" cy="120" r="3"/>
+    <circle cx="520" cy="90" r="2.5"/>
+    <circle cx="900" cy="180" r="2"/>
+    <circle cx="1230" cy="70" r="3"/>
+    <circle cx="1560" cy="150" r="2.5"/>
+    <circle cx="1780" cy="110" r="2"/>
+    <circle cx="700" cy="230" r="2"/>
+    <circle cx="1400" cy="260" r="2.5"/>
+    <circle cx="340" cy="300" r="2"/>
+  </g>
+  <!-- moon -->
+  <circle cx="1470" cy="190" r="120" fill="url(#moon)"/>
+  <circle cx="1486" cy="172" r="118" fill="#141B2C" opacity="0.25"/>
+
+  <!-- distant valley hills -->
+  <path d="M0 560 Q300 430 640 520 Q980 610 1320 500 Q1660 390 1920 520 L1920 1080 L0 1080 Z" fill="#22314E"/>
+  <path d="M0 640 Q360 540 700 610 Q1080 680 1460 560 Q1700 490 1920 600 L1920 1080 L0 1080 Z" fill="#1A2740"/>
+
+  <!-- treeline -->
+  <g fill="#141E33">
+    <polygon points="0,660 60,540 120,660"/>
+    <polygon points="90,680 150,560 210,680"/>
+    <polygon points="520,620 580,500 640,620"/>
+    <polygon points="1150,610 1210,470 1270,610"/>
+    <polygon points="1560,640 1620,520 1680,640"/>
+    <polygon points="1810,660 1860,560 1910,660"/>
+  </g>
+
+  <!-- the valley road -->
+  <path d="M960 1080 Q940 900 900 780 Q880 720 900 680 L1040 680 Q1060 720 1040 780 Q1000 900 1020 1080 Z" fill="#0F1726"/>
+  <path d="M940 780 L1040 780" stroke="#3A4A6B" stroke-width="4" opacity="0.4"/>
+
+  <!-- distant warm lights in the village -->
+  <g fill="#E8A33D" opacity="0.9">
+    <rect x="560" y="520" width="12" height="12" rx="3"/>
+    <rect x="640" y="540" width="12" height="12" rx="3"/>
+    <rect x="1200" y="520" width="12" height="12" rx="3"/>
+    <rect x="1330" y="500" width="12" height="12" rx="3"/>
+    <rect x="450" y="560" width="10" height="10" rx="3"/>
+  </g>
+  <!-- a warm smudge on the horizon: the inn's own light remembered -->
+  <ellipse cx="990" cy="720" rx="60" ry="18" fill="#E8A33D" opacity="0.15"/>
+
+  <!-- snowground -->
+  <rect y="680" width="1920" height="400" fill="url(#snow)"/>
+  <path d="M0 680 Q960 640 1920 680 L1920 700 Q960 664 0 700 Z" fill="#E9EDF4"/>
+  <path d="M0 760 Q480 720 960 760 Q1440 800 1920 760 L1920 800 L0 800 Z" fill="#D6DDE8"/>
+
+  <!-- falling snow -->
+  <g fill="#F2F5F9">
+    <circle cx="180" cy="200" r="4"/>
+    <circle cx="400" cy="340" r="3"/>
+    <circle cx="640" cy="220" r="4"/>
+    <circle cx="880" cy="420" r="3"/>
+    <circle cx="1100" cy="300" r="5"/>
+    <circle cx="1340" cy="200" r="3.5"/>
+    <circle cx="1600" cy="380" r="4"/>
+    <circle cx="1810" cy="260" r="3"/>
+    <circle cx="250" cy="520" r="3.5"/>
+    <circle cx="760" cy="560" r="4"/>
+    <circle cx="1480" cy="520" r="3"/>
+    <circle cx="300" cy="700" r="4"/>
+    <circle cx="1000" cy="600" r="3.5"/>
+    <circle cx="1700" cy="660" r="4"/>
+  </g>
+
+  <!-- a lone figure far down the road -->
+  <path d="M985 900 L975 870 L985 842 L995 870 L985 900 Z" fill="#0F1726"/>
+  <rect x="982" y="826" width="6" height="16" rx="3" fill="#0F1726"/>
+
+  <!-- vignette -->
+  <rect width="1920" height="1080" fill="url(#vig)"/>
+</svg>

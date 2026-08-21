@@ -1,48 +1,157 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- THE INN INTERIOR — the stage. POV behind the bar, looking across at the
+       hearth and the window. Two lights only: amber firelight (right) and cold
+       windowlight (left). The far wall is the museum: keepsakes we can't quite
+       see. -->
   <defs>
-    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="roomwall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A3322"/>
+      <stop offset="100%" stop-color="#2E2016"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A3226"/>
+      <stop offset="100%" stop-color="#2B1D14"/>
+    </linearGradient>
+    <linearGradient id="nightglass" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#232E45"/>
       <stop offset="100%" stop-color="#141B2C"/>
     </linearGradient>
-    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#E8E0C5"/>
-      <stop offset="100%" stop-color="#C9BFA0"/>
-    </radialGradient>
-    <radialGradient id="fire" cx="0.82" cy="0.55" r="0.55">
-      <stop offset="0%" stop-color="#E8A33D" stop-opacity="0.9"/>
-      <stop offset="35%" stop-color="#C97B2D" stop-opacity="0.45"/>
+    <radialGradient id="fireglow" cx="0.6" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#E8A33D" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#C97B2D" stop-opacity="0.5"/>
       <stop offset="100%" stop-color="#3E2817" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
-      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#E8E0C5"/>
+      <stop offset="100%" stop-color="#B8C2D0"/>
     </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.42" r="0.8">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
+    </radialGradient>
+    <linearGradient id="glassglow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3A4A6B" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1A2438" stop-opacity="0.35"/>
+    </linearGradient>
   </defs>
-  <rect width="1280" height="720" fill="#3E2817"/>
-  <rect x="90" y="120" width="300" height="220" rx="12" fill="url(#night)"/>
-  <rect x="90" y="120" width="300" height="220" rx="12" fill="none" stroke="#2B1D14" stroke-width="14"/>
-  <circle cx="180" cy="172" r="26" fill="url(#moon)"/>
-  <circle cx="186" cy="166" r="26" fill="#232E45" opacity="0.55"/>
-  <path d="M90 340 L140 292 L205 325 L258 262 L318 308 L368 282 L390 340 Z" fill="#141B2C" opacity="0.92"/>
-  <rect width="1280" height="720" fill="url(#fire)"/>
-  <path d="M1000 470 Q1040 420 1100 420 Q1160 420 1200 470 L1200 560 L1000 560 Z" fill="#2B1D14"/>
-  <path d="M1060 470 Q1080 440 1100 440 Q1120 440 1140 470 L1140 520 L1060 520 Z" fill="#1A1210"/>
-  <path d="M1070 470 Q1085 420 1100 470 Q1115 420 1130 470 Z" fill="#E8A33D" opacity="0.95"/>
-  <path d="M1085 470 Q1095 445 1100 470 Q1105 445 1115 470 Z" fill="#F2E3C5" opacity="0.9"/>
-  <ellipse cx="1100" cy="482" rx="55" ry="18" fill="#C97B2D" opacity="0.6"/>
-  <rect x="1050" y="510" width="100" height="16" rx="8" fill="#4A3228" transform="rotate(-6 1100 518)"/>
-  <circle cx="560" cy="210" r="6" fill="#8A8A85"/>
-  <circle cx="700" cy="190" r="6" fill="#8A8A85"/>
-  <circle cx="840" cy="220" r="6" fill="#8A8A85"/>
-  <g transform="translate(560 210) rotate(18)">
-    <rect x="-6" y="0" width="12" height="150" rx="4" fill="#9A9A92"/>
-    <rect x="-12" y="-14" width="24" height="16" rx="4" fill="#5C3A21"/>
-    <rect x="-4" y="-34" width="8" height="22" fill="#8C8C84"/>
+
+  <!-- base room -->
+  <rect width="1920" height="1080" fill="#3A2A1C"/>
+
+  <!-- back wall wainscot + plaster -->
+  <rect y="40" width="1920" height="600" fill="url(#roomwall)"/>
+  <rect y="640" width="1920" height="160" fill="#3A2A1C"/>
+  <!-- wall boards -->
+  <g stroke="#2E2016" stroke-width="6" opacity="0.6">
+    <line x1="0" y1="250" x2="1920" y2="250"/>
+    <line x1="0" y1="640" x2="1920" y2="640"/>
+    <line x1="0" y1="420" x2="1920" y2="420"/>
+    <line x1="320" y1="40" x2="320" y2="250"/>
+    <line x1="900" y1="40" x2="900" y2="250"/>
+    <line x1="1500" y1="40" x2="1500" y2="250"/>
   </g>
-  <rect x="0" y="600" width="1280" height="120" fill="#5C3A21"/>
-  <rect x="0" y="600" width="1280" height="18" fill="#6B4A2A"/>
-  <rect x="470" y="568" width="46" height="36" rx="6" fill="#8C4A1F"/>
-  <rect x="540" y="576" width="40" height="28" rx="6" fill="#6B4A2A"/>
-  <rect x="430" y="578" width="40" height="26" rx="6" fill="#6B4A2A"/>
-  <rect width="1280" height="720" fill="url(#vig)"/>
+
+  <!-- the window (end of the bar): cold blue night -->
+  <g>
+    <rect x="360" y="150" width="430" height="330" rx="14" fill="#2B1D14"/>
+    <rect x="382" y="172" width="386" height="286" rx="8" fill="url(#nightglass)"/>
+    <circle cx="470" cy="236" r="40" fill="url(#moon)"/>
+    <path d="M382 458 L570 210 L700 458 Z" fill="#141B2C" opacity="0.8"/>
+    <path d="M382 458 L470 230 L560 458 Z" fill="#10141F" opacity="0.9"/>
+    <!-- treeline silhouette in the pane -->
+    <path d="M382 420 L470 300 L520 380 L600 280 L768 420 Z" fill="#1A2438" opacity="0.9"/>
+    <rect x="382" y="172" width="386" height="286" fill="url(#glassglow)"/>
+    <!-- mullions -->
+    <rect x="568" y="172" width="14" height="286" fill="#2B1D14"/>
+    <rect x="382" y="300" width="386" height="14" fill="#2B1D14"/>
+    <!-- frame -->
+    <rect x="360" y="150" width="430" height="330" rx="14" fill="none" stroke="#2B1D14" stroke-width="22"/>
+  </g>
+
+  <!-- the hearth (right): the room's one warm light -->
+  <g>
+    <path d="M1400 120 L1580 120 L1580 470 L1400 470 Z" fill="#2B1D14"/>
+    <path d="M1430 150 L1550 150 L1550 430 L1430 430 Z" fill="#1A1210"/>
+    <path d="M1470 210 L1490 170 L1520 210 L1520 400 L1470 400 Z" fill="#C97B2D"/>
+    <path d="M1480 210 L1495 175 L1510 210 L1505 400 L1480 400 Z" fill="#E8A33D"/>
+    <path d="M1490 220 L1495 190 L1500 220 L1500 330 L1490 330 Z" fill="#F2E3C5" opacity="0.95"/>
+    <!-- logs -->
+    <rect x="1462" y="408" width="80" height="20" rx="10" fill="#4A3226" transform="rotate(-4 1502 418)"/>
+    <rect x="1455" y="412" width="80" height="20" rx="10" fill="#3E2817" transform="rotate(6 1495 422)"/>
+    <ellipse cx="1510" cy="430" rx="90" ry="26" fill="#C97B2D" opacity="0.5"/>
+    <!-- mantel -->
+    <rect x="1388" y="470" width="204" height="26" rx="8" fill="#6B4A2A"/>
+    <path d="M1390 400 q18 18 40 12" stroke="#4A3226" stroke-width="10" fill="none"/>
+    <path d="M1560 400 q-18 18 -40 12" stroke="#4A3226" stroke-width="10" fill="none"/>
+  </g>
+
+  <!-- the museum wall behind the bar: keepsakes we half-see -->
+  <g opacity="0.5">
+    <g transform="translate(1040 330) rotate(-8)">
+      <rect x="-90" y="0" width="180" height="14" rx="7" fill="#8A8A85"/>
+      <rect x="-14" y="14" width="28" height="120" rx="6" fill="#6B4A2F"/>
+      <circle cx="0" cy="150" r="22" fill="#8A8A85"/>
+    </g>
+    <g transform="translate(1240 300) rotate(6)">
+      <rect x="-20" y="-6" width="40" height="130" rx="8" fill="#5C4A3A"/>
+      <rect x="-40" y="118" width="80" height="16" rx="6" fill="#5C4A3A"/>
+    </g>
+    <circle cx="1160" cy="240" r="26" fill="#8A8A85"/>
+    <path d="M1140 260 L1180 260 L1180 300 L1140 300 Z" fill="#8A8A85"/>
+  </g>
+
+  <!-- hearth firelight wash -->
+  <rect x="900" y="60" width="1020" height="760" fill="url(#fireglow)"/>
+
+  <!-- floor, receding -->
+  <rect y="800" width="1920" height="280" fill="url(#floor)"/>
+  <g stroke="#2E2016" stroke-width="6" opacity="0.7">
+    <line x1="0" y1="800" x2="1920" y2="800"/>
+    <line x1="0" y1="850" x2="1920" y2="850"/>
+    <line x1="0" y1="920" x2="1920" y2="920"/>
+    <line x1="0" y1="1000" x2="1920" y2="1000"/>
+  </g>
+
+  <!-- a stool across the bar -->
+  <g>
+    <ellipse cx="1180" cy="820" rx="120" ry="18" fill="#3A2A1C"/>
+    <path d="M1080 820 L1100 560 L1260 560 L1280 820 Z" fill="#4A3226"/>
+    <rect x="1080" y="540" width="200" height="26" rx="10" fill="#5C4A2A"/>
+  </g>
+  <g transform="translate(760 880) scale(0.8)">
+    <ellipse cx="0" cy="0" rx="120" ry="18" fill="#3A2A1C"/>
+    <path d="M-100 0 L-80 -260 L80 -260 L100 0 Z" fill="#4A3226"/>
+    <rect x="-100" y="-280" width="200" height="26" rx="10" fill="#5C4A2A"/>
+  </g>
+
+  <!-- the bar counter (our side, foreground) -->
+  <rect x="0" y="900" width="1920" height="180" fill="#5C3A21"/>
+  <rect x="0" y="900" width="1920" height="26" fill="#6B4A2A"/>
+  <rect x="0" y="988" width="1920" height="92" fill="#4A3226"/>
+  <g stroke="#3E2817" stroke-width="5" opacity="0.7">
+    <line x1="360" y1="960" x2="360" y2="1080"/>
+    <line x1="960" y1="960" x2="960" y2="1080"/>
+    <line x1="1560" y1="960" x2="1560" y2="1080"/>
+  </g>
+
+  <!-- things on the bar -->
+  <g transform="translate(300 870)">
+    <path d="M-40 30 L-30 0 L30 0 L40 30 L36 52 L-36 52 Z" fill="#C9A35C"/>
+    <path d="M-44 52 L44 52 L40 78 L-40 78 Z" fill="#B0862F"/>
+  </g>
+  <g transform="translate(1660, 852)">
+    <path d="M0 30 L0 -10 a34 34 0 0 1 68 0 L68 30 Z" fill="#8C4A1F"/>
+    <path d="M-6 30 L74 30 L70 60 L-2 60 Z" fill="#6B4A2F"/>
+    <rect x="6" y="-16" width="6" height="18" fill="#3A2A1C"/>
+  </g>
+  <g transform="translate(1440, 884)">
+    <rect x="-6" y="-70" width="12" height="70" rx="5" fill="#F2E3C5"/>
+    <path d="M-10 -70 Q0 -86 10 -70 Z" fill="#E8A33D"/>
+  </g>
+
+  <!-- windowlight wash over the left room -->
+  <rect x="0" y="0" width="760" height="1080" fill="#3A4A6B" opacity="0.18"/>
+
+  <!-- vignette -->
+  <rect width="1920" height="1080" fill="url(#vig)"/>
 </svg>

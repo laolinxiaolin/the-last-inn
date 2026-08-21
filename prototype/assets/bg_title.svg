@@ -1,42 +1,111 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- TITLE — the inn from the road, deep winter. Cold night, one warm
+       window burning. You walk the road until the last light, and here it is. -->
   <defs>
-    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#232E45"/>
-      <stop offset="100%" stop-color="#141B2C"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141B2C"/>
+      <stop offset="70%" stop-color="#1E2A42"/>
+      <stop offset="100%" stop-color="#2A3854"/>
     </linearGradient>
     <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0%" stop-color="#E8E0C5"/>
-      <stop offset="100%" stop-color="#C9BFA0"/>
+      <stop offset="100%" stop-color="#B8C2D0"/>
     </radialGradient>
-    <radialGradient id="fire" cx="0.82" cy="0.62" r="0.6">
-      <stop offset="0%" stop-color="#E8A33D" stop-opacity="0.85"/>
-      <stop offset="40%" stop-color="#C97B2D" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#3E2817" stop-opacity="0"/>
+    <linearGradient id="windowglow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8A33D" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#C97B2D" stop-opacity="0.7"/>
+    </linearGradient>
+    <radialGradient id="spill" cx="0.6" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#E8A33D" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#C97B2D" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="vig" cx="0.5" cy="0.45" r="0.8">
       <stop offset="0%" stop-color="#000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.62"/>
     </radialGradient>
   </defs>
-  <rect width="1280" height="720" fill="#2B1D14"/>
-  <rect x="90" y="110" width="300" height="230" rx="12" fill="url(#night)"/>
-  <rect x="90" y="110" width="300" height="230" rx="12" fill="none" stroke="#1A1210" stroke-width="16"/>
-  <circle cx="180" cy="165" r="28" fill="url(#moon)"/>
-  <circle cx="186" cy="158" r="28" fill="#232E45" opacity="0.55"/>
-  <path d="M90 340 L140 290 L200 325 L250 265 L310 310 L360 280 L390 340 Z" fill="#101826"/>
-  <rect width="1280" height="720" fill="url(#fire)"/>
-  <path d="M1000 480 Q1040 430 1100 430 Q1160 430 1200 480 L1200 570 L1000 570 Z" fill="#1A1210"/>
-  <path d="M1060 480 Q1080 450 1100 450 Q1120 450 1140 480 L1140 530 L1060 530 Z" fill="#0F0A08"/>
-  <path d="M1070 480 Q1085 425 1100 480 Q1115 425 1130 480 Z" fill="#E8A33D" opacity="0.9"/>
-  <path d="M1085 480 Q1095 450 1100 480 Q1105 450 1115 480 Z" fill="#F2E3C5" opacity="0.85"/>
-  <ellipse cx="1100" cy="492" rx="60" ry="18" fill="#C97B2D" opacity="0.55"/>
-  <rect x="1048" y="520" width="104" height="16" rx="8" fill="#4A3228" transform="rotate(-5 1100 528)"/>
-  <circle cx="560" cy="200" r="6" fill="#8A8A85"/>
-  <circle cx="700" cy="180" r="6" fill="#8A8A85"/>
-  <circle cx="840" cy="210" r="6" fill="#8A8A85"/>
-  <rect x="0" y="600" width="1280" height="120" fill="#5C3A21"/>
-  <rect x="0" y="600" width="1280" height="18" fill="#6B4A2A"/>
-  <rect x="470" y="570" width="46" height="34" rx="6" fill="#8C4A1F"/>
-  <rect x="540" y="576" width="40" height="28" rx="6" fill="#6B4A2A"/>
-  <rect width="1280" height="720" fill="url(#vig)"/>
+
+  <!-- sky -->
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <g fill="#D9DCE3" opacity="0.7">
+    <circle cx="300" cy="180" r="3"/>
+    <circle cx="640" cy="120" r="2.5"/>
+    <circle cx="1180" cy="160" r="3"/>
+    <circle cx="1520" cy="100" r="2.5"/>
+    <circle cx="840" cy="320" r="2"/>
+    <circle cx="1760" cy="250" r="2.5"/>
+    <circle cx="420" cy="360" r="2"/>
+  </g>
+  <circle cx="240" cy="200" r="110" fill="url(#moon)"/>
+  <circle cx="252" cy="186" r="108" fill="#141B2C" opacity="0.28"/>
+
+  <!-- far hills -->
+  <path d="M0 560 Q420 470 900 560 Q1380 650 1920 540 L1920 1080 L0 1080 Z" fill="#1A2740"/>
+  <path d="M0 660 Q520 570 980 660 Q1500 750 1920 620 L1920 1080 L0 1080 Z" fill="#121B2E"/>
+
+  <!-- treeline -->
+  <g fill="#0E1628">
+    <polygon points="60,700 130,560 200,700"/>
+    <polygon points="420,680 490,540 560,680"/>
+    <polygon points="1420,690 1490,550 1560,690"/>
+    <polygon points="1700,720 1760,600 1820,720"/>
+  </g>
+
+  <!-- snow ground -->
+  <rect y="760" width="1920" height="320" fill="#DFE5EE"/>
+  <path d="M0 760 Q960 720 1920 760 L1920 780 Q960 744 0 780 Z" fill="#EDF1F6"/>
+
+  <!-- the inn, from the road -->
+  <g>
+    <!-- body -->
+    <path d="M1500 700 L1500 940 L1820 940 L1820 700 Z" fill="#3A2A1C"/>
+    <path d="M1500 700 L1500 940 L1820 940 L1820 700 Z" fill="none" stroke="#2B1D14" stroke-width="12"/>
+    <!-- snow on the roof -->
+    <path d="M1470 700 Q1660 560 1850 700 Q1660 610 1470 700 Z" fill="#EDF1F6"/>
+    <!-- roof -->
+    <path d="M1470 700 L1660 520 L1850 700 Z" fill="#241C14"/>
+    <!-- chimney with a thread of smoke -->
+    <rect x="1780" y="560" width="34" height="120" fill="#3A2C24"/>
+    <path d="M1790 560 q-10 -40 20 -70 q20 -24 6 -50" stroke="#B8C2D0" stroke-width="10" fill="none" opacity="0.4" stroke-linecap="round"/>
+    <!-- the warm window -->
+    <rect x="1560" y="800" width="130" height="110" rx="8" fill="#2B1D14"/>
+    <rect x="1572" y="812" width="106" height="86" rx="4" fill="url(#windowglow)"/>
+    <rect x="1622" y="812" width="6" height="86" fill="#2B1D14"/>
+    <!-- a shape moving past the glass -->
+    <path d="M1590 900 L1602 830 L1640 830 L1652 900 Z" fill="#3E2817" opacity="0.8"/>
+    <!-- warm spill onto the snow -->
+    <rect x="1500" y="820" width="320" height="140" fill="url(#spill)" opacity="0.5"/>
+    <!-- door, shut, a sliver of light at the bottom -->
+    <rect x="1660" y="840" width="90" height="100" rx="6" fill="#3E2A1C"/>
+    <rect x="1660" y="888" width="90" height="12" fill="#C97B2D" opacity="0.8"/>
+    <!-- hanging sign -->
+    <path d="M1560 760 L1560 720 M1700 760 L1700 720" stroke="#2B1D14" stroke-width="8"/>
+    <rect x="1520" y="690" width="220" height="70" rx="10" fill="#5C3A21"/>
+    <rect x="1520" y="690" width="220" height="70" rx="10" fill="none" stroke="#2B1D14" stroke-width="8"/>
+    <rect x="1560" y="730" width="140" height="8" fill="#C9A35C"/>
+    <!-- warm pool in front of the door -->
+    <ellipse cx="1695" cy="960" rx="120" ry="22" fill="#E8A33D" opacity="0.3"/>
+  </g>
+
+  <!-- the road we walked -->
+  <path d="M860 1080 Q900 1000 920 940 Q936 900 940 880 L1020 880 Q1024 900 1040 940 Q1060 1000 1100 1080 Z" fill="#0E1628"/>
+
+  <!-- falling snow -->
+  <g fill="#F2F5F9">
+    <circle cx="200" cy="300" r="4"/>
+    <circle cx="520" cy="420" r="3"/>
+    <circle cx="820" cy="260" r="4"/>
+    <circle cx="1120" cy="400" r="3.5"/>
+    <circle cx="1360" cy="300" r="4"/>
+    <circle cx="1760" cy="380" r="3"/>
+    <circle cx="300" cy="600" r="3.5"/>
+    <circle cx="900" cy="620" r="4"/>
+    <circle cx="1240" cy="560" r="3"/>
+    <circle cx="1680" cy="640" r="4"/>
+    <circle cx="700" cy="760" r="3.5"/>
+    <circle cx="1480" cy="720" r="3"/>
+  </g>
+
+  <!-- vignette -->
+  <rect width="1920" height="1080" fill="url(#vig)"/>
 </svg>

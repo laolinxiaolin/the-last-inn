@@ -395,6 +395,7 @@ func _base_guest_actions() -> void:
 func _quiet_beat() -> void:
 	brew_row.visible = false
 	portrait.visible = false
+	_set_bg("res://assets/bg_exterior.svg")
 	_set_text(DATA.quiet_beat(night))
 	_clear_actions()
 	_add_action("Continue", _base_guest_actions)
@@ -481,6 +482,7 @@ func _grib_regular_scene() -> void:
 func _window_scene() -> void:
 	stage = "window"
 	portrait.visible = false
+	_set_bg("res://assets/bg_exterior.svg")
 	_set_text(DATA.window_view(world.places, world.flags, world.guests, world.batch))
 	_clear_actions()
 	_add_action("Continue", _start_night_three)
@@ -496,7 +498,7 @@ func _start_night_three() -> void:
 	brew_row.visible = false
 	portrait.visible = false
 	_phase("Night Three — The Cellar")
-	_set_bg("res://assets/bg_door.svg")
+	_set_bg("res://assets/bg_cellar.svg")
 	_set_text(DATA.night_three_open(world))
 	_clear_actions()
 	_add_action("Walk the wall", _wall_menu)
@@ -507,6 +509,7 @@ func _start_night_three() -> void:
 ## The wall is a museum of the playthrough — one keepsake per thread the
 ## player resolved. Walking it is reading your own choices back.
 func _wall_menu() -> void:
+	_set_bg("res://assets/bg_wall.svg")
 	keeps = DATA.keepsakes(world)
 	portrait.visible = false
 	_set_text("[center][b]The wall[/b][/center]\n\n[i]Every thing up here is a question someone answered, or didn't. You know which is which.[/i]")
@@ -526,6 +529,7 @@ func _wall_keep(k: Dictionary) -> void:
 ## The inn is a museum of how you poured. Talk to the ones who remain —
 ## each one's line is computed from the playthrough (quests, pours, bond).
 func _regulars_menu() -> void:
+	_set_bg("res://assets/bg_inn.svg")
 	regulars = DATA.regulars(world, sent)
 	portrait.visible = false
 	var intro := "[center][b]The regulars, this last night[/b][/center]\n\n[i]The inn is a museum of how you treated the ones who came to it. Absence speaks too.[/i]"
@@ -545,6 +549,7 @@ func _regular_talk(r: Dictionary) -> void:
 
 func _door_trial_scene() -> void:
 	portrait.visible = false
+	_set_bg("res://assets/bg_door.svg")
 	_set_text(DATA.night_three_trial(world))
 	_clear_actions()
 	_add_action("Answer honestly", _show_ending_choice)
@@ -584,6 +589,7 @@ func _sent_them_ending() -> void:
 ## you like, then close the inn one last time, and the game lets you go.
 func _embers() -> void:
 	portrait.visible = false
+	_set_bg("res://assets/bg_inn.svg")
 	_set_text(DATA.embers_room())
 	_clear_actions()
 	_add_action("Sit by the fire", _embers_sit)
@@ -799,6 +805,7 @@ func _board_set() -> void:
 ## One decision at closing (docs/05, 06): what to set fermenting next time.
 func _set_batch() -> void:
 	portrait.visible = false
+	_set_bg("res://assets/bg_cellar.svg")
 	_set_text("The house is shut. One last decision before the days pass:\n\n[i]What do you set in the cellar, to be ready when you are?[/i]")
 	_clear_actions()
 	for b in DATA.brews():
