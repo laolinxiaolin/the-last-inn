@@ -53,6 +53,7 @@ var done_callable: Callable
 var world := WORLD_STATE.new()
 var regulars := []
 var keeps := []
+var stage := "title"  # the flow point the current save/load maps back to
 
 
 func _ready() -> void:
@@ -64,8 +65,12 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_F12:
-		_shot("manual")
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_F12:
+				_shot("manual")
+			KEY_F5:
+				_save()
 
 
 # ---------------------------------------------------------------- UI setup
@@ -313,17 +318,21 @@ func _set_text(t: String) -> void:
 # ---------------------------------------------------------------- flow
 
 func _show_title() -> void:
+	stage = "title"
 	_phase("")
 	_set_bg("res://assets/bg_title.svg")
 	portrait.visible = false
 	_set_text("[center][b][font_size=56]THE LAST INN[/font_size][/b]\n\n[font_size=28]You were the hero once.\nNow you're the one behind the bar, and the world comes to you.\n\nA concept demo — one evening at the inn.[/font_size][/center]")
 	_clear_actions()
 	_add_action("Light the fire", _opening_scene)
+	if _has_save():
+		_add_action("Resume the inn", _resume)
 
 
 ## The ritual (docs/06): you light the fire, you look at the window, you open
 ## the doors. The weather sets the night before a single guest walks in.
 func _opening_scene() -> void:
+	stage = "night"
 	night = 1
 	met_grib = false
 	in_returns = false
@@ -345,6 +354,7 @@ func _opening_scene() -> void:
 
 
 func _start_night() -> void:
+	stage = "night"
 	night = 1
 	met_grib = false
 	in_returns = false
@@ -446,6 +456,7 @@ func _start_night_two() -> void:
 
 
 func _show_grib() -> void:
+	stage = "grib"
 	met_grib = true
 	current_guest = DATA.grib()
 	current_guest["intro"] = DATA.grib_intro(_mill_state())
@@ -460,6 +471,7 @@ func _show_grib() -> void:
 
 
 func _grib_regular_scene() -> void:
+	stage = "grib_reg"
 	portrait.visible = false
 	_set_text(DATA.grib_regular(_mill_state(), world.guests.get("grib", {})))
 	_clear_actions()
@@ -467,15 +479,18 @@ func _grib_regular_scene() -> void:
 
 
 func _window_scene() -> void:
+	stage = "window"
 	portrait.visible = false
 	_set_text(DATA.window_view(world.places, world.flags, world.guests, world.batch))
 	_clear_actions()
 	_add_action("Continue", _start_night_three)
+	_save()  # auto-save at dawn (docs/06)
 
 
 # ---------------------------------------------------------------- night three: the door
 
 func _start_night_three() -> void:
+	stage = "night3"
 	night = 3
 	board_btn.visible = false
 	brew_row.visible = false
@@ -878,6 +893,7 @@ func _apply_outcome(guest_id: String, quest_id: String) -> void:
 
 
 func _run_returns() -> void:
+	stage = "returns"
 	scene_queue.clear()
 	if sends.is_empty():
 		scene_queue.append({
@@ -941,6 +957,86 @@ func _restart() -> void:
 	_show_title()
 
 
+# ---------------------------------------------------------------- save / load
+
+## docs/06 — save anywhere, auto-save at dawn. The whole world + character
+## state round-trips to user://save.json; F5 saves, and the title offers Resume.
+
+func _has_save() -> bool:
+	return FileAccess.file_exists("user://save.json")
+
+
+func _save() -> void:
+	var data := {
+		"stage": stage,
+		"night": night,
+		"met_grib": met_grib,
+		"guest_idx": guest_idx,
+		"pours": pours,
+		"sends": sends,
+		"sent": sent,
+		"world": {
+			"places": world.places,
+			"flags": world.flags,
+			"guests": world.guests,
+			"batch": world.batch,
+		},
+	}
+	var f := FileAccess.open("user://save.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(data))
+	print("SAVED stage=", stage, " night=", night)
+
+
+func _resume() -> void:
+	if not _load_game():
+		_show_title()
+
+
+func _load_game() -> bool:
+	if not _has_save():
+		return false
+	var f := FileAccess.open("user://save.json", FileAccess.READ)
+	var data: Dictionary = JSON.parse_string(f.get_as_text())
+	if data.is_empty():
+		return false
+	night = data.get("night", 1)
+	met_grib = data.get("met_grib", false)
+	guest_idx = data.get("guest_idx", 0)
+	pours = data.get("pours", {})
+	sends = data.get("sends", {})
+	sent = data.get("sent", {})
+	world = WORLD_STATE.new()
+	var wd: Dictionary = data.get("world", {})
+	world.places = wd.get("places", world.places)
+	world.flags = wd.get("flags", {})
+	world.guests = wd.get("guests", {})
+	world.batch = wd.get("batch", "")
+	in_returns = false
+	scene_queue.clear()
+	_resume_stage(data.get("stage", "title"))
+	return true
+
+
+func _resume_stage(s: String) -> void:
+	board_btn.visible = false
+	brew_row.visible = false
+	dim.color = Color(0.08, 0.06, 0.05, 0.0)
+	match s:
+		"title":
+			_show_title()
+		"window":
+			_window_scene()
+		"night3":
+			_start_night_three()
+		_:
+			# A mid-night save returns to the evening's start, world kept.
+			if night == 2:
+				_show_grib()
+			else:
+				guests = DATA.guests_night_one()
+				_show_guest(clampi(guest_idx, 0, guests.size() - 1))
+
+
 # ---------------------------------------------------------------- screenshots
 
 func _shot(tag: String) -> void:
@@ -961,6 +1057,8 @@ func _frame() -> void:
 
 func _demo_flow() -> void:
 	await _frame()
+	if FileAccess.file_exists("user://save.json"):
+		DirAccess.remove_absolute("user://save.json")
 	_show_title()
 	await _frame()
 	await _shot("01_title")

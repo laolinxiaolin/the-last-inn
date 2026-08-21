@@ -132,3 +132,9 @@ Considered:
 
 - **docs/06: returns arrive one at a time, not in a pile.** Each return is now framed by a day-montage — *"the days pass"* — so they land spread over time, the way they should. The pace is itself a tell the player learns: the mill answers fast or not at all, the deep road holds its silence, the tower keeps its own slow hours.
 - **The montage frames the bell, the bell frames the face** — a three-beat return (days, step, then the one who comes back), which is exactly the doorbell rhythm the design describes. It layers onto the existing system with one small function (`return_days`) prepended in `_queue_return`; no new state.
+
+## Prototype — save anywhere, auto-save at dawn
+
+- **The docs' patient-player promise (docs/06) is now true in the prototype.** The full world + character state — every place, flag, bond, history, pour, send, and the cellar batch — round-trips to `user://save.json`. F5 saves anywhere; the dawn window auto-saves; the title offers **Resume the inn** when a save exists.
+- **Resume is stage-aware.** Each flow function records its `stage`; on load the game reconstructs the right screen — the dawn window, night three's door, or the evening it was left — rather than dumping the player back at the title.
+- **The state plumbing earned its keep for the fourth time.** The same `db21c9f`/`dad3674` world object that powers the window, the regulars, and the wall is what save/load serializes — a single dict that's both the game's memory and its save file.

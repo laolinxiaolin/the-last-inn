@@ -306,5 +306,29 @@ func _initialize() -> void:
 	assert(scene.keeps.any(func(k): return k["name"] == "A guard's axe"), "keld's axe should hang on the wall")
 	print("OK the Bitter pour loses the guard")
 
+	# --- save / load round-trips the world at dawn ---
+	scene._start_night()
+	scene.sends = {"renn": "mill", "keld": "tower", "woman": "caravan"}
+	scene._board_set()
+	scene._run_returns()
+	await process_frame
+	scene._start_night_two()
+	await process_frame
+	scene._window_scene()  # auto-saves at dawn
+	await process_frame
+	assert(scene._has_save(), "dawn should auto-save")
+	var want_peace: bool = scene.world.has_flag("goblin_peace")
+	# reload into a fresh instance and confirm the world restored
+	var fresh: Control = (load("res://main.tscn") as PackedScene).instantiate()
+	root.add_child(fresh)
+	await process_frame
+	fresh._resume()
+	await process_frame
+	assert(fresh.world.has_flag("goblin_peace") == want_peace, "flags should restore across save/load")
+	assert(fresh.night == 2 and fresh.stage == "window", "resume should land on the dawn window")
+	assert(fresh.text_label.text.contains("dawn"), "the dawn window should render after resume")
+	DirAccess.remove_absolute("user://save.json")
+	print("OK save / load round-trips the world at dawn")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)

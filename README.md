@@ -63,6 +63,8 @@ And after any ending, **the Embers** (docs/10): no board, no stakes, no knock �
 
 And every closing has **one decision** (docs/05, 06): what batch to set fermenting in the cellar for next time. The world remembers it — the dawn window notes the batch coming along, and it smells like next time.
 
+And the game does what a tired player needs (docs/06): **save anywhere, auto-save at dawn.** Press F5 to save; the dawn window saves by itself; the title offers **Resume the inn** if a save exists. The whole world — every flag, bond, place, and batch — comes back.
+
 Run it:
 
 ```sh
