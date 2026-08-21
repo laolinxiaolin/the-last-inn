@@ -79,3 +79,10 @@ Considered:
 - **The mirror runs on the playthrough, not on a plot.** The lost kid's lines are computed from the world and guest state the prototype already keeps: how many quests were sent, who didn't come back (the woman in grey's silver), and the kindness accumulated in bonds. The same house that "remembers how you treated people" is what the door answers from.
 - **Three endings, none moralized** (Sealer / Went In / Sent Them), each written to reference the state — e.g. the went-in ending reuses the sword on the wall when the woman died, because the hooks were waiting.
 - **No new systems.** Night three reads existing world + character state; the door needed no flags of its own, which is the strongest sign the state plumbing (commits `db21c9f`, `dad3674`) was the right investment.
+
+## Prototype — weather & the quiet
+
+- **The window is the game's weather (docs/06).** Three nights, three seasons: autumn rain, first snow, deep winter — the dark the player has been watching slowly comes to the door. It's one small `window_weather(night)` function; the tone does the rest.
+- **The fire-lighting ritual** now opens the night, and the title's "Open the Inn" became "Light the fire" — the game's opening click is a small ritual, not an entrance.
+- **The quiet beat is a verb, not a cutscene.** "Listen to the night" lives in the guest menu, so an empty inn is something you *choose* to sit with — the fire, the rain, a Common you poured yourself. Cheap to build, but it's the sentence the design keeps repeating: *an empty inn can be company.*
+- **Weather has no numbers.** It's the window being a window — the same rule as the world map. The game never says "season 3"; it just rains, then snows, then it's dark at the glass.

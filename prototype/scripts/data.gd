@@ -411,6 +411,36 @@ static func _place_line(id: String, name: String, places: Dictionary) -> String:
 	return lines[id][places[id]["state"]] % name
 
 
+# ---------------------------------------------------------------- weather & the quiet
+
+## docs/06 — the window is the game's weather. Autumn rain, first snow, deep
+## winter; the same dark the player has been watching slowly comes to the door.
+## And the quiet beats — the fire, the rain, an empty inn as company.
+
+static func window_weather(night: int) -> String:
+	match night:
+		1:
+			return "Soft autumn rain on the roof. The valley lights flicker in the wet."
+		2:
+			return "The first snow is holding. The road to the mill is white and very quiet."
+		_:
+			return "Deep winter. The window is nearly dark — the dark you have been watching has come closer, to knock."
+
+
+static func inn_opening(night: int) -> String:
+	return "You light the fire. It catches on the second try, the way it always does.\n\n" + window_weather(night) + "\n\nOutside the door, the night waits. You know, by now, that it isn't only the road out there."
+
+
+static func quiet_beat(night: int) -> String:
+	match night:
+		1:
+			return "The door settles. The fire pops. You pour yourself a Common and sit a while with the rain — a tired man, an empty room, and the whole night ahead."
+		2:
+			return "The door settles. Snow drifts against the glass. You pour yourself one and let the inn hold the quiet."
+		_:
+			return "The door settles. The fire is low. You pour yourself one and sit with the dark, the way the game means you to. It isn't frightening. It's company."
+
+
 # ---------------------------------------------------------------- night three: the door
 
 ## The cellar is a capstone, not a cellar (docs/10 — the locked door). On the

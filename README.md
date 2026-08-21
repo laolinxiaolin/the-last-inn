@@ -49,6 +49,8 @@ It covers two nights: the full first-night cast (Renn, Keld, the woman in grey, 
 
 It then closes the arc on **night three — the door**: the cellar is a capstone, the dark presses, and the endgame trial reads the whole playthrough back at the player before three endings (Sealer / Went In / Sent Them).
 
+Around all of it sits the weather and the quiet (docs/06): each night opens with the fire-lighting ritual and the window's season (autumn rain → first snow → deep winter), and between guests you can stop and listen to the night — pour yourself a Common and let an empty inn be company.
+
 Run it:
 
 ```sh

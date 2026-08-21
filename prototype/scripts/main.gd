@@ -316,7 +316,30 @@ func _show_title() -> void:
 	portrait.visible = false
 	_set_text("[center][b][font_size=56]THE LAST INN[/font_size][/b]\n\n[font_size=28]You were the hero once.\nNow you're the one behind the bar, and the world comes to you.\n\nA concept demo — one evening at the inn.[/font_size][/center]")
 	_clear_actions()
-	_add_action("Open the Inn", _start_night)
+	_add_action("Light the fire", _opening_scene)
+
+
+## The ritual (docs/06): you light the fire, you look at the window, you open
+## the doors. The weather sets the night before a single guest walks in.
+func _opening_scene() -> void:
+	night = 1
+	met_grib = false
+	in_returns = false
+	world = WORLD_STATE.new()
+	guests = DATA.guests_night_one()
+	guest_idx = 0
+	pours = {}
+	sends = {}
+	sent = {}
+	board_btn.visible = false
+	brew_row.visible = false
+	portrait.visible = false
+	dim.color = Color(0.08, 0.06, 0.05, 0.0)
+	_phase("Night One — The Hearth")
+	_set_bg("res://assets/bg_inn.svg")
+	_set_text(DATA.inn_opening(night))
+	_clear_actions()
+	_add_action("Open the doors", _start_night)
 
 
 func _start_night() -> void:
@@ -353,7 +376,16 @@ func _base_guest_actions() -> void:
 	_clear_actions()
 	_add_action("Pour an ale", _toggle_brew_row)
 	_add_action("Talk", _show_talks)
+	_add_action("Listen to the night", _quiet_beat)
 	_add_action("Done with %s" % current_guest["name"], done_callable)
+
+
+func _quiet_beat() -> void:
+	brew_row.visible = false
+	portrait.visible = false
+	_set_text(DATA.quiet_beat(night))
+	_clear_actions()
+	_add_action("Continue", _base_guest_actions)
 
 
 func _toggle_brew_row() -> void:
@@ -818,6 +850,9 @@ func _demo_flow() -> void:
 	_show_title()
 	await _frame()
 	await _shot("01_title")
+	_opening_scene()
+	await _frame()
+	await _shot("26_inn_opening")
 	_start_night()
 	await _frame()
 	await _shot("02_renn_intro")
@@ -828,6 +863,9 @@ func _demo_flow() -> void:
 	_on_talk(current_guest["talks"][0]["q"], current_guest["talks"][0]["a"])
 	await _frame()
 	await _shot("04_renn_talk")
+	_quiet_beat()
+	await _frame()
+	await _shot("27_quiet_beat")
 	_base_guest_actions()
 	_next_guest()
 	await _frame()
