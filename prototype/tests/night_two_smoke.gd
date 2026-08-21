@@ -229,6 +229,15 @@ func _initialize() -> void:
 	scene._sent_them_ending()
 	await process_frame
 	assert(scene.text_label.text.contains("man who stayed"), "sent-them ending should render")
+	scene._embers()
+	await process_frame
+	assert(scene.text_label.text.contains("nothing left to send"), "embers should render")
+	scene._embers_sit()
+	await process_frame
+	assert(scene.text_label.text.contains("be still"), "embers sit should render")
+	scene._final_close()
+	await process_frame
+	assert(scene.text_label.text.contains("last kindness"), "the final close should be kind")
 	print("OK night three: the door + three endings")
 
 	# --- the Sweet pour can lose the boy: renn's caravan becomes a courier ---

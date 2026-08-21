@@ -59,6 +59,8 @@ And what you pour can cost someone. Send **Renn** onto the deep road with **the 
 
 Before the door you can also **walk the wall** — the living museum given a room. Every keepsake hangs there because of a choice you made: her sword in grey, the borrowed sword too big for a boy, a road hat, a coin too new, the bell key, Grib's candle.
 
+And after any ending, **the Embers** (docs/10): no board, no stakes, no knock — just the inn, the ones who remain, the fire, the rain. Sit as long as you like, or close the inn one last time and walk away, and the game lets you go. The last kindness.
+
 Run it:
 
 ```sh

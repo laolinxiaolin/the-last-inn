@@ -678,3 +678,21 @@ static func keepsakes(world) -> Array:
 		out.append({"name": "A barley candle",
 			"note": "Grib's thank-you, small and neat. In the books, the inn always has a candle."})
 	return out
+
+
+# ---------------------------------------------------------------- the embers
+
+## docs/10 — after the ending, the Embers: no quests, no board, no stakes. Just
+## the inn, the ones who remain, the fire, the rain. You can sit as long as you
+## like — or close the inn one last time and walk away, and the game lets you.
+
+static func embers_room() -> String:
+	return "The fire burns low. There is nothing left to send — no board, no knock, no door.\n\nOnly the inn: the fire, the beer at the glass, the ones who are still in their chairs.\n\nYou can sit here as long as you like. There is no clock. That is the point."
+
+
+static func embers_sit() -> String:
+	return "You pour yourself one and sit with it.\n\nNobody here needs anything from you now. That is the whole gift of it — for once, no one at this inn needs a thing.\n\nThe fire pops. The rain keeps its slow words at the glass. You are allowed, at last, to be still."
+
+
+static func final_close() -> String:
+	return "You bank the fire down to the last coal. You check the door is shut and the wall is full. You dry the last glass and set it to sleep.\n\nYou close the inn one last time — not from failure, but because you are done, and the game lets you.\n\nThe last kindness."

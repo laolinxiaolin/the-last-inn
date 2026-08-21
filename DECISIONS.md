@@ -110,3 +110,9 @@ Considered:
 - **The inn is a living museum; now it has a room.** "Walk the wall" on night three shows a keepsake for every thread the player resolved — her sword in grey, the borrowed sword too big for a boy, a road hat, a coin too new, the bell key, Grib's candle. Nothing is on the wall that the player didn't put there by a choice.
 - **It's the memory system made visible.** Same plumbing as the window and the regulars — pure reading of flags + guest state. Walking the wall is reading your own choices back, which is the quietest and most honest way the game can pay off the "the inn is a museum of the playthrough" promise.
 - **Every keepsake is a double bind.** A sword can mean she died *or* that she waited by the door; a hat means the boy came home empty and whole. The same hook tells two opposite stories, so the wall mirrors the playthrough the way a mirror should.
+
+## Prototype — the embers
+
+- **The game that lets you retire (docs/10).** After any ending the demo now opens the Embers — no board, no stakes, no knock — before the closing screen. You can sit by the fire and pour yourself one for as long as you like, with no clock, because that's the point.
+- **The last kindness.** The way out is a verb too: "close the inn one last time," and the game lets you — a banked fire, a full wall, a dried glass, *done not because you failed but because you're finished.* It's the design's farewell line, made playable.
+- **It caps the whole memory story.** You pour, you read, you lose the boy or bring him home, you open the door, and then — quiet. The prototype's arc is now whole: warmth, the dark creeping, the door, and the silence after, which the game treats as a reward, not a void.

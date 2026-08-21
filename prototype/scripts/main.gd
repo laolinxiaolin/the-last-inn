@@ -548,19 +548,43 @@ func _sealer_ending() -> void:
 	portrait.visible = false
 	_set_text(DATA.sealer_ending(world))
 	_clear_actions()
-	_add_action("Continue", _finish_epilogue)
+	_add_action("Continue", _embers)
 
 
 func _went_in_ending() -> void:
 	portrait.visible = false
 	_set_text(DATA.went_in_ending(world))
 	_clear_actions()
-	_add_action("Continue", _finish_epilogue)
+	_add_action("Continue", _embers)
 
 
 func _sent_them_ending() -> void:
 	portrait.visible = false
 	_set_text(DATA.sent_them_ending(world))
+	_clear_actions()
+	_add_action("Continue", _embers)
+
+
+## After any ending, the Embers (docs/10): no stakes, no board. Sit as long as
+## you like, then close the inn one last time, and the game lets you go.
+func _embers() -> void:
+	portrait.visible = false
+	_set_text(DATA.embers_room())
+	_clear_actions()
+	_add_action("Sit by the fire", _embers_sit)
+	_add_action("Close the inn one last time", _final_close)
+
+
+func _embers_sit() -> void:
+	portrait.visible = false
+	_set_text(DATA.embers_sit())
+	_clear_actions()
+	_add_action("Continue", _embers)
+
+
+func _final_close() -> void:
+	portrait.visible = false
+	_set_text(DATA.final_close())
 	_clear_actions()
 	_add_action("Continue", _finish_epilogue)
 
@@ -1025,6 +1049,15 @@ func _demo_flow() -> void:
 	_sealer_ending()
 	await _frame()
 	await _shot("25_sealer")
+	_embers()
+	await _frame()
+	await _shot("32_embers")
+	_embers_sit()
+	await _frame()
+	await _shot("33_embers_sit")
+	_final_close()
+	await _frame()
+	await _shot("34_final_close")
 	_finish_epilogue()
 	await _frame()
 	await _shot("20_end")
