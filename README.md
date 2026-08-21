@@ -55,7 +55,7 @@ And before the door, **the regulars** (docs/01, 07): the inn is a living museum 
 
 And every return is announced by **the doorbell** (docs/06): the game's one instrument of suspense. Light step, heavy step, measured step — and, when someone doesn't come back at all, a step that isn't theirs.
 
-And what you pour can cost someone. Send **Renn** onto the deep road with **the Sweet** in him — the mead that makes a boy generous *and loud* — and the courier brings his borrowed sword back instead. The wall remembers the sword too big for a boy, and he is not among the regulars on the last night.
+And what you pour can cost someone. Send **Renn** onto the deep road with **the Sweet** in him — the mead that makes a boy generous *and loud* — and the courier brings his borrowed sword back instead. The wall remembers the sword too big for a boy, and he is not among the regulars on the last night. Keld can be lost too, the opposite way: hand him the **Bitter** — the drink that says *you want me gone* — and he goes to the caravan alone, and a stranger brings back his axe and the coin he wore smooth.
 
 Before the door you can also **walk the wall** — the living museum given a room. Every keepsake hangs there because of a choice you made: her sword in grey, the borrowed sword too big for a boy, a road hat, a coin too new, the bell key, Grib's candle.
 

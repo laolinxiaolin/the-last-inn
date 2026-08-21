@@ -807,6 +807,11 @@ func _queue_return(guest_id: String, quest_id: String) -> void:
 		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.renn_caravan_courier()})
 		scene_queue.append({"bg": "res://assets/bg_inn.svg", "portrait": "", "kind": "text", "text": DATA.renn_courier_after()})
 		return
+	# The Bitter pour tells Keld he's not wanted — he goes to the road alone.
+	if guest_id == "keld" and quest_id == "caravan" and pours.get("keld", "") == "bitter":
+		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.keld_caravan_courier()})
+		scene_queue.append({"bg": "res://assets/bg_inn.svg", "portrait": "", "kind": "text", "text": DATA.keld_courier_after()})
+		return
 	var key := "%s|%s" % [guest_id, quest_id]
 	var scene: Dictionary = DATA.returns().get(key, {})
 	if scene.is_empty():
@@ -842,6 +847,15 @@ func _apply_outcome(guest_id: String, quest_id: String) -> void:
 		world.note("renn", "quest caravan")
 		world.places["deep_road"]["state"] = "fallen"
 		world.set_flag("renn_dead")
+		return
+	# The Bitter pour sends Keld to the caravan alone — the deep road keeps him.
+	if guest_id == "keld" and quest_id == "caravan" and pours.get("keld", "") == "bitter":
+		world.report("deep_road", "keld_courier")
+		world.raise_bond("keld", 2)
+		world.note("keld", "quest caravan")
+		world.places["deep_road"]["state"] = "fallen"
+		world.set_flag("silver_too_new")
+		world.set_flag("keld_dead")
 		return
 	var key := "%s|%s" % [guest_id, quest_id]
 	var o: Dictionary = OUTCOMES.get(key, {})

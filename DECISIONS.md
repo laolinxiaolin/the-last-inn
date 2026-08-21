@@ -121,3 +121,9 @@ Considered:
 
 - **"One decision at closing" (docs/05, 06) is now real.** Before the days pass, the player sets a batch to ferment in the cellar — the house pour, or any of the six. It's the small ritual that makes closing a closing, not just a stop.
 - **The cellar is the past's address.** `world.batch` is a single string, and the dawn window reads it back — *"the batch you set is coming along — The Dark. It smells like next time."* Same pattern as everything else: one piece of state, many places it can be read.
+
+## Prototype — the Bitter pour loses the guard
+
+- **Keld's death is the mirror of Renn's.** Renn dies from being sent loud and reckless (the Sweet); Keld dies from being told he's not wanted (the Bitter, *"you want me gone"*). Two different deaths, two different pours, one rule: what you pour before you send is part of the story.
+- **The whole memory system closes around it.** `keld_dead` writes the window and the wall, empties his seat among the regulars, and shows up in the door mirror — and because Keld was the guard who *knew* the door, losing him changes what the door knows.
+- **He was the one who kept the door's secret; losing him makes the dark readier.** That's the weight of it — the choice to push Keld away isn't just sad, it's strategically frightening.

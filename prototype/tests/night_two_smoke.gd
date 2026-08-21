@@ -279,5 +279,31 @@ func _initialize() -> void:
 	assert(scene.text_label.text.contains("the batch you set"), "the window should note the batch")
 	print("OK the cellar batch + the window notes it")
 
+	# --- the Bitter pour loses the guard: keld's caravan becomes a courier ---
+	scene._start_night()
+	scene.sends = {"keld": "caravan"}
+	scene.pours = {"keld": "bitter"}
+	scene._run_returns()
+	await process_frame
+	assert(scene.world.has_flag("keld_dead"), "keld_dead should be set by the Bitter caravan")
+	assert(scene.world.state_of("deep_road") == "fallen", "the deep road should be fallen")
+	assert(scene.text_label.text.contains("axe"), "the courier should bring back the axe")
+	scene._start_night_two()
+	await process_frame
+	scene._board_set()
+	scene._grib_regular_scene()
+	scene._window_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("went in alone"), "the window should mark his axe")
+	scene._start_night_three()
+	await process_frame
+	scene._regulars_menu()
+	await process_frame
+	assert(not scene.regulars.any(func(r): return r["id"] == "keld"), "dead keld must not be among the regulars")
+	scene._wall_menu()
+	await process_frame
+	assert(scene.keeps.any(func(k): return k["name"] == "A guard's axe"), "keld's axe should hang on the wall")
+	print("OK the Bitter pour loses the guard")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)

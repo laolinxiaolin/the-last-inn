@@ -368,6 +368,8 @@ static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionar
 		flavor.append("On the wall: a sword too big for a boy. It came back. He didn't.")
 	if flags.has("keld_knows"):
 		flavor.append("Keld knows things now. He drinks, and doesn't say them.")
+	if flags.has("keld_dead"):
+		flavor.append("On the bar: an axe, and a purse worn by a century of thumbs. He went in alone.")
 	if flags.has("bell_key"):
 		flavor.append("Somewhere, a key of black iron stays warm.")
 	if flags.has("door_watcher"):
@@ -494,8 +496,10 @@ static func night_three_open(world) -> String:
 		t += "The woman in grey is at the window, watching the road. 'I said I'd be here when it opened,' she says. 'I keep my word.'\n"
 	if world.has_flag("renn_dead"):
 		t += "On the wall, a sword too big for a boy. It came back. He didn't.\n"
-	if world.has_flag("keld_knows"):
+	if world.has_flag("keld_knows") and not world.has_flag("keld_dead"):
 		t += "Keld is by the head of the cellar stairs, not quite in the room. 'You know what it is now,' he says. 'You knew when you poured me the Dark.'\n"
+	if world.has_flag("keld_dead"):
+		t += "On the bar, an axe and a worn coin purse rest where the guard who sat with the whole world used to be. He went in alone.\n"
 	if world.has_flag("goblin_peace") or world.has_flag("mill_quiet"):
 		t += "Out at the edge of the window, a mill light is steady where it used to be out.\n"
 	t += "\nAnd the cellar door is ajar.\n\nIt has never been ajar before. Below it, the dark breathes in the rhythm of a held breath.\n"
@@ -518,6 +522,8 @@ static func night_three_trial(world) -> String:
 		t += "\n'She paid in silver too new. You knew. You let me walk out with her coin, and the road ate us both.'\n"
 	if world.has_flag("renn_dead"):
 		t += "\n'The one with the borrowed sword,' he says. 'You poured him the Sweet — to make him generous, to make him loud. He was both. He didn't come back. You knew what the Sweet does to a boy with something to prove.'\n"
+	if world.has_flag("keld_dead"):
+		t += "\n'The tomb-guard,' he says. 'You poured him the Bitter — made him honest, made him spiteful — and he walked out alone to prove he wasn't wanted. You were the last one who knew the door. Now the door knows.'\n"
 	if bonds >= 6:
 		t += "\n'But you were kind. I can taste it — the warm pour, the hand that steadied a shaking one. That door is real.'\n"
 	elif bonds > 0:
@@ -563,7 +569,7 @@ static func regulars(world, sent: Dictionary) -> Array:
 	out.append(_fenwick_regular())
 	if sent.has("renn") and not world.has_flag("renn_dead"):
 		out.append(_renn_regular(world, sent["renn"]))
-	if sent.has("keld"):
+	if sent.has("keld") and not world.has_flag("keld_dead"):
 		out.append(_keld_regular(world))
 	if not world.has_flag("woman_dead"):
 		out.append(_woman_regular(world))
@@ -683,6 +689,9 @@ static func keepsakes(world) -> Array:
 	if world.has_flag("bell_key"):
 		out.append({"name": "A key of black iron",
 			"note": "'It's not a lock,' Keld said. 'It's a bell.' He left it warm."})
+	if world.has_flag("keld_dead"):
+		out.append({"name": "A guard's axe",
+			"note": "The stone-hafted axe, and the purse a century of thumbs wore smooth. He went alone because the story made it look like you didn't want him. Some doors close shut from our side."})
 	if world.guests.has("grib") and world.guests["grib"]["flags"].has("poured_sweet"):
 		out.append({"name": "A barley candle",
 			"note": "Grib's thank-you, small and neat. In the books, the inn always has a candle."})
@@ -705,3 +714,17 @@ static func embers_sit() -> String:
 
 static func final_close() -> String:
 	return "You bank the fire down to the last coal. You check the door is shut and the wall is full. You dry the last glass and set it to sleep.\n\nYou close the inn one last time — not from failure, but because you are done, and the game lets you.\n\nThe last kindness."
+
+
+# ---------------------------------------------------------------- the Bitter pour loses the guard
+
+## Keld reads every room, and the Bitter says 'you want me gone' (docs/05).
+## Send him to the caravan after that and he goes alone — the courier brings
+## back his axe and the coin he set on the bar before he'd ever trust you.
+
+static func keld_caravan_courier() -> String:
+	return "Six days pass. The door opens.\n\nA stranger stands in the doorway, holding an axe — you'd know the stone-hafted head anywhere. At its feet, a small coin purse, leather worn smooth by a century of thumbs.\n\n'He said to give this to you. Said you'd know where it belonged.'\n\nIt's the purse he set on the bar the first night, before he'd ever decided to trust you."
+
+
+static func keld_courier_after() -> String:
+	return "You set the axe and the purse where they can be seen. There were hooks waiting.\n\nThe fire pops. Somewhere, the road he walked has ended.\n\n[i]You poured him the Bitter — 'you want me gone.' He heard you, and he went alone. Some doors close shut from this side.[/i]"
