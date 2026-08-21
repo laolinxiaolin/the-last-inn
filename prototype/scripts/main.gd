@@ -90,7 +90,7 @@ func _build_ui() -> void:
 
 	info = Label.new()
 	info.position = Vector2(24, 16)
-	info.add_theme_font_size_override("font_size", 20)
+	info.add_theme_font_size_override("font_size", 28)
 	info.add_theme_color_override("font_color", Color("#F2E3C5"))
 	info.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
 	info.add_theme_constant_override("outline_size", 6)
@@ -107,7 +107,7 @@ func _build_ui() -> void:
 
 	panel = Panel.new()
 	panel.anchor_left = 0.38
-	panel.anchor_top = 0.56
+	panel.anchor_top = 0.42
 	panel.anchor_right = 0.97
 	panel.anchor_bottom = 0.97
 	var pstyle := StyleBoxFlat.new()
@@ -123,10 +123,10 @@ func _build_ui() -> void:
 
 	var margin := MarginContainer.new()
 	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
-	margin.add_theme_constant_override("margin_left", 20)
-	margin.add_theme_constant_override("margin_right", 20)
-	margin.add_theme_constant_override("margin_top", 14)
-	margin.add_theme_constant_override("margin_bottom", 14)
+	margin.add_theme_constant_override("margin_left", 36)
+	margin.add_theme_constant_override("margin_right", 36)
+	margin.add_theme_constant_override("margin_top", 26)
+	margin.add_theme_constant_override("margin_bottom", 26)
 	panel.add_child(margin)
 
 	var vbox := VBoxContainer.new()
@@ -144,12 +144,12 @@ func _build_ui() -> void:
 	text_label.fit_content = true
 	text_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	text_label.bbcode_enabled = true
-	text_label.add_theme_font_size_override("normal_font_size", 25)
+	text_label.add_theme_font_size_override("normal_font_size", 31)
 	text_label.add_theme_color_override("default_color", Color("#3E2817"))
 	scroll.add_child(text_label)
 
 	actions = VBoxContainer.new()
-	actions.add_theme_constant_override("separation", 8)
+	actions.add_theme_constant_override("separation", 12)
 	vbox.add_child(actions)
 
 	# brew shelf (top center)
@@ -158,14 +158,14 @@ func _build_ui() -> void:
 	brew_row.anchor_right = 0.5
 	brew_row.anchor_top = 0.0
 	brew_row.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	brew_row.offset_left = -400
-	brew_row.offset_right = 400
-	brew_row.offset_top = 16
-	brew_row.add_theme_constant_override("separation", 8)
+	brew_row.offset_left = -560
+	brew_row.offset_right = 560
+	brew_row.offset_top = 20
+	brew_row.add_theme_constant_override("separation", 14)
 	brew_row.visible = false
 	add_child(brew_row)
 	for brew in DATA.brews():
-		var b := _mk_button(brew["name"], 20)
+		var b := _mk_button(brew["name"], 26)
 		b.tooltip_text = brew["line"]
 		var s := StyleBoxFlat.new()
 		s.bg_color = Color(brew["color"])
@@ -184,15 +184,15 @@ func _build_ui() -> void:
 		brew_row.add_child(b)
 
 	# quest board button (top right)
-	board_btn = _mk_button("Quest Board", 20)
+	board_btn = _mk_button("Quest Board", 26)
 	board_btn.anchor_left = 1.0
 	board_btn.anchor_right = 1.0
 	board_btn.anchor_top = 0.0
 	board_btn.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-	board_btn.offset_left = -190
-	board_btn.offset_right = -16
-	board_btn.offset_top = 16
-	board_btn.offset_bottom = 62
+	board_btn.offset_left = -260
+	board_btn.offset_right = -20
+	board_btn.offset_top = 20
+	board_btn.offset_bottom = 88
 	board_btn.visible = false
 	board_btn.pressed.connect(_open_board)
 	add_child(board_btn)
@@ -208,10 +208,10 @@ func _build_ui() -> void:
 
 	var bmargin := MarginContainer.new()
 	bmargin.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bmargin.add_theme_constant_override("margin_left", 90)
-	bmargin.add_theme_constant_override("margin_right", 90)
-	bmargin.add_theme_constant_override("margin_top", 50)
-	bmargin.add_theme_constant_override("margin_bottom", 50)
+	bmargin.add_theme_constant_override("margin_left", 150)
+	bmargin.add_theme_constant_override("margin_right", 150)
+	bmargin.add_theme_constant_override("margin_top", 80)
+	bmargin.add_theme_constant_override("margin_bottom", 80)
 	board_overlay.add_child(bmargin)
 
 	var bvbox := VBoxContainer.new()
@@ -221,31 +221,31 @@ func _build_ui() -> void:
 	var btitle := Label.new()
 	btitle.text = "THE QUEST BOARD"
 	btitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btitle.add_theme_font_size_override("font_size", 34)
+	btitle.add_theme_font_size_override("font_size", 46)
 	btitle.add_theme_color_override("font_color", Color("#F2E3C5"))
 	bvbox.add_child(btitle)
 
 	quest_list = VBoxContainer.new()
 	quest_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	quest_list.add_theme_constant_override("separation", 14)
+	quest_list.add_theme_constant_override("separation", 22)
 	bvbox.add_child(quest_list)
 
 	var bnote := Label.new()
 	bnote.text = "Match people to quests. Read them first. The board is never the whole truth."
 	bnote.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	bnote.add_theme_font_size_override("font_size", 18)
+	bnote.add_theme_font_size_override("font_size", 26)
 	bnote.add_theme_color_override("font_color", Color("#C9BFA0"))
 	bvbox.add_child(bnote)
 
-	var bset := _mk_button("The Board Is Set — Close the Inn", 22)
+	var bset := _mk_button("The Board Is Set — Close the Inn", 28)
 	bset.pressed.connect(_board_set)
 	bvbox.add_child(bset)
 
 
-func _mk_button(text: String, font_size: int = 22) -> Button:
+func _mk_button(text: String, font_size: int = 28) -> Button:
 	var b := Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(0, 50)
+	b.custom_minimum_size = Vector2(0, 60)
 	b.add_theme_font_size_override("font_size", font_size)
 	var s := StyleBoxFlat.new()
 	s.bg_color = Color("#E8D5AC")
@@ -322,7 +322,7 @@ func _show_title() -> void:
 	_phase("")
 	_set_bg("res://assets/bg_title.svg")
 	portrait.visible = false
-	_set_text("[center][b][font_size=56]THE LAST INN[/font_size][/b]\n\n[font_size=28]You were the hero once.\nNow you're the one behind the bar, and the world comes to you.\n\nA concept demo — one evening at the inn.[/font_size][/center]")
+	_set_text("[center][b][font_size=80]THE LAST INN[/font_size][/b]\n\n[font_size=40]You were the hero once.\nNow you're the one behind the bar, and the world comes to you.\n\nA concept demo — one evening at the inn.[/font_size][/center]")
 	_clear_actions()
 	_add_action("Light the fire", _opening_scene)
 	if _has_save():
@@ -635,6 +635,7 @@ func _rebuild_board() -> void:
 
 func _mk_quest_row(q: Dictionary) -> Panel:
 	var row := Panel.new()
+	row.custom_minimum_size = Vector2(0, 232)
 	var rs := StyleBoxFlat.new()
 	rs.bg_color = Color("#E8D5AC")
 	rs.corner_radius_top_left = 10
@@ -650,10 +651,10 @@ func _mk_quest_row(q: Dictionary) -> Panel:
 	v.add_theme_constant_override("margin_left", 0)
 	var m := MarginContainer.new()
 	m.set_anchors_preset(Control.PRESET_FULL_RECT)
-	m.add_theme_constant_override("margin_left", 18)
-	m.add_theme_constant_override("margin_right", 18)
-	m.add_theme_constant_override("margin_top", 12)
-	m.add_theme_constant_override("margin_bottom", 12)
+	m.add_theme_constant_override("margin_left", 26)
+	m.add_theme_constant_override("margin_right", 26)
+	m.add_theme_constant_override("margin_top", 18)
+	m.add_theme_constant_override("margin_bottom", 18)
 	row.add_child(m)
 	m.add_child(v)
 
@@ -662,25 +663,25 @@ func _mk_quest_row(q: Dictionary) -> Panel:
 	var name_l := Label.new()
 	name_l.text = q["name"]
 	name_l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	name_l.add_theme_font_size_override("font_size", 24)
+	name_l.add_theme_font_size_override("font_size", 32)
 	name_l.add_theme_color_override("font_color", Color("#3E2817"))
 	h.add_child(name_l)
 	var tier_l := Label.new()
 	tier_l.text = "· %s ·" % q["tier"]
-	tier_l.add_theme_font_size_override("font_size", 20)
+	tier_l.add_theme_font_size_override("font_size", 26)
 	tier_l.add_theme_color_override("font_color", Color(q["tier_color"]))
 	h.add_child(tier_l)
 
 	var desc := Label.new()
 	desc.text = q["desc"]
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	desc.add_theme_font_size_override("font_size", 18)
+	desc.add_theme_font_size_override("font_size", 24)
 	desc.add_theme_color_override("font_color", Color("#5C4A35"))
 	v.add_child(desc)
 
 	var reward := Label.new()
 	reward.text = "Reward: %s" % q["reward"]
-	reward.add_theme_font_size_override("font_size", 16)
+	reward.add_theme_font_size_override("font_size", 22)
 	reward.add_theme_color_override("font_color", Color("#8C7A5A"))
 	v.add_child(reward)
 
@@ -689,29 +690,29 @@ func _mk_quest_row(q: Dictionary) -> Panel:
 	var assigned := Label.new()
 	assigned.text = q.get("resolved_text", "—")
 	assigned.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	assigned.add_theme_font_size_override("font_size", 20)
+	assigned.add_theme_font_size_override("font_size", 26)
 	assigned.add_theme_color_override("font_color", Color("#3E2817"))
 	bh.add_child(assigned)
 
 	var row_data := {"assigned": assigned, "locked": q.get("locked", false), "resolved_text": q.get("resolved_text", "")}
 	if not row_data["locked"]:
-		var pick_btn := _mk_button("Assign", 18)
-		pick_btn.custom_minimum_size = Vector2(120, 40)
+		var pick_btn := _mk_button("Assign", 24)
+		pick_btn.custom_minimum_size = Vector2(170, 58)
 		bh.add_child(pick_btn)
 
 		var picker := HBoxContainer.new()
 		picker.visible = false
-		picker.add_theme_constant_override("separation", 8)
+		picker.add_theme_constant_override("separation", 12)
 		v.add_child(picker)
 		for g in _available_guests():
 			if sent.get(g["id"], "") == q["id"]:
 				continue  # they've already been there. They know what they did.
-			var gb := _mk_button(g["name"], 18)
-			gb.custom_minimum_size = Vector2(0, 40)
+			var gb := _mk_button(g["name"], 24)
+			gb.custom_minimum_size = Vector2(0, 56)
 			gb.pressed.connect(_pick.bind(q["id"], g["id"]))
 			picker.add_child(gb)
-		var nobody := _mk_button("Nobody", 18)
-		nobody.custom_minimum_size = Vector2(0, 40)
+		var nobody := _mk_button("Nobody", 24)
+		nobody.custom_minimum_size = Vector2(0, 56)
 		nobody.pressed.connect(_pick.bind(q["id"], ""))
 		picker.add_child(nobody)
 
@@ -939,7 +940,7 @@ func _show_next_scene() -> void:
 
 func _finish_epilogue() -> void:
 	portrait.visible = false
-	_set_text("[center][b][font_size=40]— Concept demo complete —[/font_size][/b]\n\n[font_size=24]The quest is never what the board says it is.\nThe tower is a door.\nSome debts come back as questions.\nAnd some knock — small, polite — and stay.\n\nThank you for pouring.[/font_size][/center]")
+	_set_text("[center][b][font_size=56]— Concept demo complete —[/font_size][/b]\n\n[font_size=34]The quest is never what the board says it is.\nThe tower is a door.\nSome debts come back as questions.\nAnd some knock — small, polite — and stay.\n\nThank you for pouring.[/font_size][/center]")
 	_clear_actions()
 	_add_action("Light the Fire Again", _restart)
 
