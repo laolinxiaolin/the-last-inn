@@ -65,3 +65,10 @@ Considered:
 - Whether the inn "chose" the player or the player drifted to it (kept ambiguous until Act 3)
 - Length and content of the Embers mode
 - Music direction beyond "low ambient bed, silence at dark moments"
+
+## Prototype — night two sends
+
+- **Night two's board still means something.** Sends made after Grib resolve through the same returns/outcome path as night one (days pass, the door creaks) before his epilogue — the second night isn't just a walk-through, and the bell key / fallen deep road can still happen there.
+- **Availability is world state, not a menu rule.** A guest can't be sent to the same quest twice — they've already been there, they know what they did. The woman in grey stops taking jobs after the courier brings her sword home.
+- **The board resets each evening.** Night-one "Going: …" labels don't linger into night two; history lives in the world (`sent`), not in the UI (`sends`).
+- **The window speaks the truth of who's still here.** The "silver too new" line only says *she didn't come back* when she didn't — otherwise the coin just bought a round on the house.

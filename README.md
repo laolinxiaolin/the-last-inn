@@ -43,7 +43,20 @@ The other inns are gone. The region is thinning — villages quieter, roads empt
 
 ## Current status
 
-This is a design document repository — the game is being fully designed here before a single line of code. See [docs/](docs/).
+The design is fully locked (all 16 docs). A playable **Godot 4.7 concept prototype** lives in [prototype/](prototype/).
+
+It covers two nights: the full first-night cast (Renn, Keld, the woman in grey, Fenwick, Garrick), six ale, the quest board, returns, the courier, Grib on night two, and a dawn window that shows what the world — and the innkeeper — remembers.
+
+Run it:
+
+```sh
+godot --path prototype            # interactive
+cd prototype && godot -- --demo   # auto-play + capture shots to user://shots/
+```
+
+Night one's quests resolve into world-state (mill parley / peace / quiet, the fallen deep road, the tower's bell key). Night two's board still means something: sends made after Grib resolve the same way before his epilogue, and the picker remembers who already went and who didn't come home.
+
+See [docs/](docs/) for the full design.
 
 - [00 — Design Roadmap](docs/00-roadmap.md) (status + open questions)
 - [01 — Concept](docs/01-concept.md)

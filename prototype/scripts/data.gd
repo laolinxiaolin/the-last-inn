@@ -351,7 +351,10 @@ static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionar
 	if flags.has("renn_hat"):
 		flavor.append("Somewhere on the road, a boy wears a hat he found. It suits him.")
 	if flags.has("silver_too_new"):
-		flavor.append("On the bar: a coin, too new. It came back. She didn't.")
+		if flags.has("woman_dead"):
+			flavor.append("On the bar: a coin, too new. It came back. She didn't.")
+		else:
+			flavor.append("On the bar: a coin, too new. It bought a round of Common, on the house.")
 	if flags.has("woman_dead"):
 		flavor.append("On the wall: a sword. There were hooks waiting.")
 	if flags.has("keld_knows"):

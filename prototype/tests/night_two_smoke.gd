@@ -133,5 +133,52 @@ func _initialize() -> void:
 	assert(scene.world.bond_of("keld") >= 2, "keld bond too low")
 	print("OK keld daughter line in window")
 
+	# --- night two: the board still means something on the second night ---
+	# Nobody went night one; Keld takes the caravan night two — deep road falls.
+	scene._start_night()
+	scene.sends = {}
+	scene._run_returns()
+	await process_frame
+	scene._start_night_two()
+	await process_frame
+	assert(scene.sends.is_empty(), "night-one sends should not linger on the night-two board")
+	scene.sends = {"keld": "caravan"}
+	scene._board_set()
+	await process_frame
+	assert(scene.text_label.text == "You close the inn. The fire settles.\n\nThree days pass.",
+		"night-two close with sends must route through returns")
+	scene._run_returns()
+	await process_frame
+	assert(scene.world.state_of("deep_road") == "fallen", "deep_road should fall from keld|caravan")
+	assert(scene.world.has_flag("silver_too_new"), "silver_too_new missing")
+	scene._grib_regular_scene()
+	scene._window_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("coin, too new"), "silver flavor missing from window")
+	assert(not scene.text_label.text.contains("She didn't"),
+		"dead-woman flavor must not fire without woman_dead")
+	print("OK night-two sends resolve + window")
+
+	# --- the inn remembers who already went: no repeats, no dead ---
+	scene._start_night()
+	scene.sends = {"keld": "tower", "woman": "caravan"}
+	scene._board_set()  # commits the board to the inn's memory
+	scene._run_returns()
+	await process_frame
+	assert(scene.world.has_flag("woman_dead"), "woman should be dead")
+	scene._start_night_two()
+	await process_frame
+	scene._open_board()
+	await process_frame
+	# tower picker: woman is gone and Keld already went there — renn + nobody = 2
+	var tower_picker: Control = scene.quest_rows["tower"]["picker"]
+	assert(tower_picker.get_child_count() == 2,
+		"keld (already went) and the dead woman should be excluded from the tower picker")
+	# caravan picker: only the woman is out — renn + keld + nobody = 3
+	var caravan_picker: Control = scene.quest_rows["caravan"]["picker"]
+	assert(caravan_picker.get_child_count() == 3,
+		"keld may take the caravan (he did the tower); only the woman is gone")
+	print("OK availability: no repeats, no dead guests")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)

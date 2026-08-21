@@ -41,7 +41,8 @@ var quest_rows := {}
 var guests: Array = []
 var guest_idx := 0
 var pours := {}
-var sends := {}
+var sends := {}   # this evening's assignments
+var sent := {}    # the inn's memory: who went where, across both nights
 var current_guest := {}
 var scene_queue: Array = []
 var last_scene_kind := ""
@@ -327,6 +328,7 @@ func _start_night() -> void:
 	guest_idx = 0
 	pours = {}
 	sends = {}
+	sent = {}
 	board_btn.visible = true
 	dim.color = Color(0.08, 0.06, 0.05, 0.0)
 	_show_guest(0)
@@ -403,6 +405,7 @@ func _mill_state() -> String:
 func _start_night_two() -> void:
 	night = 2
 	in_returns = false
+	sends = {}  # the board starts fresh each evening; memory lives in the world
 	board_btn.visible = true
 	dim.color = Color(0.08, 0.06, 0.05, 0.0)
 	_show_grib()
@@ -535,7 +538,9 @@ func _mk_quest_row(q: Dictionary) -> Panel:
 		picker.visible = false
 		picker.add_theme_constant_override("separation", 8)
 		v.add_child(picker)
-		for g in DATA.assignable_guests():
+		for g in _available_guests():
+			if sent.get(g["id"], "") == q["id"]:
+				continue  # they've already been there. They know what they did.
 			var gb := _mk_button(g["name"], 18)
 			gb.custom_minimum_size = Vector2(0, 40)
 			gb.pressed.connect(_pick.bind(q["id"], g["id"]))
@@ -582,6 +587,17 @@ func _refresh_quest_rows() -> void:
 		row["picker"].visible = false
 
 
+## Who can still be sent out the door. Availability is world state,
+## not a menu rule: the woman in grey doesn't take jobs after the courier.
+func _available_guests() -> Array:
+	var out := []
+	for g in DATA.assignable_guests():
+		if g["id"] == "woman" and world.has_flag("woman_dead"):
+			continue
+		out.append(g)
+	return out
+
+
 func _guest_display_name(id: String) -> String:
 	for g in DATA.assignable_guests():
 		if g["id"] == id:
@@ -596,10 +612,20 @@ func _board_set() -> void:
 	board_overlay.visible = false
 	dim.color = Color(0.08, 0.06, 0.05, 0.85)
 	portrait.visible = false
+	# Whatever goes out the door tonight, the inn remembers.
+	for gid in sends.keys():
+		sent[gid] = sends[gid]
 	if night == 2:
-		_set_text(DATA.night_two_close(_mill_state()))
-		_clear_actions()
-		_add_action("Continue", _grib_regular_scene)
+		if sends.is_empty():
+			_set_text(DATA.night_two_close(_mill_state()))
+			_clear_actions()
+			_add_action("Continue", _grib_regular_scene)
+		else:
+			# Night two sends resolve the same way night one does:
+			# days pass, the door creaks, and then the morning after.
+			_set_text("You close the inn. The fire settles.\n\nThree days pass.")
+			_clear_actions()
+			_add_action("Continue", _run_returns)
 	else:
 		_set_text("You close the inn. The fire settles.\n\nThree days pass.")
 		_clear_actions()
@@ -688,7 +714,10 @@ func _show_next_scene() -> void:
 	_clear_actions()
 	if scene_queue.is_empty():
 		if in_returns:
-			_add_action("Continue", _start_night_two)
+			if night == 1:
+				_add_action("Continue", _start_night_two)
+			else:
+				_add_action("Continue", _grib_regular_scene)
 		else:
 			_add_action("Continue", _finish_epilogue)
 	else:
@@ -706,6 +735,7 @@ func _restart() -> void:
 	scene_queue.clear()
 	pours = {}
 	sends = {}
+	sent = {}
 	night = 1
 	met_grib = false
 	in_returns = false
@@ -803,10 +833,21 @@ func _demo_flow() -> void:
 	await _shot("15_grib_talk")
 	_open_board()
 	await _frame()
+	# Night two the board still means something: Keld takes the caravan
+	# (the woman is gone, and he already did the tower).
+	_pick("caravan", "keld")
+	await _frame()
 	await _shot("16_board_night_two")
 	_board_set()
 	await _frame()
 	await _shot("17_close_night_two")
+	_run_returns()
+	await _frame()
+	await _shot("21_keld_caravan")
+	while scene_queue.size() > 0:
+		_show_next_scene()
+		await _frame()
+		await _frame()
 	_grib_regular_scene()
 	await _frame()
 	await _shot("18_regular")
