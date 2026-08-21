@@ -534,3 +534,64 @@ static func went_in_ending(world) -> String:
 
 static func sent_them_ending(world) -> String:
 	return "You stand at the head of the stairs and you send them in — the adventurers who came to the last inn. They go down past the ajar door together.\n\nThey come back changed, each carrying a little of the dark out with them, so it stops living only in the cellar.\n\nThe inn keeps burning. You are still behind the bar, still pouring, still reading.\n\nThis is not the wrong ending. It is the ending of the man who stayed, and the game honors it."
+
+
+# ---------------------------------------------------------------- the regulars
+
+## docs/01, docs/07 — the inn is a living museum of the playthrough. On the
+## last night, the regulars who remain are there, and each one reads back how
+## they were treated — their quest, their pour, their bond. Absence speaks too.
+
+static func regulars(world, sent: Dictionary) -> Array:
+	var out := []
+	out.append(_garrick_regular())
+	out.append(_fenwick_regular())
+	if sent.has("renn"):
+		out.append(_renn_regular(world, sent["renn"]))
+	if sent.has("keld"):
+		out.append(_keld_regular(world))
+	if not world.has_flag("woman_dead"):
+		out.append(_woman_regular(world))
+	return out
+
+
+static func _garrick_regular() -> Dictionary:
+	return {"id": "garrick", "name": "Garrick",
+		"line": "He's in his corner, same as the night you first lit the fire. He raises his glass. 'You came back,' he says. 'That's the trick — sitting down when the dark gets close.' He drinks. 'I'll be here when you're ready.'"}
+
+
+static func _fenwick_regular() -> Dictionary:
+	return {"id": "fenwick", "name": "Fenwick",
+		"line": "He sweeps his hat off in a bow a little slower than it used to be. 'The last inn, and I the last bard, keeping it honest.' He lets the mask slip for one breath. 'The songs are all true and none of them true — same as the road, same as me. That's why I stay.'"}
+
+
+static func _renn_regular(world, quest: String) -> Dictionary:
+	var line := ""
+	match quest:
+		"mill":
+			line = "Renn is at the bar, wearing a man's name on a boy's shoulders. 'The village's still fighting with the goblins,' he says. 'I'm the only one who talks to both now. You started that — with a pour, not a sword.'"
+		"caravan":
+			line = "He's at the bar, wearing the hat he found on the road. 'I came back empty,' he says. 'And you didn't hold it against me. That's what made me a man — seeing I could be empty and still count.'"
+		_:
+			line = "Renn comes back from the tower and does not tell you what he saw. 'The door's not the problem,' he says. 'It never was.' He is older than he was a week ago."
+	if world.has_guest_flag("renn", "poured_quiet"):
+		line += "\n\n'And the warm one,' he says. 'Nobody ever gave me anything warm before. I'll remember that when the door opens.'"
+	return {"id": "renn", "name": "Renn", "line": line}
+
+
+static func _keld_regular(world) -> Dictionary:
+	var line := "Keld is by the wall, the way he was the first night — not quite in the room, exactly where a guard belongs. 'The tower's a door,' he says. 'You knew that. Now you know what's on the other side of it.' He waits long enough to mean it. 'You know what it's for.'"
+	if world.has_guest_flag("keld", "poured_dark"):
+		line += "\n\n'The Dark,' he says. 'Nobody pours me the Dark. You did. I won't forget it.'"
+	return {"id": "keld", "name": "Keld", "line": line}
+
+
+static func _woman_regular(world) -> Dictionary:
+	var line := ""
+	if world.has_flag("door_watcher"):
+		line = "She is at the window, not the bar. 'I said I'd be here when it opened,' she says. 'I keep my word.' She doesn't turn. 'When you go down, I'll be right behind you.'"
+	elif world.has_flag("mill_quiet"):
+		line = "She is there and then she isn't — pays, and says nothing, and that silence is the only kindness she has left to give. You let the quiet be."
+	else:
+		line = "She sits at the bar a long time before she speaks. 'I came for the door,' she says. 'Same as you. Same as it's always been.'"
+	return {"id": "woman", "name": "The woman in grey", "line": line}

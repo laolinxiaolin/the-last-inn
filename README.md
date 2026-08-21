@@ -51,6 +51,8 @@ It then closes the arc on **night three — the door**: the cellar is a capstone
 
 Around all of it sits the weather and the quiet (docs/06): each night opens with the fire-lighting ritual and the window's season (autumn rain → first snow → deep winter), and between guests you can stop and listen to the night — pour yourself a Common and let an empty inn be company.
 
+And before the door, **the regulars** (docs/01, 07): the inn is a living museum of the playthrough. You can talk to the ones who remain — Garrick always, Fenwick always, Renn and Keld if you sent them, the woman in grey only if she didn't die — and each one reads back how they were treated, the quest they walked, the pour you chose. Absence speaks too.
+
 Run it:
 
 ```sh

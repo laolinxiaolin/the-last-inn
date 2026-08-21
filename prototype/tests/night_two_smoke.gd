@@ -197,6 +197,14 @@ func _initialize() -> void:
 	await process_frame
 	assert(scene.text_label.text.contains("cellar door is ajar"), "door setup should render")
 	assert(scene.text_label.text.contains("her sword"), "door marks the woman on the wall")
+	scene._regulars_menu()
+	await process_frame
+	assert(scene.regulars.size() == 4, "dead woman excluded; garrick+fenwick+renn+keld remain")
+	assert(scene.actions.get_child_count() == 5, "four regular talks + one go-down")
+	assert(not scene.text_label.text.contains("woman in grey"), "the woman is not among the regulars")
+	scene._regular_talk(scene.regulars[2])  # renn, the kid who came back
+	await process_frame
+	assert(scene.text_label.text.contains("with a pour, not a sword"), "renn's mill-returned line should read the playthrough")
 	scene._door_trial_scene()
 	await process_frame
 	assert(scene.text_label.text.contains("You come late"), "trial should render")

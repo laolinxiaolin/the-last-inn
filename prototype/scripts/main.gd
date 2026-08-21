@@ -51,6 +51,7 @@ var met_grib := false
 var in_returns := false
 var done_callable: Callable
 var world := WORLD_STATE.new()
+var regulars := []
 
 
 func _ready() -> void:
@@ -482,7 +483,28 @@ func _start_night_three() -> void:
 	_set_bg("res://assets/bg_door.svg")
 	_set_text(DATA.night_three_open(world))
 	_clear_actions()
+	_add_action("Talk to the regulars", _regulars_menu)
 	_add_action("Go down with the lamp", _door_trial_scene)
+
+
+## The inn is a museum of how you poured. Talk to the ones who remain —
+## each one's line is computed from the playthrough (quests, pours, bond).
+func _regulars_menu() -> void:
+	regulars = DATA.regulars(world, sent)
+	portrait.visible = false
+	var intro := "[center][b]The regulars, this last night[/b][/center]\n\n[i]The inn is a museum of how you treated the ones who came to it. Absence speaks too.[/i]"
+	_set_text(intro)
+	_clear_actions()
+	for r in regulars:
+		_add_action("Talk to %s" % r["name"], _regular_talk.bind(r))
+	_add_action("Go down with the lamp", _door_trial_scene)
+
+
+func _regular_talk(r: Dictionary) -> void:
+	portrait.visible = false
+	_set_text("[b]%s:[/b] %s" % [r["name"], r["line"]])
+	_clear_actions()
+	_add_action("Back", _regulars_menu)
 
 
 func _door_trial_scene() -> void:
@@ -946,6 +968,12 @@ func _demo_flow() -> void:
 	_start_night_three()
 	await _frame()
 	await _shot("22_door")
+	_regulars_menu()
+	await _frame()
+	await _shot("28_regulars")
+	_regular_talk(regulars[0])
+	await _frame()
+	await _shot("29_regular_talk")
 	_door_trial_scene()
 	await _frame()
 	await _shot("23_trial")

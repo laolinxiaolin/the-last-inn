@@ -86,3 +86,10 @@ Considered:
 - **The fire-lighting ritual** now opens the night, and the title's "Open the Inn" became "Light the fire" — the game's opening click is a small ritual, not an entrance.
 - **The quiet beat is a verb, not a cutscene.** "Listen to the night" lives in the guest menu, so an empty inn is something you *choose* to sit with — the fire, the rain, a Common you poured yourself. Cheap to build, but it's the sentence the design keeps repeating: *an empty inn can be company.*
 - **Weather has no numbers.** It's the window being a window — the same rule as the world map. The game never says "season 3"; it just rains, then snows, then it's dark at the glass.
+
+## Prototype — the regulars (the living museum)
+
+- **The inn is a museum of how you poured (docs/01, 07).** On the last night, before the door, you can talk to the regulars who remain — Garrick and Fenwick are always there, Renn and Keld only if you sent them, the woman in grey only if she didn't die. Absence is the loudest line: the woman's empty chair is the point.
+- **Each regular reads the playthrough.** Their lines are computed live from quests sent, pours chosen, and guest flags (`has_guest_flag`) — Renn's quiet pour comes back to him, Keld remembers the Dark, the kid who came back empty on the caravan still counts.
+- **It's a menu, not a cutscene.** The player chooses who to sit with, which keeps it interactive and lets the same scene land differently every run.
+- **The regulars need no new state.** They're pure reading of existing world + character state — the third feature in a row (night-two sends, night-three mirror, now the regulars) built on the same plumbing, which keeps validating the `db21c9f`/`dad3674` investment.
