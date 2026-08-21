@@ -61,6 +61,8 @@ Before the door you can also **walk the wall** — the living museum given a roo
 
 And after any ending, **the Embers** (docs/10): no board, no stakes, no knock — just the inn, the ones who remain, the fire, the rain. Sit as long as you like, or close the inn one last time and walk away, and the game lets you go. The last kindness.
 
+And every closing has **one decision** (docs/05, 06): what batch to set fermenting in the cellar for next time. The world remembers it — the dawn window notes the batch coming along, and it smells like next time.
+
 Run it:
 
 ```sh

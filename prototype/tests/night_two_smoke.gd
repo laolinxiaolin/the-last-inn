@@ -265,5 +265,19 @@ func _initialize() -> void:
 	assert(not scene.regulars.any(func(r): return r["id"] == "renn"), "dead renn must not be among the regulars")
 	print("OK the Sweet pour loses the boy")
 
+	# --- the cellar batch: a closing decision the world remembers ---
+	scene._start_night()
+	scene.sends = {"keld": "tower"}
+	scene._run_returns()
+	await process_frame
+	scene._set_batch()
+	scene._batch_pick("dark")
+	await process_frame
+	assert(scene.world.batch == "dark", "batch should be set by the closing decision")
+	scene._window_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("the batch you set"), "the window should note the batch")
+	print("OK the cellar batch + the window notes it")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)

@@ -468,7 +468,7 @@ func _grib_regular_scene() -> void:
 
 func _window_scene() -> void:
 	portrait.visible = false
-	_set_text(DATA.window_view(world.places, world.flags, world.guests))
+	_set_text(DATA.window_view(world.places, world.flags, world.guests, world.batch))
 	_clear_actions()
 	_add_action("Continue", _start_night_three)
 
@@ -771,15 +771,32 @@ func _board_set() -> void:
 			_clear_actions()
 			_add_action("Continue", _grib_regular_scene)
 		else:
-			# Night two sends resolve the same way night one does:
-			# days pass, the door creaks, and then the morning after.
 			_set_text("You close the inn. The fire settles.\n\nThree days pass.")
 			_clear_actions()
-			_add_action("Continue", _run_returns)
+			_add_action("Set the batch", _set_batch)
 	else:
 		_set_text("You close the inn. The fire settles.\n\nThree days pass.")
 		_clear_actions()
-		_add_action("Continue", _run_returns)
+		_add_action("Set the batch", _set_batch)
+
+
+## One decision at closing (docs/05, 06): what to set fermenting next time.
+func _set_batch() -> void:
+	portrait.visible = false
+	_set_text("The house is shut. One last decision before the days pass:\n\n[i]What do you set in the cellar, to be ready when you are?[/i]")
+	_clear_actions()
+	for b in DATA.brews():
+		_add_action("Set the %s" % b["name"], _batch_pick.bind(b["id"]))
+	_add_action("The house pour is fine", _batch_pick.bind("common"))
+
+
+func _batch_pick(id: String) -> void:
+	world.set_batch(id)
+	var nm := DATA.brew_name(id)
+	portrait.visible = false
+	_set_text("You set a batch of %s working in the cellar, where the house keeps what it's saving for next time.\n\nIt'll be ready when you are." % nm)
+	_clear_actions()
+	_add_action("Run the days", _run_returns)
 
 
 # ---------------------------------------------------------------- returns
@@ -983,6 +1000,13 @@ func _demo_flow() -> void:
 	await _frame()
 	await _shot("10_board_set")
 	_board_set()
+	await _frame()
+	_set_batch()
+	await _frame()
+	await _shot("35_set_batch")
+	_batch_pick("dark")
+	await _frame()
+	await _shot("36_batch_set")
 	_run_returns()
 	await _frame()
 	await _shot("11_closing")

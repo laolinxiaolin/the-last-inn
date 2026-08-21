@@ -116,3 +116,8 @@ Considered:
 - **The game that lets you retire (docs/10).** After any ending the demo now opens the Embers — no board, no stakes, no knock — before the closing screen. You can sit by the fire and pour yourself one for as long as you like, with no clock, because that's the point.
 - **The last kindness.** The way out is a verb too: "close the inn one last time," and the game lets you — a banked fire, a full wall, a dried glass, *done not because you failed but because you're finished.* It's the design's farewell line, made playable.
 - **It caps the whole memory story.** You pour, you read, you lose the boy or bring him home, you open the door, and then — quiet. The prototype's arc is now whole: warmth, the dark creeping, the door, and the silence after, which the game treats as a reward, not a void.
+
+## Prototype — the cellar batch
+
+- **"One decision at closing" (docs/05, 06) is now real.** Before the days pass, the player sets a batch to ferment in the cellar — the house pour, or any of the six. It's the small ritual that makes closing a closing, not just a stop.
+- **The cellar is the past's address.** `world.batch` is a single string, and the dawn window reads it back — *"the batch you set is coming along — The Dark. It smells like next time."* Same pattern as everything else: one piece of state, many places it can be read.

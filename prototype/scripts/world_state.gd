@@ -11,6 +11,7 @@ const FALLEN := "fallen"
 var places := {}
 var flags := {}
 var guests := {}  # guest_id -> {bond: int, flags: {}, history: []}
+var batch := ""  # the batch the innkeeper set at last closing (a brew id)
 
 func _init() -> void:
 	# The world arrives already thinned: the caravan is late, the forest
@@ -34,6 +35,15 @@ func state_of(place_id: String) -> String:
 
 func set_flag(name: String) -> void:
 	flags[name] = true
+
+
+## One decision at closing (docs/05, 06): what to set fermenting for next time.
+func set_batch(id: String) -> void:
+	batch = id
+
+
+func has_batch() -> bool:
+	return batch != ""
 
 
 func has_flag(name: String) -> bool:

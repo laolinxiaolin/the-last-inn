@@ -19,6 +19,13 @@ static func brews() -> Array:
 			"line": "Mead. Makes people generous and loud."},
 	]
 
+
+static func brew_name(id: String) -> String:
+	for b in brews():
+		if b["id"] == id:
+			return b["name"]
+	return id
+
 static func quests() -> Array:
 	return [
 		{"id": "mill", "name": "A Small Problem at the Mill", "tier": "Small", "tier_color": "8C9A6B",
@@ -336,7 +343,7 @@ static func grib_regular(mill_state: String, grib: Dictionary) -> String:
 # ---------------------------------------------------------------- the window
 
 ## The window is the world map. No states, no numbers — the innkeeper's view.
-static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionary) -> String:
+static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionary, batch: String = "") -> String:
 	var t := "You wake before the fire. The window, at dawn:\n\n"
 	t += _place_line("mill_village", "The mill village", places) + "\n"
 	t += _place_line("crossroads", "The crossroads", places) + "\n"
@@ -372,6 +379,8 @@ static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionar
 		flavor.append("Grib drinks what he's poured and hopes to earn a kinder one. You're working on it.")
 	if guests.has("keld") and guests["keld"]["bond"] >= 2:
 		flavor.append("At closing, Keld said one sentence about his daughter. Then never again.")
+	if batch != "":
+		flavor.append("In the cellar, the batch you set is coming along — %s. It smells like next time." % brew_name(batch))
 	for f in flavor:
 		t += "\n[i]%s[/i]" % f
 	return t
