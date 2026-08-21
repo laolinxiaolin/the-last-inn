@@ -199,6 +199,12 @@ func _initialize() -> void:
 	await process_frame
 	assert(scene.text_label.text.contains("cellar door is ajar"), "door setup should render")
 	assert(scene.text_label.text.contains("her sword"), "door marks the woman on the wall")
+	scene._wall_menu()
+	await process_frame
+	assert(scene.keeps.size() >= 2, "the wall should hold keepsakes for resolved threads")
+	scene._wall_keep(scene.keeps[0])
+	await process_frame
+	assert(scene.text_label.text.contains("A sword in grey"), "the woman's sword should hang on the wall")
 	scene._regulars_menu()
 	await process_frame
 	assert(scene.regulars.size() == 4, "dead woman excluded; garrick+fenwick+renn+keld remain")

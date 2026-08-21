@@ -57,6 +57,8 @@ And every return is announced by **the doorbell** (docs/06): the game's one inst
 
 And what you pour can cost someone. Send **Renn** onto the deep road with **the Sweet** in him — the mead that makes a boy generous *and loud* — and the courier brings his borrowed sword back instead. The wall remembers the sword too big for a boy, and he is not among the regulars on the last night.
 
+Before the door you can also **walk the wall** — the living museum given a room. Every keepsake hangs there because of a choice you made: her sword in grey, the borrowed sword too big for a boy, a road hat, a coin too new, the bell key, Grib's candle.
+
 Run it:
 
 ```sh

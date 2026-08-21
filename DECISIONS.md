@@ -104,3 +104,9 @@ Considered:
 - **The deepest input is choosing what to pour (docs/05).** Until now only the woman could die, and her death came from the *quest*, not from a choice. Now a single pour can doom the boy: send Renn onto the caravan with the **Sweet** — the mead that makes a person generous *and loud* — and the soft-fail becomes a courier. The borrowed sword comes back; the blacksmith's boy never gets to give it back.
 - **It reuses the whole memory system.** `renn_dead` writes the wall, removes him from the regulars (absence is the point), darkens the deep road to fallen, and shows up in the door mirror — *"you poured him the Sweet, to make him generous, to make him loud. He was both. He didn't come back."* The player is never told the outcome in advance; they're only warned by what they already know about the mead and the boy.
 - **It stays read, not told** (the pillar again). No "this will kill him" UI. Just the ale's line — *generous and loud* — and the reader's own judgment.
+
+## Prototype — the wall
+
+- **The inn is a living museum; now it has a room.** "Walk the wall" on night three shows a keepsake for every thread the player resolved — her sword in grey, the borrowed sword too big for a boy, a road hat, a coin too new, the bell key, Grib's candle. Nothing is on the wall that the player didn't put there by a choice.
+- **It's the memory system made visible.** Same plumbing as the window and the regulars — pure reading of flags + guest state. Walking the wall is reading your own choices back, which is the quietest and most honest way the game can pay off the "the inn is a museum of the playthrough" promise.
+- **Every keepsake is a double bind.** A sword can mean she died *or* that she waited by the door; a hat means the boy came home empty and whole. The same hook tells two opposite stories, so the wall mirrors the playthrough the way a mirror should.

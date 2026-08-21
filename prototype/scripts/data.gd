@@ -646,3 +646,35 @@ static func renn_courier_after() -> String:
 The fire pops. Out in the wet, the road keeps going, and it does not bring back the ones you read wrong.
 
 [i]The Sweet made him generous. And loud. You knew what it does to a boy with something to prove. You poured it anyway.[/i]"
+
+
+# ---------------------------------------------------------------- the wall
+
+## The inn is a living museum of the playthrough (docs/01). The wall holds a
+## keepsake for every thread the player resolved — a question kept, a loss
+## remembered, a kindness that stayed. Walking it is reading your own choices.
+
+static func keepsakes(world) -> Array:
+	var out := []
+	if world.has_flag("renn_dead"):
+		out.append({"name": "A sword too big for a boy",
+			"note": "The borrowed one. The blacksmith's boy never got to give it back. It fits the hooks like it was waiting for them."})
+	elif world.has_flag("renn_hat"):
+		out.append({"name": "A road hat",
+			"note": "Renn found it on the deep road and came home wearing it — empty-handed and whole. You let that be enough."})
+	if world.has_flag("woman_dead"):
+		out.append({"name": "A sword in grey",
+			"note": "It came in before she did, kept dry under a stranger's coat. There were hooks waiting."})
+	elif world.has_flag("door_watcher"):
+		out.append({"name": "A glass by the door",
+			"note": "The woman in grey left it. She said she'd be here when the door opened. She keeps her word."})
+	if world.has_flag("silver_too_new"):
+		out.append({"name": "A coin too new",
+			"note": "It bought a round once. It keeps coming back to the bar when you look for it. Some debts stay quiet."})
+	if world.has_flag("bell_key"):
+		out.append({"name": "A key of black iron",
+			"note": "'It's not a lock,' Keld said. 'It's a bell.' He left it warm."})
+	if world.guests.has("grib") and world.guests["grib"]["flags"].has("poured_sweet"):
+		out.append({"name": "A barley candle",
+			"note": "Grib's thank-you, small and neat. In the books, the inn always has a candle."})
+	return out

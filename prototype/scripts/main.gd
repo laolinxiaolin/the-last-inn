@@ -52,6 +52,7 @@ var in_returns := false
 var done_callable: Callable
 var world := WORLD_STATE.new()
 var regulars := []
+var keeps := []
 
 
 func _ready() -> void:
@@ -483,8 +484,28 @@ func _start_night_three() -> void:
 	_set_bg("res://assets/bg_door.svg")
 	_set_text(DATA.night_three_open(world))
 	_clear_actions()
+	_add_action("Walk the wall", _wall_menu)
 	_add_action("Talk to the regulars", _regulars_menu)
 	_add_action("Go down with the lamp", _door_trial_scene)
+
+
+## The wall is a museum of the playthrough — one keepsake per thread the
+## player resolved. Walking it is reading your own choices back.
+func _wall_menu() -> void:
+	keeps = DATA.keepsakes(world)
+	portrait.visible = false
+	_set_text("[center][b]The wall[/b][/center]\n\n[i]Every thing up here is a question someone answered, or didn't. You know which is which.[/i]")
+	_clear_actions()
+	for k in keeps:
+		_add_action("Look at %s" % k["name"], _wall_keep.bind(k))
+	_add_action("Back to the fire", _start_night_three)
+
+
+func _wall_keep(k: Dictionary) -> void:
+	portrait.visible = false
+	_set_text("[b]%s:[/b] %s" % [k["name"], k["note"]])
+	_clear_actions()
+	_add_action("Back to the wall", _wall_menu)
 
 
 ## The inn is a museum of how you poured. Talk to the ones who remain —
@@ -983,6 +1004,12 @@ func _demo_flow() -> void:
 	_start_night_three()
 	await _frame()
 	await _shot("22_door")
+	_wall_menu()
+	await _frame()
+	await _shot("30_wall")
+	_wall_keep(keeps[0])
+	await _frame()
+	await _shot("31_wall_keep")
 	_regulars_menu()
 	await _frame()
 	await _shot("28_regulars")
