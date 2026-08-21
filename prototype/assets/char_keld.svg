@@ -1,34 +1,93 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <path d="M76 512 Q100 360 256 360 Q412 360 436 512 Z" fill="#4A3B30"/>
-  <path d="M76 512 Q92 420 148 392 L192 512 Z" fill="#352A22"/>
-  <path d="M100 420 L412 420 L400 440 L112 440 Z" fill="#6B5A48"/>
-  <g stroke="#B8A890" stroke-width="3" opacity="0.5">
-    <line x1="140" y1="432" x2="180" y2="432"/>
-    <line x1="200" y1="432" x2="300" y2="432"/>
-    <line x1="320" y1="432" x2="370" y2="432"/>
+  <!-- KELD — the dwarf. Wide, still, dark grey hair and great beard, leathers
+       + chain, grey-blue cloak. Deadpan: one eyebrow raised. Scarred hand with
+       one finger missing, wrapped around his one drink of the night. -->
+  <defs>
+    <style>
+      .ol{stroke:#2E2016;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .olt{stroke:#2E2016;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <!-- grey-blue cloak, widest layer -->
+  <path d="M28 512 C 56 376 150 330 256 330 C 362 330 456 376 484 512 Z" fill="#3A4A6B" class="ol"/>
+  <path d="M28 512 C 52 396 128 344 210 332 C 150 356 108 416 98 512 Z" fill="#2B3850"/>
+  <path d="M484 512 C 460 396 384 344 302 332 C 362 356 404 416 414 512 Z" fill="#2B3850"/>
+
+  <!-- leather armor -->
+  <path d="M120 512 C 138 410 190 372 256 372 C 322 372 374 410 392 512 Z" fill="#4A3226" class="ol"/>
+  <path d="M138 512 C 152 432 190 392 236 378 C 196 402 172 448 168 512 Z" fill="#3A2518"/>
+  <path d="M196 408 L196 470 M316 408 L316 470" stroke="#3A2518" stroke-width="6"/>
+  <!-- chain collar at the neck -->
+  <path d="M196 380 Q 256 418 316 380 L316 360 Q 256 396 196 360 Z" fill="#8A8A85" class="olt"/>
+  <path d="M204 372 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0" stroke="#5F5F5A" stroke-width="5" fill="none"/>
+  <!-- cloak brooch -->
+  <circle cx="352" cy="392" r="16" fill="#8A8A85" class="olt"/>
+  <circle cx="352" cy="392" r="7" fill="#3A4A6B"/>
+
+  <!-- thick neck -->
+  <rect x="216" y="310" width="80" height="60" rx="22" fill="#D9AE82"/>
+
+  <!-- ears -->
+  <ellipse cx="136" cy="252" rx="15" ry="21" fill="#D9AE82" class="olt"/>
+  <ellipse cx="376" cy="252" rx="15" ry="21" fill="#D9AE82" class="olt"/>
+
+  <!-- broad weathered face -->
+  <path d="M256 124 C 338 124 378 172 378 244 C 378 316 330 366 256 366 C 182 366 134 316 134 244 C 134 172 174 124 256 124 Z" fill="#D9AE82" class="ol"/>
+  <path d="M356 190 C 368 226 364 296 330 338 C 354 310 366 262 360 216 Z" fill="#C79A6E"/>
+
+  <!-- receding dark grey hair, high stern hairline -->
+  <path d="M138 226 C 128 136 188 92 256 92 C 324 92 384 136 374 226 C 368 168 352 142 330 134 C 338 162 328 178 312 176 C 306 146 282 132 256 132 C 230 132 206 146 200 176 C 184 178 174 162 182 134 C 160 142 144 168 138 226 Z" fill="#55554F" class="ol"/>
+  <path d="M182 134 C 174 162 184 178 200 176 C 206 146 230 132 256 132 C 230 138 210 152 204 178 C 192 180 184 166 188 140 Z" fill="#46463F"/>
+
+  <!-- the great beard -->
+  <path d="M146 246 C 146 352 196 434 256 434 C 316 434 366 352 366 246 L340 276 C 342 340 306 396 256 396 C 206 396 170 340 172 276 Z" fill="#6B6B66" class="ol"/>
+  <!-- center braid -->
+  <path d="M236 350 h40 v76 q-20 12 -40 0 Z" fill="#5A5A55" class="olt"/>
+  <path d="M238 366 h36 M238 386 h36 M238 406 h36" stroke="#46463F" stroke-width="5"/>
+  <rect x="238" y="420" width="36" height="18" rx="8" fill="#8A8A85" class="olt"/>
+  <!-- beard shading -->
+  <path d="M340 276 C 342 340 306 396 256 396 L256 434 C 316 434 366 352 366 246 Z" fill="#5A5A55" opacity="0.55"/>
+
+  <!-- drooping mustache -->
+  <path d="M256 306 C 226 298 200 308 188 332 C 208 324 228 326 244 336 C 249 339 253 340 256 340 C 259 340 263 339 268 336 C 284 326 304 324 324 332 C 312 308 286 298 256 306 Z" fill="#5A5A55" class="olt"/>
+  <!-- mouth, barely there -->
+  <path d="M236 348 Q256 354 276 348" stroke="#3A2518" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- big blocky nose -->
+  <path d="M242 264 L236 308 Q256 324 276 308 L270 264 Q256 272 242 264 Z" fill="#CDA273" class="olt"/>
+
+  <!-- small deep-set eyes, heavy lids -->
+  <ellipse cx="212" cy="244" rx="17" ry="12" fill="#F5EBD8" class="olt"/>
+  <ellipse cx="300" cy="240" rx="17" ry="12" fill="#F5EBD8" class="olt"/>
+  <circle cx="212" cy="246" r="7.5" fill="#4A3A28"/>
+  <circle cx="300" cy="242" r="7.5" fill="#4A3A28"/>
+  <circle cx="212" cy="246" r="3.5" fill="#1A1A1A"/>
+  <circle cx="300" cy="242" r="3.5" fill="#1A1A1A"/>
+  <path d="M194 236 Q212 226 230 236 L230 246 Q212 238 194 246 Z" fill="#C79A6E"/>
+  <path d="M282 232 Q300 222 318 232 L318 242 Q300 234 282 242 Z" fill="#C79A6E"/>
+  <path d="M194 236 Q212 226 230 236" stroke="#2E2016" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M282 232 Q300 222 318 232" stroke="#2E2016" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- under-eye bags -->
+  <path d="M198 260 Q212 266 226 260 M286 256 Q300 262 314 256" stroke="#B07E56" stroke-width="4" fill="none"/>
+
+  <!-- deadpan brows: one low, one raised -->
+  <path d="M188 208 Q214 200 240 208" stroke="#55554F" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M272 196 Q300 182 328 192" stroke="#55554F" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+  <!-- scar through the left brow down the temple -->
+  <path d="M198 196 L184 252" stroke="#E8C9A0" stroke-width="6" stroke-linecap="round"/>
+  <path d="M190 214 L202 210 M188 228 L200 224 M186 242 L198 238" stroke="#E8C9A0" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- scarred hand with one finger missing, around tonight's one drink -->
+  <g>
+    <path d="M150 512 L150 442 Q150 420 172 420 L206 420 Q228 420 228 442 L228 512 Z" fill="#6B4A2F" class="ol"/>
+    <path d="M150 456 h78 M150 486 h78" stroke="#3A2518" stroke-width="6"/>
+    <rect x="144" y="418" width="90" height="14" rx="7" fill="#8A8A85" class="olt"/>
+    <ellipse cx="189" cy="420" rx="38" ry="8" fill="#3E2817" class="olt"/>
+    <!-- the fist around it: two knuckles, a notch where a finger should be, one more -->
+    <path d="M158 512 L158 452 C 158 434 166 426 176 428 C 180 416 194 412 202 420 L212 434 C 218 422 232 420 240 430 C 246 424 252 432 252 444 L252 512 Z" fill="#C79A6E" class="ol"/>
+    <path d="M202 420 L212 434" stroke="#8C6A44" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M176 436 v18 M232 440 v16" stroke="#A87A52" stroke-width="4.5" fill="none" stroke-linecap="round"/>
   </g>
-  <rect x="222" y="330" width="68" height="70" rx="22" fill="#D8B090"/>
-  <ellipse cx="256" cy="250" rx="100" ry="110" fill="#E0C0A0"/>
-  <ellipse cx="152" cy="262" rx="16" ry="22" fill="#E0C0A0"/>
-  <ellipse cx="360" cy="262" rx="16" ry="22" fill="#E0C0A0"/>
-  <path d="M150 230 Q150 110 256 108 Q362 110 362 230 Q352 160 322 152 Q310 190 256 186 Q202 190 190 152 Q162 160 150 230 Z" fill="#8A8A82"/>
-  <path d="M170 170 Q182 130 210 120 Q196 160 190 196 Z" fill="#7A7A72"/>
-  <path d="M342 170 Q330 130 302 120 Q316 160 322 196 Z" fill="#7A7A72"/>
-  <path d="M150 240 Q146 212 160 196 Q180 208 182 240 Z" fill="#8A8A82"/>
-  <path d="M362 240 Q366 212 352 196 Q332 208 330 240 Z" fill="#8A8A82"/>
-  <path d="M196 268 Q210 296 214 306 Q232 332 268 336 Q304 332 306 306 Q310 296 318 268 Z" fill="#9A9A92"/>
-  <path d="M196 268 Q226 284 256 286 Q286 284 318 268 Q300 296 256 300 Q212 296 196 268 Z" fill="#8A8A82"/>
-  <path d="M206 236 L258 218 L310 236" stroke="#5A4A38" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M206 236 L206 252" stroke="#5A4A38" stroke-width="6" stroke-linecap="round"/>
-  <path d="M310 236 L310 252" stroke="#5A4A38" stroke-width="6" stroke-linecap="round"/>
-  <ellipse cx="214" cy="276" rx="20" ry="24" fill="#FFFFFF"/>
-  <ellipse cx="298" cy="276" rx="20" ry="24" fill="#FFFFFF"/>
-  <circle cx="216" cy="280" r="11" fill="#7A6B4A"/>
-  <circle cx="296" cy="280" r="11" fill="#7A6B4A"/>
-  <circle cx="216" cy="280" r="5.5" fill="#1A1A1A"/>
-  <circle cx="296" cy="280" r="5.5" fill="#1A1A1A"/>
-  <circle cx="220" cy="275" r="3" fill="#FFFFFF"/>
-  <circle cx="300" cy="275" r="3" fill="#FFFFFF"/>
-  <path d="M230 316 Q256 330 282 316" stroke="#5A4A38" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <line x1="300" y1="198" x2="312" y2="184" stroke="#D8B090" stroke-width="5" stroke-linecap="round"/>
 </svg>

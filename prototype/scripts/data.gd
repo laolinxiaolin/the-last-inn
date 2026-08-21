@@ -566,7 +566,7 @@ static func sent_them_ending(world) -> String:
 static func regulars(world, sent: Dictionary) -> Array:
 	var out := []
 	out.append(_garrick_regular())
-	out.append(_fenwick_regular())
+	out.append(_fenwick_regular(world))
 	if sent.has("renn") and not world.has_flag("renn_dead"):
 		out.append(_renn_regular(world, sent["renn"]))
 	if sent.has("keld") and not world.has_flag("keld_dead"):
@@ -578,12 +578,16 @@ static func regulars(world, sent: Dictionary) -> Array:
 
 static func _garrick_regular() -> Dictionary:
 	return {"id": "garrick", "name": "Garrick",
-		"line": "He's in his corner, same as the night you first lit the fire. He raises his glass. 'You came back,' he says. 'That's the trick — sitting down when the dark gets close.' He drinks. 'I'll be here when you're ready.'"}
+		"line": "He's in his corner, same as the night you first lit the fire. He raises his glass. 'You came back,' he says. 'That's the trick.' Then, lower: 'I was in this corner before you found this bar. I knew who you were before you knew you'd stay. You walked the road for all of us once; now you sit for all of us. That's not retirement — it's the same work, softer.' He drinks. 'I followed you here on purpose, friend. I'd do it again.'"}
 
 
-static func _fenwick_regular() -> Dictionary:
-	return {"id": "fenwick", "name": "Fenwick",
-		"line": "He sweeps his hat off in a bow a little slower than it used to be. 'The last inn, and I the last bard, keeping it honest.' He lets the mask slip for one breath. 'The songs are all true and none of them true — same as the road, same as me. That's why I stay.'"}
+static func _fenwick_regular(world) -> Dictionary:
+	var line := "He sweeps his hat off in a bow a little slower than it used to be. 'The last inn, and I the last bard, keeping it honest.'"
+	if world.state_of("deep_road") == "fallen":
+		line += "\n\nThen, for once, the mask slips all the way off: 'I was on the deep road. I was always on it — the caravan, the coin too new, the barrel story I told you. That was me. I sang the songs and walked the road and carried none of it home. And when she paid me silver too new and didn't come back, I knew her. That's why I stay here, telling it plain at last.'"
+	else:
+		line += " He lets the mask slip for one breath: 'The songs are all true and none of them true — same as the road, same as me. That's why I stay.'"
+	return {"id": "fenwick", "name": "Fenwick", "line": line}
 
 
 static func _renn_regular(world, quest: String) -> Dictionary:

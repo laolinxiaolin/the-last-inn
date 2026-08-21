@@ -1,28 +1,98 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <path d="M84 512 Q112 370 256 370 Q400 370 428 512 Z" fill="#6B4A8C"/>
-  <path d="M84 512 Q104 428 156 400 L198 512 Z" fill="#54386E"/>
-  <path d="M118 398 L394 398 L384 420 L128 420 Z" fill="#F2E3C5"/>
-  <rect x="222" y="336" width="68" height="62" rx="20" fill="#E8C9A0"/>
-  <ellipse cx="256" cy="252" rx="92" ry="104" fill="#F2D8B8"/>
-  <ellipse cx="162" cy="264" rx="13" ry="18" fill="#F2D8B8"/>
-  <ellipse cx="350" cy="264" rx="13" ry="18" fill="#F2D8B8"/>
-  <path d="M140 200 Q130 70 256 66 Q382 70 372 200 Q340 130 310 140 Q296 180 256 176 Q216 180 202 140 Q174 130 140 200 Z" fill="#4A3228"/>
-  <path d="M140 200 Q136 160 160 130 Q200 150 200 204 Z" fill="#4A3228"/>
-  <path d="M372 200 Q376 160 352 130 Q312 150 312 204 Z" fill="#4A3228"/>
-  <ellipse cx="120" cy="140" rx="120" ry="34" fill="#5C3A21" transform="rotate(-14 120 140)"/>
-  <ellipse cx="120" cy="140" rx="120" ry="34" fill="none" stroke="#4A3228" stroke-width="6" transform="rotate(-14 120 140)"/>
-  <ellipse cx="404" cy="128" rx="120" ry="30" fill="#5C3A21" transform="rotate(12 404 128)"/>
-  <path d="M392 96 Q420 40 470 60 Q430 84 430 120 Z" fill="#2E8C7A" transform="rotate(-20 430 90)"/>
-  <circle cx="452" cy="70" r="7" fill="#141B2C" opacity="0.7"/>
-  <ellipse cx="214" cy="272" rx="26" ry="30" fill="#FFFFFF"/>
-  <ellipse cx="298" cy="272" rx="26" ry="30" fill="#FFFFFF"/>
-  <circle cx="218" cy="278" r="14" fill="#8C6B3A"/>
-  <circle cx="294" cy="278" r="14" fill="#8C6B3A"/>
-  <circle cx="218" cy="278" r="7" fill="#1A1A1A"/>
-  <circle cx="294" cy="278" r="7" fill="#1A1A1A"/>
-  <circle cx="224" cy="272" r="4" fill="#FFFFFF"/>
-  <circle cx="300" cy="272" r="4" fill="#FFFFFF"/>
-  <path d="M186 242 Q218 226 246 244" stroke="#2E1F16" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <path d="M266 244 Q294 226 326 242" stroke="#2E1F16" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <path d="M238 330 Q256 316 274 330 Q256 342 238 330 Z" fill="#B86B5A"/>
+  <!-- FENWICK — the bard. A hat that is a crime (peacock feather), curly dark
+       hair, purple-and-teal doublet, theatrical smug half-lidded grin. -->
+  <defs>
+    <style>
+      .ol{stroke:#2E2016;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .olt{stroke:#2E2016;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <!-- purple doublet -->
+  <path d="M52 512 C 78 398 154 364 256 364 C 358 364 434 398 460 512 Z" fill="#5B3A7A" class="ol"/>
+  <path d="M52 512 C 72 416 132 376 200 366 C 148 392 116 442 110 512 Z" fill="#472D61"/>
+  <!-- teal trim -->
+  <path d="M196 372 L256 420 L316 372 L330 386 L256 448 L182 386 Z" fill="#3E8E7E" class="olt"/>
+  <!-- cream ruffle collar -->
+  <path d="M180 368 q14 26 38 22 q8 22 38 22 q30 0 38 -22 q24 4 38 -22 l-36 -14 q-40 14 -80 0 Z" fill="#F2E3C5" class="olt"/>
+  <!-- gold buttons -->
+  <circle cx="256" cy="462" r="8" fill="#C9A35C" class="olt"/>
+  <circle cx="256" cy="492" r="8" fill="#C9A35C" class="olt"/>
+
+  <!-- neck -->
+  <rect x="228" y="316" width="56" height="64" rx="18" fill="#EFCB9E"/>
+  <path d="M228 322 h56 v12 c-18 14 -38 14 -56 0 Z" fill="#D9AE82"/>
+
+  <!-- ears + gold hoop -->
+  <ellipse cx="146" cy="252" rx="14" ry="20" fill="#EFCB9E" class="olt"/>
+  <ellipse cx="366" cy="252" rx="14" ry="20" fill="#EFCB9E" class="olt"/>
+  <circle cx="366" cy="282" r="9" fill="none" stroke="#C9A35C" stroke-width="5"/>
+
+  <!-- lean face -->
+  <path d="M256 116 C 328 116 362 166 362 240 C 362 314 322 360 256 360 C 190 360 150 314 150 240 C 150 166 184 116 256 116 Z" fill="#EFCB9E" class="ol"/>
+  <path d="M340 192 C 354 228 350 294 316 334 C 340 306 352 258 346 212 Z" fill="#DBB287"/>
+
+  <!-- curly dark hair spilling from under the hat -->
+  <g fill="#3A2A20" class="olt">
+    <circle cx="152" cy="222" r="24"/>
+    <circle cx="146" cy="268" r="20"/>
+    <circle cx="160" cy="306" r="17"/>
+    <circle cx="360" cy="222" r="24"/>
+    <circle cx="366" cy="268" r="20"/>
+    <circle cx="352" cy="306" r="17"/>
+    <circle cx="178" cy="186" r="21"/>
+    <circle cx="334" cy="186" r="21"/>
+  </g>
+
+  <!-- eyes: half-lidded, performing -->
+  <ellipse cx="214" cy="252" rx="24" ry="26" fill="#FFFFFF" class="olt"/>
+  <ellipse cx="298" cy="252" rx="24" ry="26" fill="#FFFFFF" class="olt"/>
+  <path d="M190 254 a24 26 0 0 1 48 0 Z" fill="#DBB287"/>
+  <path d="M274 254 a24 26 0 0 1 48 0 Z" fill="#DBB287"/>
+  <circle cx="214" cy="262" r="13" fill="#6B4A2F"/>
+  <circle cx="298" cy="262" r="13" fill="#6B4A2F"/>
+  <circle cx="214" cy="263" r="6.5" fill="#1A1A1A"/>
+  <circle cx="298" cy="263" r="6.5" fill="#1A1A1A"/>
+  <circle cx="219" cy="256" r="4" fill="#FFFFFF"/>
+  <circle cx="303" cy="256" r="4" fill="#FFFFFF"/>
+  <path d="M190 242 Q214 230 238 242" stroke="#2E2016" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M274 242 Q298 230 322 242" stroke="#2E2016" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+  <!-- theatrically arched brows -->
+  <path d="M188 214 Q216 196 246 210" stroke="#3A2A20" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M266 206 Q296 190 326 212" stroke="#3A2A20" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+  <!-- long showman's nose -->
+  <path d="M252 278 Q248 296 258 304 Q266 308 272 300" stroke="#C09068" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- thin mustache + little pointed goatee -->
+  <path d="M232 318 Q256 326 280 318 Q272 312 256 314 Q240 312 232 318 Z" fill="#3A2A20"/>
+  <path d="M246 344 Q256 368 266 344 Q256 350 246 344 Z" fill="#3A2A20" class="olt"/>
+
+  <!-- the crooked smug grin -->
+  <path d="M226 330 Q262 348 292 322" stroke="#7A332A" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M284 318 q10 -2 14 6" stroke="#7A332A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- smug blush of self-regard -->
+  <ellipse cx="188" cy="296" rx="15" ry="8" fill="#E8A39A" opacity="0.4"/>
+  <ellipse cx="324" cy="296" rx="15" ry="8" fill="#E8A39A" opacity="0.4"/>
+
+  <!-- THE HAT (a crime) -->
+  <path d="M52 176 C 96 122 178 96 256 96 C 334 96 416 122 460 176 C 420 158 420 200 360 192 C 300 184 300 168 256 168 C 212 168 212 184 152 192 C 92 200 92 158 52 176 Z" fill="#4A3226" class="ol"/>
+  <path d="M256 172 C 208 172 182 190 152 192 C 92 200 92 158 52 176 C 96 122 178 96 256 96 L256 172 Z" fill="#3E2817" opacity="0.6"/>
+  <!-- crown -->
+  <path d="M186 130 C 184 70 216 40 256 40 C 296 40 328 70 326 130 C 300 122 278 118 256 118 C 234 118 212 122 186 130 Z" fill="#4A3226" class="ol"/>
+  <path d="M256 40 L256 118 C 234 118 212 122 186 130 C 184 70 216 40 256 40 Z" fill="#3E2817" opacity="0.6"/>
+  <!-- teal band -->
+  <path d="M188 122 C 212 114 234 110 256 110 C 278 110 300 114 324 122 L322 140 C 298 132 278 128 256 128 C 234 128 214 132 190 140 Z" fill="#3E8E7E" class="olt"/>
+
+  <!-- the peacock feather -->
+  <g transform="rotate(18 340 120)">
+    <path d="M330 128 C 326 76 340 34 372 12 C 386 44 378 96 346 132 Z" fill="#3E8E7E" class="olt"/>
+    <path d="M338 122 C 340 84 352 52 368 30" stroke="#2B6B5E" stroke-width="4" fill="none"/>
+    <ellipse cx="362" cy="40" rx="16" ry="20" fill="#C9A35C" class="olt"/>
+    <ellipse cx="362" cy="42" rx="10" ry="13" fill="#3A6B8C"/>
+    <ellipse cx="362" cy="44" rx="5.5" ry="7.5" fill="#232335"/>
+  </g>
+  <path d="M318 142 q14 6 26 2" stroke="#2E2016" stroke-width="6" fill="none" stroke-linecap="round"/>
 </svg>

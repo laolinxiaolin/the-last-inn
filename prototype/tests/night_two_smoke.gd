@@ -214,6 +214,12 @@ func _initialize() -> void:
 	scene._regular_talk(scene.regulars[2])  # renn, the kid who came back
 	await process_frame
 	assert(scene.text_label.text.contains("with a pour, not a sword"), "renn's mill-returned line should read the playthrough")
+	scene._regular_talk(scene.regulars[0])  # garrick — his reveal
+	await process_frame
+	assert(scene.text_label.text.contains("followed you"), "garrick should reveal he followed the innkeeper")
+	scene._regular_talk(scene.regulars[1])  # fenwick — his deep-road truth
+	await process_frame
+	assert(scene.text_label.text.contains("deep road"), "fenwick should confess the caravan truth when the road has fallen")
 	scene._door_trial_scene()
 	await process_frame
 	assert(scene.text_label.text.contains("You come late"), "trial should render")

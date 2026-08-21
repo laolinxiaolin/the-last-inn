@@ -1,14 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <path d="M60 512 Q84 360 256 360 Q428 360 452 512 Z" fill="#5A5A56"/>
-  <path d="M60 512 Q80 420 140 396 L184 512 Z" fill="#474744"/>
-  <path d="M120 340 Q128 240 256 236 Q384 240 392 340 Q376 280 348 268 Q336 300 256 298 Q176 300 164 268 Q136 280 120 340 Z" fill="#8A8A85"/>
-  <path d="M96 360 Q100 300 130 268 Q160 320 168 368 Z" fill="#8A8A85"/>
-  <path d="M416 360 Q412 300 382 268 Q352 320 344 368 Z" fill="#8A8A85"/>
-  <path d="M120 340 Q128 240 256 236 Q384 240 392 340 L392 368 Q384 320 256 318 Q128 320 120 368 Z" fill="#6B6B66"/>
-  <ellipse cx="256" cy="330" rx="118" ry="60" fill="#3A3A38"/>
-  <path d="M150 330 Q180 286 256 286 Q332 286 362 330 Q330 368 256 368 Q182 368 150 330 Z" fill="#3A3A38"/>
-  <ellipse cx="256" cy="318" rx="76" ry="34" fill="#2E2E2C"/>
-  <ellipse cx="232" cy="318" rx="8" ry="6" fill="#A8C8D8" opacity="0.8"/>
-  <ellipse cx="280" cy="318" rx="8" ry="6" fill="#A8C8D8" opacity="0.8"/>
-  <path d="M222 350 Q240 358 256 358 Q272 358 288 350" stroke="#4A4A46" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- THE WOMAN IN GREY. Hooded, face half-hidden in shadow, bloodless grey
+       throughout. Only the pale eyes and the too-new silver clasp catch light. -->
+  <defs>
+    <style>
+      .ol{stroke:#232320;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .olt{stroke:#232320;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <!-- cloak, draping wide -->
+  <path d="M36 512 C 62 388 152 340 256 340 C 360 340 450 388 476 512 Z" fill="#7E7E79" class="ol"/>
+  <path d="M36 512 C 58 404 128 354 206 342 C 148 366 106 424 96 512 Z" fill="#6E6E69"/>
+  <path d="M476 512 C 454 404 384 354 306 342 C 364 366 406 424 416 512 Z" fill="#6E6E69"/>
+  <path d="M150 420 C 170 452 176 484 174 512 M362 420 C 342 452 336 484 338 512" stroke="#63635E" stroke-width="7" fill="none"/>
+
+  <!-- hood, outer -->
+  <path d="M256 70 C 344 70 400 136 400 244 C 400 310 378 356 346 384 C 330 398 316 404 306 408 L206 408 C 196 404 182 398 166 384 C 134 356 112 310 112 244 C 112 136 168 70 256 70 Z" fill="#8A8A85" class="ol"/>
+  <path d="M166 384 C 134 356 112 310 112 244 C 112 136 168 70 256 70 L256 118 C 196 118 156 172 156 250 C 156 316 178 356 204 380 C 198 384 184 388 166 384 Z" fill="#777772"/>
+  <path d="M132 300 C 146 290 158 288 170 292 M380 300 C 366 290 354 288 342 292" stroke="#63635E" stroke-width="7" fill="none"/>
+  <!-- hood point at the back crown -->
+  <path d="M348 128 C 380 150 396 190 398 232 C 406 180 388 136 348 112 Z" fill="#777772"/>
+
+  <!-- hood shadow interior -->
+  <path d="M256 122 C 322 122 364 170 364 254 C 364 324 330 380 256 384 C 182 380 148 324 148 254 C 148 170 190 122 256 122 Z" fill="#45453F"/>
+
+  <!-- pale face inside the shadow -->
+  <path d="M256 168 C 312 168 340 208 340 272 C 340 334 306 372 256 372 C 206 372 172 334 172 272 C 172 208 200 168 256 168 Z" fill="#E8D5C2"/>
+  <!-- the hood's cast shadow, swallowing the upper face -->
+  <path d="M172 292 C 176 216 204 178 256 178 C 308 178 336 216 340 292 C 322 252 300 236 256 236 C 212 236 190 252 172 292 Z" fill="#8F8478"/>
+  <path d="M172 292 C 176 216 204 178 256 178 C 264 178 272 179 280 182 C 236 184 202 216 188 268 Z" fill="#7E7468"/>
+
+  <!-- strands of near-black hair slipping out -->
+  <path d="M196 214 C 186 252 186 292 194 324" stroke="#2A2422" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M318 210 C 330 248 332 290 326 322" stroke="#2A2422" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+  <!-- calm, narrow, unreadable eyes in the shadow -->
+  <path d="M198 274 Q218 266 240 274" stroke="#232320" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M272 274 Q294 266 314 274" stroke="#232320" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="219" cy="281" rx="17" ry="9" fill="#E3DACB"/>
+  <ellipse cx="293" cy="281" rx="17" ry="9" fill="#E3DACB"/>
+  <circle cx="219" cy="282" r="7" fill="#7A8CA0"/>
+  <circle cx="293" cy="282" r="7" fill="#7A8CA0"/>
+  <circle cx="219" cy="282" r="3.5" fill="#1A1A1A"/>
+  <circle cx="293" cy="282" r="3.5" fill="#1A1A1A"/>
+  <circle cx="222" cy="279" r="2" fill="#FFFFFF"/>
+  <circle cx="296" cy="279" r="2" fill="#FFFFFF"/>
+  <!-- thin, straight brows -->
+  <path d="M200 258 L240 255 M272 255 L312 258" stroke="#3A332E" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- nose hint -->
+  <path d="M252 306 Q256 314 262 308" stroke="#B49E88" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- sealed mouth -->
+  <path d="M240 334 L272 334" stroke="#8C6B60" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M246 340 Q256 343 266 340" stroke="#C4A294" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- the tiredness she won't name -->
+  <path d="M204 296 Q219 301 234 296 M278 296 Q293 301 308 296" stroke="#C4B4A2" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- the silver clasp, too new -->
+  <circle cx="256" cy="404" r="15" fill="#D9D9D3" class="olt"/>
+  <path d="M256 392 L256 416 M244 404 L268 404" stroke="#F5F0E6" stroke-width="4"/>
+  <path d="M250 388 l6 -8 6 8" stroke="#F5F0E6" stroke-width="3" fill="none"/>
 </svg>

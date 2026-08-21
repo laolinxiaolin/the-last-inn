@@ -1,29 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <path d="M76 512 Q100 372 256 372 Q412 372 436 512 Z" fill="#8C4A3A"/>
-  <path d="M76 512 Q96 428 148 402 L190 512 Z" fill="#6E3A2E"/>
-  <path d="M120 402 L392 402 L380 424 L132 424 Z" fill="#F2E3C5"/>
-  <path d="M140 420 L372 420 L366 436 L146 436 Z" fill="#C9BFA0"/>
-  <rect x="222" y="338" width="68" height="60" rx="20" fill="#E0C0A0"/>
-  <ellipse cx="256" cy="254" rx="94" ry="106" fill="#E8C9A4"/>
-  <ellipse cx="160" cy="266" rx="14" ry="20" fill="#E8C9A4"/>
-  <ellipse cx="352" cy="266" rx="14" ry="20" fill="#E8C9A4"/>
-  <path d="M148 222 Q140 96 256 94 Q372 96 364 222 Q340 150 316 148 Q306 182 256 180 Q206 182 196 148 Q174 150 148 222 Z" fill="#D8D8D0"/>
-  <path d="M160 190 Q170 148 200 136 Q188 176 186 210 Z" fill="#C0C0B8"/>
-  <path d="M352 190 Q342 148 312 136 Q324 176 326 210 Z" fill="#C0C0B8"/>
-  <path d="M148 226 Q146 202 158 188 Q178 196 180 226 Z" fill="#D8D8D0"/>
-  <path d="M364 226 Q366 202 354 188 Q334 196 332 226 Z" fill="#D8D8D0"/>
-  <path d="M196 246 Q210 262 216 268 Q234 282 256 284 Q278 282 296 268 Q302 262 316 246 Q292 262 256 264 Q220 262 196 246 Z" fill="#B8A890"/>
-  <path d="M204 232 Q230 216 282 216 Q308 232 310 240" stroke="#6E5A42" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <path d="M204 232 L204 246" stroke="#6E5A42" stroke-width="5" stroke-linecap="round"/>
-  <path d="M310 240 L310 246" stroke="#6E5A42" stroke-width="5" stroke-linecap="round"/>
-  <ellipse cx="212" cy="270" rx="21" ry="25" fill="#FFFFFF"/>
-  <ellipse cx="300" cy="270" rx="21" ry="25" fill="#FFFFFF"/>
-  <circle cx="214" cy="274" r="11" fill="#C9A35C"/>
-  <circle cx="298" cy="274" r="11" fill="#C9A35C"/>
-  <circle cx="214" cy="274" r="5.5" fill="#1A1A1A"/>
-  <circle cx="298" cy="274" r="5.5" fill="#1A1A1A"/>
-  <circle cx="218" cy="269" r="3" fill="#FFFFFF"/>
-  <circle cx="302" cy="269" r="3" fill="#FFFFFF"/>
-  <path d="M226 318 Q256 332 286 318" stroke="#8C6B5A" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <line x1="330" y1="170" x2="342" y2="158" stroke="#E8C9A4" stroke-width="5" stroke-linecap="round"/>
+  <!-- GARRICK — the old hero. Silver-white hair swept back, weathered tan,
+       crow's feet and laugh lines, warm half-smile, old red-brown coat.
+       Sits like a soldier still. -->
+  <defs>
+    <style>
+      .ol{stroke:#2E2016;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .olt{stroke:#2E2016;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+      .wr{stroke:#A87A52;stroke-width:4.5;fill:none;stroke-linecap:round}
+    </style>
+  </defs>
+
+  <!-- old red-brown coat, broad shoulders -->
+  <path d="M44 512 C 72 394 152 358 256 358 C 360 358 440 394 468 512 Z" fill="#7A4030" class="ol"/>
+  <path d="M44 512 C 66 412 126 370 196 360 C 144 386 110 440 104 512 Z" fill="#5E3023"/>
+  <!-- worn collar, worn soft -->
+  <path d="M214 360 L256 402 L222 434 L196 376 Z" fill="#8C5238" class="olt"/>
+  <path d="M298 360 L256 402 L290 434 L316 376 Z" fill="#8C5238" class="olt"/>
+  <!-- brass button + old stitch repair on the shoulder -->
+  <circle cx="256" cy="462" r="9" fill="#C9A35C" class="olt"/>
+  <path d="M352 432 h44 v36 h-44 Z" fill="none" class="olt" stroke-dasharray="7 6"/>
+
+  <!-- thick old neck -->
+  <rect x="222" y="312" width="68" height="66" rx="20" fill="#E0B98C"/>
+  <path d="M222 318 h68 v12 c-22 16 -46 16 -68 0 Z" fill="#C79A6E"/>
+
+  <!-- ears -->
+  <ellipse cx="142" cy="250" rx="15" ry="21" fill="#E0B98C" class="olt"/>
+  <ellipse cx="370" cy="250" rx="15" ry="21" fill="#E0B98C" class="olt"/>
+
+  <!-- weathered face -->
+  <path d="M256 118 C 334 118 368 170 368 246 C 368 320 326 368 256 368 C 186 368 144 320 144 246 C 144 170 178 118 256 118 Z" fill="#E0B98C" class="ol"/>
+  <path d="M346 194 C 360 232 356 300 320 342 C 346 314 358 264 352 216 Z" fill="#CDA273"/>
+
+  <!-- silver-white hair, swept back -->
+  <path d="M148 232 C 138 132 194 88 256 88 C 318 88 374 132 364 232 C 354 168 338 142 318 134 C 328 166 318 184 300 184 C 306 156 294 134 276 126 C 266 156 236 166 214 154 C 206 136 192 132 182 138 C 162 150 152 184 148 232 Z" fill="#DCD8CE" class="ol"/>
+  <path d="M318 134 C 328 166 318 184 300 184 C 306 156 294 134 276 126 L282 116 C 300 120 312 126 318 134 Z" fill="#B8B2A6"/>
+  <path d="M214 154 C 236 166 266 156 276 126 C 266 160 238 172 214 160 Z" fill="#B8B2A6"/>
+  <path d="M182 138 C 162 150 152 184 148 232 L164 232 C 166 192 174 162 190 148 Z" fill="#B8B2A6"/>
+  <!-- swept-back comb lines -->
+  <path d="M210 124 C 236 108 276 106 306 120 M226 112 C 250 100 282 100 302 110" stroke="#B8B2A6" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- short grey stubble along the jaw -->
+  <path d="M170 292 C 180 344 212 372 256 372 C 300 372 332 344 342 292 C 336 336 300 360 256 360 C 212 360 176 336 170 292 Z" fill="#C9C3B8" opacity="0.85"/>
+  <!-- short mustache -->
+  <path d="M234 316 Q256 326 278 316 Q272 310 256 312 Q240 310 234 316 Z" fill="#DCD8CE"/>
+
+  <!-- warm eyes, lids soft with age -->
+  <ellipse cx="214" cy="250" rx="21" ry="24" fill="#FFFFFF" class="olt"/>
+  <ellipse cx="298" cy="250" rx="21" ry="24" fill="#FFFFFF" class="olt"/>
+  <path d="M193 246 a21 24 0 0 1 42 0 Z" fill="#CDA273" opacity="0.55"/>
+  <path d="M277 246 a21 24 0 0 1 42 0 Z" fill="#CDA273" opacity="0.55"/>
+  <circle cx="214" cy="258" r="13" fill="#7A5230"/>
+  <circle cx="298" cy="258" r="13" fill="#7A5230"/>
+  <circle cx="214" cy="259" r="6.5" fill="#1A1A1A"/>
+  <circle cx="298" cy="259" r="6.5" fill="#1A1A1A"/>
+  <circle cx="219" cy="252" r="4" fill="#FFFFFF"/>
+  <circle cx="303" cy="252" r="4" fill="#FFFFFF"/>
+  <path d="M192 240 Q214 228 236 240" stroke="#2E2016" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M276 240 Q298 228 320 240" stroke="#2E2016" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+  <!-- thick grey brows, at ease -->
+  <path d="M190 216 Q214 204 240 214" stroke="#C9C3B8" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M272 214 Q298 204 322 216" stroke="#C9C3B8" stroke-width="11" fill="none" stroke-linecap="round"/>
+
+  <!-- the map of a life: forehead, crow's feet, laugh lines, under-eye -->
+  <path d="M196 178 Q256 166 316 178 M206 192 Q256 181 306 192" class="wr"/>
+  <path d="M186 242 l-16 -6 M187 255 l-16 2 M190 267 l-14 8" class="wr"/>
+  <path d="M326 242 l16 -6 M325 255 l16 2 M322 267 l14 8" class="wr"/>
+  <path d="M198 276 Q214 283 230 276 M282 276 Q298 283 314 276" class="wr"/>
+  <path d="M224 304 Q216 326 226 344 M288 304 Q296 326 286 344" class="wr"/>
+
+  <!-- nose, seen some fights -->
+  <path d="M250 282 Q244 300 254 308 Q264 312 272 304" stroke="#B07E56" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- the warm half-smile -->
+  <path d="M232 334 Q256 350 284 330" stroke="#7A332A" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M288 326 q8 -1 11 5" stroke="#7A332A" stroke-width="4" fill="none" stroke-linecap="round"/>
 </svg>
