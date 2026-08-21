@@ -803,13 +803,14 @@ func _batch_pick(id: String) -> void:
 
 func _queue_return(guest_id: String, quest_id: String) -> void:
 	# The Sweet pour on the deep road loses the boy — the courier comes instead.
+	# The Sweet pour on the deep road loses the boy — the courier comes instead.
 	if guest_id == "renn" and quest_id == "caravan" and pours.get("renn", "") == "sweet":
-		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.renn_caravan_courier()})
+		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.return_days("caravan") + "\n\n" + DATA.renn_caravan_courier()})
 		scene_queue.append({"bg": "res://assets/bg_inn.svg", "portrait": "", "kind": "text", "text": DATA.renn_courier_after()})
 		return
 	# The Bitter pour tells Keld he's not wanted — he goes to the road alone.
 	if guest_id == "keld" and quest_id == "caravan" and pours.get("keld", "") == "bitter":
-		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.keld_caravan_courier()})
+		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.return_days("caravan") + "\n\n" + DATA.keld_caravan_courier()})
 		scene_queue.append({"bg": "res://assets/bg_inn.svg", "portrait": "", "kind": "text", "text": DATA.keld_courier_after()})
 		return
 	var key := "%s|%s" % [guest_id, quest_id]
@@ -817,8 +818,8 @@ func _queue_return(guest_id: String, quest_id: String) -> void:
 	if scene.is_empty():
 		return
 	var text: String = scene.get("text", "")
-	# The bell announces the return before the face does (docs/06). Read the step.
-	text = DATA.door_bell(guest_id, quest_id) + "\n\n" + text
+	# The days pass (a quiet montage), then the bell reads the step (docs/06).
+	text = DATA.return_days(quest_id) + "\n\n" + DATA.door_bell(guest_id, quest_id) + "\n\n" + text
 	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "quiet":
 		text = DATA.renn_quiet_extra() + "\n\n" + text
 	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "dark":

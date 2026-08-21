@@ -127,3 +127,8 @@ Considered:
 - **Keld's death is the mirror of Renn's.** Renn dies from being sent loud and reckless (the Sweet); Keld dies from being told he's not wanted (the Bitter, *"you want me gone"*). Two different deaths, two different pours, one rule: what you pour before you send is part of the story.
 - **The whole memory system closes around it.** `keld_dead` writes the window and the wall, empties his seat among the regulars, and shows up in the door mirror — and because Keld was the guard who *knew* the door, losing him changes what the door knows.
 - **He was the one who kept the door's secret; losing him makes the dark readier.** That's the weight of it — the choice to push Keld away isn't just sad, it's strategically frightening.
+
+## Prototype — the return montage (the "between guests" rhythm)
+
+- **docs/06: returns arrive one at a time, not in a pile.** Each return is now framed by a day-montage — *"the days pass"* — so they land spread over time, the way they should. The pace is itself a tell the player learns: the mill answers fast or not at all, the deep road holds its silence, the tower keeps its own slow hours.
+- **The montage frames the bell, the bell frames the face** — a three-beat return (days, step, then the one who comes back), which is exactly the doorbell rhythm the design describes. It layers onto the existing system with one small function (`return_days`) prepended in `_queue_return`; no new state.

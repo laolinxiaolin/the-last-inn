@@ -53,6 +53,7 @@ func _initialize() -> void:
 	scene._run_returns()
 	await process_frame
 	assert(scene.text_label.text.contains("not hers"), "courier's bell must not be her step")
+	assert(scene.text_label.text.contains("The days pass"), "returns should arrive through a day-montage")
 	assert(scene.world.state_of("deep_road") == "fallen", "deep_road should be fallen")
 	assert(scene.world.has_flag("silver_too_new"), "silver_too_new missing")
 	assert(scene.world.has_flag("woman_dead"), "woman_dead missing")

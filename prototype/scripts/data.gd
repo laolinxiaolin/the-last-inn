@@ -639,6 +639,20 @@ static func door_bell(guest_id: String, quest_id: String) -> String:
 	return "Later, a knock."
 
 
+## docs/06 — returns arrive one at a time across a quiet montage of days,
+## not in a pile. How many days a quest takes before it answers is a tell the
+## player learns: the mill answers fast or not at all; the tower keeps its own
+## slow hours.
+static func return_days(quest_id: String) -> String:
+	match quest_id:
+		"mill":
+			return "The days pass. The mill is the kind of trouble that answers quick, or not at all."
+		"caravan":
+			return "The days pass. The deep road holds its silence a long while before it gives any of it back."
+		_:
+			return "The days pass. The tower is not quick about anything — it is a door, and doors keep their own hours."
+
+
 # ---------------------------------------------------------------- the Sweet pour can lose the boy
 
 ## The deepest input is choosing what to pour (docs/05). The Sweet makes a

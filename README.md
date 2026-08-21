@@ -53,7 +53,7 @@ Around all of it sits the weather and the quiet (docs/06): each night opens with
 
 And before the door, **the regulars** (docs/01, 07): the inn is a living museum of the playthrough. You can talk to the ones who remain — Garrick always, Fenwick always, Renn and Keld if you sent them, the woman in grey only if she didn't die — and each one reads back how they were treated, the quest they walked, the pour you chose. Absence speaks too.
 
-And every return is announced by **the doorbell** (docs/06): the game's one instrument of suspense. Light step, heavy step, measured step — and, when someone doesn't come back at all, a step that isn't theirs.
+And every return is announced by **the doorbell** (docs/06): the game's one instrument of suspense. Light step, heavy step, measured step — and, when someone doesn't come back at all, a step that isn't theirs. And returns arrive the way they should — one at a time, across a quiet montage of days, each on its own day; and how many days a quest takes to answer is itself a tell the player learns (the mill answers fast or not at all, the tower keeps its own slow hours).
 
 And what you pour can cost someone. Send **Renn** onto the deep road with **the Sweet** in him — the mead that makes a boy generous *and loud* — and the courier brings his borrowed sword back instead. The wall remembers the sword too big for a boy, and he is not among the regulars on the last night. Keld can be lost too, the opposite way: hand him the **Bitter** — the drink that says *you want me gone* — and he goes to the caravan alone, and a stranger brings back his axe and the coin he wore smooth.
 
