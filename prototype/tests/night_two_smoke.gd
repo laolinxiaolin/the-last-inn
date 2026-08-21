@@ -52,6 +52,7 @@ func _initialize() -> void:
 	scene.sends = {"woman": "caravan"}
 	scene._run_returns()
 	await process_frame
+	assert(scene.text_label.text.contains("not hers"), "courier's bell must not be her step")
 	assert(scene.world.state_of("deep_road") == "fallen", "deep_road should be fallen")
 	assert(scene.world.has_flag("silver_too_new"), "silver_too_new missing")
 	assert(scene.world.has_flag("woman_dead"), "woman_dead missing")
@@ -72,6 +73,7 @@ func _initialize() -> void:
 	scene.pours = {"keld": "dark"}
 	scene._run_returns()
 	await process_frame
+	assert(scene.text_label.text.contains("heavy, deliberate"), "keld's bell should be heavy")
 	assert(scene.world.has_flag("keld_knows"), "keld_knows missing")
 	assert(scene.world.has_flag("bell_key"), "bell_key missing")
 	assert(scene.world.state_of("tower") == "strained", "tower should stay strained")

@@ -745,6 +745,8 @@ func _queue_return(guest_id: String, quest_id: String) -> void:
 	if scene.is_empty():
 		return
 	var text: String = scene.get("text", "")
+	# The bell announces the return before the face does (docs/06). Read the step.
+	text = DATA.door_bell(guest_id, quest_id) + "\n\n" + text
 	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "quiet":
 		text = DATA.renn_quiet_extra() + "\n\n" + text
 	if guest_id == "renn" and quest_id == "mill" and pours.get("renn", "") == "dark":

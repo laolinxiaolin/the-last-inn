@@ -595,3 +595,24 @@ static func _woman_regular(world) -> Dictionary:
 	else:
 		line = "She sits at the bar a long time before she speaks. 'I came for the door,' she says. 'Same as you. Same as it's always been.'"
 	return {"id": "woman", "name": "The woman in grey", "line": line}
+
+
+# ---------------------------------------------------------------- the doorbell
+
+## docs/06 — the bell is the game's one instrument of suspense. Every return
+## announces itself with a step the player learns to read: light, heavy,
+## measured, or a step that isn't theirs at all.
+
+static func door_bell(guest_id: String, quest_id: String) -> String:
+	match guest_id:
+		"renn":
+			if quest_id == "mill":
+				return "Later, a knock — light, almost a tumble, the kind of step that only comes home running."
+			return "Later, a knock — light. The step of someone who has been out past dark and is glad to be back under it."
+		"keld":
+			return "Later, a knock — heavy, deliberate, like a man walking back up from somewhere deep, and meaning every step of it."
+		"woman":
+			if quest_id == "caravan":
+				return "Later, a knock. The step behind it is not hers. That is worse than the knock itself."
+			return "Later, a knock — measured, unhurried, a step that has already decided where it is going."
+	return "Later, a knock."

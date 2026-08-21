@@ -93,3 +93,8 @@ Considered:
 - **Each regular reads the playthrough.** Their lines are computed live from quests sent, pours chosen, and guest flags (`has_guest_flag`) — Renn's quiet pour comes back to him, Keld remembers the Dark, the kid who came back empty on the caravan still counts.
 - **It's a menu, not a cutscene.** The player chooses who to sit with, which keeps it interactive and lets the same scene land differently every run.
 - **The regulars need no new state.** They're pure reading of existing world + character state — the third feature in a row (night-two sends, night-three mirror, now the regulars) built on the same plumbing, which keeps validating the `db21c9f`/`dad3674` investment.
+
+## Prototype — the doorbell
+
+- **docs/06 names the bell the game's one instrument of suspense.** Before this, returns simply appeared. Now every return announces itself with a step the player learns to read: Renn's light, running-home step; Keld's heavy, deliberate climb; the woman's measured one. The courier's bell is the sharpest — *a step that isn't hers*, worse than the knock.
+- **It's a one-line system** (`door_bell` prepended in `_queue_return`), because it's a *tell* — the game never shows a UI readout of the step; it just lets the player hear it and learn it, the way the innkeeper would. That's the design: the player is never told the truth, they read it.

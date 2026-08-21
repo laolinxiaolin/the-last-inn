@@ -53,6 +53,8 @@ Around all of it sits the weather and the quiet (docs/06): each night opens with
 
 And before the door, **the regulars** (docs/01, 07): the inn is a living museum of the playthrough. You can talk to the ones who remain — Garrick always, Fenwick always, Renn and Keld if you sent them, the woman in grey only if she didn't die — and each one reads back how they were treated, the quest they walked, the pour you chose. Absence speaks too.
 
+And every return is announced by **the doorbell** (docs/06): the game's one instrument of suspense. Light step, heavy step, measured step — and, when someone doesn't come back at all, a step that isn't theirs.
+
 Run it:
 
 ```sh
