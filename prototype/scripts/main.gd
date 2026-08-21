@@ -436,6 +436,57 @@ func _window_scene() -> void:
 	portrait.visible = false
 	_set_text(DATA.window_view(world.places, world.flags, world.guests))
 	_clear_actions()
+	_add_action("Continue", _start_night_three)
+
+
+# ---------------------------------------------------------------- night three: the door
+
+func _start_night_three() -> void:
+	night = 3
+	board_btn.visible = false
+	brew_row.visible = false
+	portrait.visible = false
+	_phase("Night Three — The Cellar")
+	_set_bg("res://assets/bg_door.svg")
+	_set_text(DATA.night_three_open(world))
+	_clear_actions()
+	_add_action("Go down with the lamp", _door_trial_scene)
+
+
+func _door_trial_scene() -> void:
+	portrait.visible = false
+	_set_text(DATA.night_three_trial(world))
+	_clear_actions()
+	_add_action("Answer honestly", _show_ending_choice)
+
+
+func _show_ending_choice() -> void:
+	portrait.visible = false
+	_set_text(DATA.night_three_choice(world))
+	_clear_actions()
+	_add_action("Seal the door", _sealer_ending)
+	_add_action("Go in with them", _went_in_ending)
+	_add_action("Send them in", _sent_them_ending)
+
+
+func _sealer_ending() -> void:
+	portrait.visible = false
+	_set_text(DATA.sealer_ending(world))
+	_clear_actions()
+	_add_action("Continue", _finish_epilogue)
+
+
+func _went_in_ending() -> void:
+	portrait.visible = false
+	_set_text(DATA.went_in_ending(world))
+	_clear_actions()
+	_add_action("Continue", _finish_epilogue)
+
+
+func _sent_them_ending() -> void:
+	portrait.visible = false
+	_set_text(DATA.sent_them_ending(world))
+	_clear_actions()
 	_add_action("Continue", _finish_epilogue)
 
 
@@ -854,6 +905,18 @@ func _demo_flow() -> void:
 	_window_scene()
 	await _frame()
 	await _shot("19_window")
+	_start_night_three()
+	await _frame()
+	await _shot("22_door")
+	_door_trial_scene()
+	await _frame()
+	await _shot("23_trial")
+	_show_ending_choice()
+	await _frame()
+	await _shot("24_choice")
+	_sealer_ending()
+	await _frame()
+	await _shot("25_sealer")
 	_finish_epilogue()
 	await _frame()
 	await _shot("20_end")

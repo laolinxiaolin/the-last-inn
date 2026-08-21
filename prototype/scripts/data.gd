@@ -409,3 +409,98 @@ static func _place_line(id: String, name: String, places: Dictionary) -> String:
 		},
 	}
 	return lines[id][places[id]["state"]] % name
+
+
+# ---------------------------------------------------------------- night three: the door
+
+## The cellar is a capstone, not a cellar (docs/10 — the locked door). On the
+## third night the house opens its question and the answer is the player's own
+## history — the mirror runs on world + guest state the innkeeper has been
+## quietly keeping (docs/13 — the trial is a conversation, not a battle).
+
+static func _dark_weight(world) -> int:
+	var n := 0
+	for p in ["mill_village", "crossroads", "forest", "deep_road", "tower"]:
+		var s: String = world.state_of(p)
+		if s == "failing" or s == "fallen":
+			n += 1
+	return n
+
+
+static func _quests_sent(world) -> int:
+	var n := 0
+	for gid in world.guests.keys():
+		for h in world.guests[gid]["history"]:
+			if String(h).begins_with("quest "):
+				n += 1
+	return n
+
+
+static func _bonds(world) -> int:
+	var n := 0
+	for gid in world.guests.keys():
+		n += world.bond_of(gid)
+	return n
+
+
+static func night_three_open(world) -> String:
+	var d: int = _dark_weight(world)
+	var t := "A week later, the house is quiet in a way it has never been.\n\n"
+	t += "The fire is lit. The regulars are here — the ones who remain.\n"
+	if world.has_flag("woman_dead"):
+		t += "On the wall, between the hooks that were waiting: her sword. It hums at the cellar door.\n"
+	elif world.has_flag("door_watcher"):
+		t += "The woman in grey is at the window, watching the road. 'I said I'd be here when it opened,' she says. 'I keep my word.'\n"
+	if world.has_flag("keld_knows"):
+		t += "Keld is by the head of the cellar stairs, not quite in the room. 'You know what it is now,' he says. 'You knew when you poured me the Dark.'\n"
+	if world.has_flag("goblin_peace") or world.has_flag("mill_quiet"):
+		t += "Out at the edge of the window, a mill light is steady where it used to be out.\n"
+	t += "\nAnd the cellar door is ajar.\n\nIt has never been ajar before. Below it, the dark breathes in the rhythm of a held breath.\n"
+	if d == 0:
+		t += "\nThe window is clear tonight, and that is the strangest thing of all."
+	else:
+		t += "\nThe window is a map of it: %d of the places you watch have gone dark." % d
+	return t
+
+
+static func night_three_trial(world) -> String:
+	var sent: int = _quests_sent(world)
+	var bonds: int = _bonds(world)
+	var t := "You take the lamp and go down.\n\nPast the ajar door is not a cellar. It is a boy.\n"
+	t += "\nHe is seventeen, the way some boys stay. He is wearing a sword too big for him. He is not surprised to see you.\n"
+	t += "\n'You come late,' he says. 'You sent me in, and you never came for me.'\n"
+	if sent == 0:
+		t += "\n'Except you didn't send anyone, did you? You held the bar, and let the world go dark around you.'\n"
+	elif world.has_flag("woman_dead"):
+		t += "\n'She paid in silver too new. You knew. You let me walk out with her coin, and the road ate us both.'\n"
+	if bonds >= 6:
+		t += "\n'But you were kind. I can taste it — the warm pour, the hand that steadied a shaking one. That door is real.'\n"
+	elif bonds > 0:
+		t += "\n'You read us. You tried. That is more than most who send get.'\n"
+	else:
+		t += "\n'And you never even learned my name. That is the part that comes to find you.'\n"
+	t += "\nHe waits. The door is open. The way through it is not a sword."
+	return t
+
+
+static func night_three_choice(world) -> String:
+	return "The room waits. On the bar is the last glass, and beside it, the only thing the whole game has been teaching you to carry: honesty.\n\n'I was afraid. I'm sorry. I'm here now.'\n\nHowever you go through, the inn will remember you by it. The door is yours to answer."
+
+
+static func sealer_ending(world) -> String:
+	var t := "You take the bar-iron and you close the cellar door. You bank the fire low — not out; low is the long way.\n\nThrough the window, the dark withdraws, place by place, the way weather decides to lift.\n\nThe inn settles. The walls stay full of the ones who came back.\n\nYou are the last inn, and you intend to keep being it."
+	if world.has_flag("woman_dead"):
+		t += "\n\nOn the wall, her sword stays. Some doors you seal from the inside, too."
+	return t
+
+
+static func went_in_ending(world) -> String:
+	var t := "You break the vow. You take the old sword off the wall — the one you said you'd never carry again."
+	if world.has_flag("woman_dead"):
+		t = "You take her sword down — hers, because it waited long enough for someone to carry it. Garrick stands without a word and takes his own. 'About time,' is all he says."
+	t += "\n\nYou go down together. The dark is not a battle; it is a question, and you answer it the way you have answered everything tonight: together, at the door, honestly.\n\nYou come back old, whole, and finished. The fire is still burning."
+	return t
+
+
+static func sent_them_ending(world) -> String:
+	return "You stand at the head of the stairs and you send them in — the adventurers who came to the last inn. They go down past the ajar door together.\n\nThey come back changed, each carrying a little of the dark out with them, so it stops living only in the cellar.\n\nThe inn keeps burning. You are still behind the bar, still pouring, still reading.\n\nThis is not the wrong ending. It is the ending of the man who stayed, and the game honors it."

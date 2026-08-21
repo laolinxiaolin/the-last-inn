@@ -180,5 +180,40 @@ func _initialize() -> void:
 		"keld may take the caravan (he did the tower); only the woman is gone")
 	print("OK availability: no repeats, no dead guests")
 
+	# --- night three: the door mirrors the whole playthrough, endings land ---
+	scene._start_night()
+	scene.sends = {"renn": "mill", "keld": "tower", "woman": "caravan"}
+	scene._board_set()
+	scene._run_returns()
+	await process_frame
+	scene._start_night_two()
+	await process_frame
+	scene._board_set()  # night two, no sends → Grib's epilogue
+	scene._grib_regular_scene()
+	scene._window_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("window"), "window scene should render")
+	scene._start_night_three()
+	await process_frame
+	assert(scene.text_label.text.contains("cellar door is ajar"), "door setup should render")
+	assert(scene.text_label.text.contains("her sword"), "door marks the woman on the wall")
+	scene._door_trial_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("You come late"), "trial should render")
+	assert(scene.text_label.text.contains("silver too new"), "the woman's death should surface in the mirror")
+	scene._show_ending_choice()
+	await process_frame
+	assert(scene.actions.get_child_count() == 3, "three endings should be offered")
+	scene._sealer_ending()
+	await process_frame
+	assert(scene.text_label.text.contains("last inn"), "sealer ending should render")
+	scene._went_in_ending()
+	await process_frame
+	assert(scene.text_label.text.contains("fire is still burning"), "went-in ending should render")
+	scene._sent_them_ending()
+	await process_frame
+	assert(scene.text_label.text.contains("man who stayed"), "sent-them ending should render")
+	print("OK night three: the door + three endings")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)

@@ -47,6 +47,8 @@ The design is fully locked (all 16 docs). A playable **Godot 4.7 concept prototy
 
 It covers two nights: the full first-night cast (Renn, Keld, the woman in grey, Fenwick, Garrick), six ale, the quest board, returns, the courier, Grib on night two, and a dawn window that shows what the world — and the innkeeper — remembers.
 
+It then closes the arc on **night three — the door**: the cellar is a capstone, the dark presses, and the endgame trial reads the whole playthrough back at the player before three endings (Sealer / Went In / Sent Them).
+
 Run it:
 
 ```sh
@@ -54,7 +56,7 @@ godot --path prototype            # interactive
 cd prototype && godot -- --demo   # auto-play + capture shots to user://shots/
 ```
 
-Night one's quests resolve into world-state (mill parley / peace / quiet, the fallen deep road, the tower's bell key). Night two's board still means something: sends made after Grib resolve the same way before his epilogue, and the picker remembers who already went and who didn't come home.
+Night one's quests resolve into world-state (mill parley / peace / quiet, the fallen deep road, the tower's bell key). Night two's board still means something: sends made after Grib resolve the same way before his epilogue, and the picker remembers who already went and who didn't come home. On night three the accumulated state becomes the mirror the ending answers from.
 
 See [docs/](docs/) for the full design.
 

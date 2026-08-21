@@ -72,3 +72,10 @@ Considered:
 - **Availability is world state, not a menu rule.** A guest can't be sent to the same quest twice — they've already been there, they know what they did. The woman in grey stops taking jobs after the courier brings her sword home.
 - **The board resets each evening.** Night-one "Going: …" labels don't linger into night two; history lives in the world (`sent`), not in the UI (`sends`).
 - **The window speaks the truth of who's still here.** The "silver too new" line only says *she didn't come back* when she didn't — otherwise the coin just bought a round on the house.
+
+## Prototype — night three, the door
+
+- **The demo now closes the arc.** Night three opens the cellar door (docs/10 — the capstone, docs/13 — the door as the endgame), and the ending trial is a *conversation*, not a battle — the core verb honored at the climax.
+- **The mirror runs on the playthrough, not on a plot.** The lost kid's lines are computed from the world and guest state the prototype already keeps: how many quests were sent, who didn't come back (the woman in grey's silver), and the kindness accumulated in bonds. The same house that "remembers how you treated people" is what the door answers from.
+- **Three endings, none moralized** (Sealer / Went In / Sent Them), each written to reference the state — e.g. the went-in ending reuses the sword on the wall when the woman died, because the hooks were waiting.
+- **No new systems.** Night three reads existing world + character state; the door needed no flags of its own, which is the strongest sign the state plumbing (commits `db21c9f`, `dad3674`) was the right investment.
