@@ -55,6 +55,8 @@ And before the door, **the regulars** (docs/01, 07): the inn is a living museum 
 
 And every return is announced by **the doorbell** (docs/06): the game's one instrument of suspense. Light step, heavy step, measured step — and, when someone doesn't come back at all, a step that isn't theirs.
 
+And what you pour can cost someone. Send **Renn** onto the deep road with **the Sweet** in him — the mead that makes a boy generous *and loud* — and the courier brings his borrowed sword back instead. The wall remembers the sword too big for a boy, and he is not among the regulars on the last night.
+
 Run it:
 
 ```sh

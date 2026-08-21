@@ -740,6 +740,11 @@ func _board_set() -> void:
 # ---------------------------------------------------------------- returns
 
 func _queue_return(guest_id: String, quest_id: String) -> void:
+	# The Sweet pour on the deep road loses the boy — the courier comes instead.
+	if guest_id == "renn" and quest_id == "caravan" and pours.get("renn", "") == "sweet":
+		scene_queue.append({"bg": "res://assets/bg_door.svg", "portrait": "", "kind": "courier", "text": DATA.renn_caravan_courier()})
+		scene_queue.append({"bg": "res://assets/bg_inn.svg", "portrait": "", "kind": "text", "text": DATA.renn_courier_after()})
+		return
 	var key := "%s|%s" % [guest_id, quest_id]
 	var scene: Dictionary = DATA.returns().get(key, {})
 	if scene.is_empty():
@@ -768,6 +773,14 @@ func _queue_return(guest_id: String, quest_id: String) -> void:
 
 
 func _apply_outcome(guest_id: String, quest_id: String) -> void:
+	# The Sweet pour turns Renn's caravan soft-fail into a loss.
+	if guest_id == "renn" and quest_id == "caravan" and pours.get("renn", "") == "sweet":
+		world.report("deep_road", "renn_courier")
+		world.raise_bond("renn", 2)
+		world.note("renn", "quest caravan")
+		world.places["deep_road"]["state"] = "fallen"
+		world.set_flag("renn_dead")
+		return
 	var key := "%s|%s" % [guest_id, quest_id]
 	var o: Dictionary = OUTCOMES.get(key, {})
 	if o.is_empty():

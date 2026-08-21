@@ -98,3 +98,9 @@ Considered:
 
 - **docs/06 names the bell the game's one instrument of suspense.** Before this, returns simply appeared. Now every return announces itself with a step the player learns to read: Renn's light, running-home step; Keld's heavy, deliberate climb; the woman's measured one. The courier's bell is the sharpest — *a step that isn't hers*, worse than the knock.
 - **It's a one-line system** (`door_bell` prepended in `_queue_return`), because it's a *tell* — the game never shows a UI readout of the step; it just lets the player hear it and learn it, the way the innkeeper would. That's the design: the player is never told the truth, they read it.
+
+## Prototype — the pour that loses the boy
+
+- **The deepest input is choosing what to pour (docs/05).** Until now only the woman could die, and her death came from the *quest*, not from a choice. Now a single pour can doom the boy: send Renn onto the caravan with the **Sweet** — the mead that makes a person generous *and loud* — and the soft-fail becomes a courier. The borrowed sword comes back; the blacksmith's boy never gets to give it back.
+- **It reuses the whole memory system.** `renn_dead` writes the wall, removes him from the regulars (absence is the point), darkens the deep road to fallen, and shows up in the door mirror — *"you poured him the Sweet, to make him generous, to make him loud. He was both. He didn't come back."* The player is never told the outcome in advance; they're only warned by what they already know about the mead and the boy.
+- **It stays read, not told** (the pillar again). No "this will kill him" UI. Just the ale's line — *generous and loud* — and the reader's own judgment.

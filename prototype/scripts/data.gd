@@ -357,6 +357,8 @@ static func window_view(places: Dictionary, flags: Dictionary, guests: Dictionar
 			flavor.append("On the bar: a coin, too new. It bought a round of Common, on the house.")
 	if flags.has("woman_dead"):
 		flavor.append("On the wall: a sword. There were hooks waiting.")
+	if flags.has("renn_dead"):
+		flavor.append("On the wall: a sword too big for a boy. It came back. He didn't.")
 	if flags.has("keld_knows"):
 		flavor.append("Keld knows things now. He drinks, and doesn't say them.")
 	if flags.has("bell_key"):
@@ -481,6 +483,8 @@ static func night_three_open(world) -> String:
 		t += "On the wall, between the hooks that were waiting: her sword. It hums at the cellar door.\n"
 	elif world.has_flag("door_watcher"):
 		t += "The woman in grey is at the window, watching the road. 'I said I'd be here when it opened,' she says. 'I keep my word.'\n"
+	if world.has_flag("renn_dead"):
+		t += "On the wall, a sword too big for a boy. It came back. He didn't.\n"
 	if world.has_flag("keld_knows"):
 		t += "Keld is by the head of the cellar stairs, not quite in the room. 'You know what it is now,' he says. 'You knew when you poured me the Dark.'\n"
 	if world.has_flag("goblin_peace") or world.has_flag("mill_quiet"):
@@ -503,6 +507,8 @@ static func night_three_trial(world) -> String:
 		t += "\n'Except you didn't send anyone, did you? You held the bar, and let the world go dark around you.'\n"
 	elif world.has_flag("woman_dead"):
 		t += "\n'She paid in silver too new. You knew. You let me walk out with her coin, and the road ate us both.'\n"
+	if world.has_flag("renn_dead"):
+		t += "\n'The one with the borrowed sword,' he says. 'You poured him the Sweet — to make him generous, to make him loud. He was both. He didn't come back. You knew what the Sweet does to a boy with something to prove.'\n"
 	if bonds >= 6:
 		t += "\n'But you were kind. I can taste it — the warm pour, the hand that steadied a shaking one. That door is real.'\n"
 	elif bonds > 0:
@@ -546,7 +552,7 @@ static func regulars(world, sent: Dictionary) -> Array:
 	var out := []
 	out.append(_garrick_regular())
 	out.append(_fenwick_regular())
-	if sent.has("renn"):
+	if sent.has("renn") and not world.has_flag("renn_dead"):
 		out.append(_renn_regular(world, sent["renn"]))
 	if sent.has("keld"):
 		out.append(_keld_regular(world))
@@ -616,3 +622,27 @@ static func door_bell(guest_id: String, quest_id: String) -> String:
 				return "Later, a knock. The step behind it is not hers. That is worse than the knock itself."
 			return "Later, a knock — measured, unhurried, a step that has already decided where it is going."
 	return "Later, a knock."
+
+
+# ---------------------------------------------------------------- the Sweet pour can lose the boy
+
+## The deepest input is choosing what to pour (docs/05). The Sweet makes a
+## person generous *and loud* — sent onto the deep road, that turns a soft
+## failure into a loss. The courier brings his sword back; the wall remembers.
+
+static func renn_caravan_courier() -> String:
+	return "Five days pass. The door opens.
+
+A stranger stands in the rain, holding a sword too big for a boy — it will never fit him now. He sets it on the bar and does not look at you.
+
+'He said to give this to you. Said you'd know what to do with it.'
+
+You recognize the hilt. It's the borrowed one. The blacksmith's boy never got to give it back."
+
+
+static func renn_courier_after() -> String:
+	return "You hang the sword on the wall. There were hooks waiting.
+
+The fire pops. Out in the wet, the road keeps going, and it does not bring back the ones you read wrong.
+
+[i]The Sweet made him generous. And loud. You knew what it does to a boy with something to prove. You poured it anyway.[/i]"

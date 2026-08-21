@@ -225,5 +225,30 @@ func _initialize() -> void:
 	assert(scene.text_label.text.contains("man who stayed"), "sent-them ending should render")
 	print("OK night three: the door + three endings")
 
+	# --- the Sweet pour can lose the boy: renn's caravan becomes a courier ---
+	scene._start_night()
+	scene.sends = {"renn": "caravan"}
+	scene.pours = {"renn": "sweet"}
+	scene._run_returns()
+	await process_frame
+	assert(scene.world.has_flag("renn_dead"), "renn_dead should be set by the Sweet caravan")
+	assert(not scene.world.has_flag("renn_hat"), "no hat — he didn't come back to find one")
+	assert(scene.world.state_of("deep_road") == "fallen", "the Sweet loss should fall the deep road")
+	assert(scene.text_label.text.contains("too big for a boy"), "the courier should bring the borrowed sword")
+	# the wall remembers, and he is not among the regulars
+	scene._start_night_two()
+	await process_frame
+	scene._board_set()
+	scene._grib_regular_scene()
+	scene._window_scene()
+	await process_frame
+	assert(scene.text_label.text.contains("too big for a boy"), "the window should mark his sword")
+	scene._start_night_three()
+	await process_frame
+	scene._regulars_menu()
+	await process_frame
+	assert(not scene.regulars.any(func(r): return r["id"] == "renn"), "dead renn must not be among the regulars")
+	print("OK the Sweet pour loses the boy")
+
 	print("ALL WORLD-STATE CHECKS PASSED")
 	quit(0)
