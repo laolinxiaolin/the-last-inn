@@ -28,13 +28,13 @@ static func brew_name(id: String) -> String:
 
 static func quests() -> Array:
 	return [
-		{"id": "mill", "name": "A Small Problem at the Mill", "tier": "Small", "tier_color": "8C9A6B",
+		{"id": "mill", "name": "A Small Problem at the Mill", "tier": "Small", "tier_color": "5C6B42",
 			"desc": "Goblins have moved into the old mill. The village wants them gone before winter.",
 			"reward": "Coin, barley, a story"},
-		{"id": "caravan", "name": "A Question of the Caravan", "tier": "Concerning", "tier_color": "C9A35C",
+		{"id": "caravan", "name": "A Question of the Caravan", "tier": "Concerning", "tier_color": "8C6A28",
 			"desc": "The deep road caravan never arrived. Someone should go look.",
 			"reward": "Silver, answers"},
-		{"id": "tower", "name": "A Door in the Tower", "tier": "Dire", "tier_color": "B86B5A",
+		{"id": "tower", "name": "A Door in the Tower", "tier": "Dire", "tier_color": "8C4638",
 			"desc": "The tower is not the problem. The tower is a door.",
 			"reward": "The truth"},
 	]
@@ -296,22 +296,22 @@ static func grib_talks(mill_state: String) -> Array:
 static func mill_card(mill_state: String) -> Dictionary:
 	match mill_state:
 		"renn_parley":
-			return {"name": "The Mill, at Peace", "tier": "Peace", "tier_color": "8C9A6B",
+			return {"name": "The Mill, at Peace", "tier": "Peace", "tier_color": "5C6B42",
 				"desc": "The village council read the boy's story and the goblins' letter. The mill has a miller again — and this time, everyone knows what they voted for.",
 				"reward": "Peace, barley, a story the board never wrote",
 				"resolved_text": "Resolved — by a boy with a borrowed sword"}
 		"keld_peace":
-			return {"name": "The Mill, at Peace", "tier": "Peace", "tier_color": "8C9A6B",
+			return {"name": "The Mill, at Peace", "tier": "Peace", "tier_color": "5C6B42",
 				"desc": "No one is sure how the dwarf did it. The barley moves both ways now. The village pretends it was all their idea.",
 				"reward": "Peace, barley, a very quiet dwarf",
 				"resolved_text": "Resolved — no one knows how"}
 		"woman_dark":
-			return {"name": "The Mill, Quiet", "tier": "Quiet", "tier_color": "6B7A8C",
+			return {"name": "The Mill, Quiet", "tier": "Quiet", "tier_color": "4A5A6B",
 				"desc": "The village names a new miller. No one mentions the goblins. No one mentions her.",
 				"reward": "A quiet winter",
 				"resolved_text": "Resolved — no one mentions it"}
 		_:
-			return {"name": "A Parley at the Mill", "tier": "Peace", "tier_color": "8C9A6B",
+			return {"name": "A Parley at the Mill", "tier": "Peace", "tier_color": "5C6B42",
 				"desc": "Grib's letter makes it a conversation. The mill doesn't need clearing — it needs someone brave enough to say so.",
 				"reward": "A new regular, a letter, peace",
 				"resolved_text": "Going: Grib's letter"}

@@ -93,7 +93,7 @@ func _build_ui() -> void:
 	info.add_theme_font_size_override("font_size", 28)
 	info.add_theme_color_override("font_color", Color("#F2E3C5"))
 	info.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
-	info.add_theme_constant_override("outline_size", 6)
+	info.add_theme_constant_override("outline_size", 9)
 	add_child(info)
 
 	portrait = TextureRect.new()
@@ -179,7 +179,13 @@ func _build_ui() -> void:
 		var sh: StyleBoxFlat = s.duplicate()
 		sh.bg_color = Color(brew["color"]).lightened(0.12)
 		b.add_theme_stylebox_override("hover", sh)
-		b.add_theme_color_override("font_color", Color("#2B1D14"))
+		var sf: StyleBoxFlat = s.duplicate()
+		sf.bg_color = Color(brew["color"]).darkened(0.15)
+		b.add_theme_stylebox_override("pressed", sf)
+		if Color(brew["color"]).get_luminance() < 0.4:
+			b.add_theme_color_override("font_hover_color", Color("#F5EADB"))
+			b.add_theme_color_override("font_pressed_color", Color("#F5EADB"))
+		b.add_theme_color_override("font_color", Color("#F2E3C5") if Color(brew["color"]).get_luminance() < 0.4 else Color("#2B1D14"))
 		b.pressed.connect(_on_pour.bind(brew["id"]))
 		brew_row.add_child(b)
 
@@ -262,6 +268,10 @@ func _mk_button(text: String, font_size: int = 28) -> Button:
 	var sp: StyleBoxFlat = s.duplicate()
 	sp.bg_color = Color("#C9BFA0")
 	b.add_theme_stylebox_override("pressed", sp)
+	b.add_theme_color_override("font_color", Color("#2B1D14"))
+	b.add_theme_color_override("font_hover_color", Color("#171310"))
+	b.add_theme_color_override("font_pressed_color", Color("#4A3A28"))
+	b.add_theme_color_override("font_disabled_color", Color("#5C4A35"))
 	return b
 
 
@@ -682,13 +692,13 @@ func _mk_quest_row(q: Dictionary) -> Panel:
 	desc.text = q["desc"]
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc.add_theme_font_size_override("font_size", 24)
-	desc.add_theme_color_override("font_color", Color("#5C4A35"))
+	desc.add_theme_color_override("font_color", Color("#4A3A28"))
 	v.add_child(desc)
 
 	var reward := Label.new()
 	reward.text = "Reward: %s" % q["reward"]
 	reward.add_theme_font_size_override("font_size", 22)
-	reward.add_theme_color_override("font_color", Color("#8C7A5A"))
+	reward.add_theme_color_override("font_color", Color("#5C4230"))
 	v.add_child(reward)
 
 	var bh := HBoxContainer.new()
